@@ -29,16 +29,39 @@ class UserCrud
         $data = $this->data;
 
         $userdata = [];
-        
+
         $userdata["username"] = $_POST["username"];
         $userdata["name"] = $_POST["name"];
-        $userdata["password"] = password_hash($_POST["password"],PASSWORD_DEFAULT);
+        $userdata["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $userdata["admin"] = false;
         $userdata["visible"] = true;
 
-        array_push($data[$listName], $userdata);
-        file_put_contents($this->filePath, json_encode($data));
-        header("Location: ".$this->homePath);
+        if($this->actionUserData($userdata["username"]) == null)
+        {
+            array_push($data[$listName], $userdata);
+            file_put_contents($this->filePath, json_encode($data));
+        }
+        else
+        {
+            $_SESSION["error_message"] = "Deze gebruiker bestaat reeds.";
+        }
+
+       
+        header("Location: " . $this->homePath);
+    }
+
+    public function actionUserData($username = null)
+    {
+        $listName = $this->listName;
+        $data = $this->data;
+
+        foreach ($data[$listName] as $id => $userdata) {
+            if ($userdata["username"] == $username) {
+                return $userdata;
+            }
+        }
+
+        return null;
     }
 
     public function actionRead()
@@ -63,29 +86,26 @@ class UserCrud
                 $data[$listName][$id] = $post;
                 file_put_contents($this->filePath, json_encode($data));
             }
-            header("Location: /".$this->homePath);
+            header("Location: /" . $this->homePath);
         }
     }
-    
+
     public function actionLogin()
     {
-        if(isset($_POST["username"]))
-        {
+        if (isset($_POST["username"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
 
             $listName = $this->listName;
             $data = $this->data;
-            
-            foreach($data as $id)
-            {
-                if($data[$listName][$id]["username"] == $username)
-                {
-                    if(password_verify($password, $data[$listName][$id]["password"]))
+
+            foreach ($data as $id) {
+                if ($data[$listName][$id]["username"] == $username) {
+                    if (password_verify($password, $data[$listName][$id]["password"]))
                         die("login ok");
 
-                        die("password not valid");
-                        break;
+                    die("password not valid");
+                    break;
                 }
 
                 die("user not found");

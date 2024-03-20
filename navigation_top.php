@@ -7,13 +7,7 @@
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
                         <a class="nav-link" href="index.php">Home</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">Spelschema</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="trannirs.html">Reglement</a>
-                     </li>
+                     </li>                    
                      <li class="nav-item">
                         <a class="nav-link" href="login.php">Inloggen</a>
                      </li>

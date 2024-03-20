@@ -5,4 +5,4 @@ include_once('UserCrud.php');
 $crud = new UserCrud();
 
 if(isset($_POST))
-    $crud->actionLogin()
+    $crud->actionLogin();

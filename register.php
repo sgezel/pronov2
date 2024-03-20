@@ -5,8 +5,12 @@ include_once("UserCrud.php");
 $crud = new UserCrud();
 ?>
 
+
+
 <form method="post" action="action_register.php" autocomplete="off">
 <div class="contact_section layout_padding">
+
+   
          <div class="container-fluid">
             <div class="row">
                <div class="col-md-6">
