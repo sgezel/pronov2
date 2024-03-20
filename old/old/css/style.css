@@ -1,0 +1,108 @@
+.login-form{
+	padding-top: 25px;
+	margin: 0 auto;
+}
+
+table
+{
+	width:100%;
+	margin-bottom: 30px;
+	background-color: white;
+}
+
+.header
+{
+	background: #D4886A;
+	color: #fff;
+	font-size: 20pt;
+}
+
+.subheader
+{
+	color:#000;
+	background: #FFc2aa;
+}
+
+body
+{
+	background: url('/img/bg.jpeg');
+}
+
+h1
+{
+	color: #fff;
+	background: #aa5939;
+}
+
+h2
+{
+	color: #aa5939;
+}
+
+.vraag:nth-child(even) {background: #eee;}
+
+#pronostiek input[type="number"]{
+	width:60px;
+	text-align: center;
+}
+
+#bonus input
+{
+	width:100%;
+}
+
+input:read-only{
+	background-color: #ddd;
+}
+
+.disabled{
+	background-color: #ddd;
+}
+
+.right
+{
+	float:right;
+}
+
+.left
+{
+	float:left;
+}
+
+.nowrap
+{
+
+white-space: nowrap;
+}
+
+.wit{
+	background: #fff;
+	margin:10px;
+	padding:10px;
+}
+
+
+
+.footer {
+
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  color:#fff !important;
+}
+
+.footer a{
+	color: #fff;
+}
+
+.footer img
+{
+	height:40px;
+}
+
+.logo
+{
+	height: 50px;
+}

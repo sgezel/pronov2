@@ -1,0 +1,93 @@
+<?php 
+  session_set_cookie_params(604800);
+  session_start();
+?>
+<?php include("header.php"); ?>
+
+<div class=innerbannerwrap>
+        <div class=innerbanner><h2 class=bannerHeadline>Regle<span>ment</span></h2></div>
+    </div>
+    <section class="matchSchedule countryclub">
+        <div class=container>
+            <div class=row><h2 class="heading small">Reglement der Premedianen voor deelname aan de  <span><nobr>Pr(emed)onostiek</nobr></span> .</h2>
+        	<div class="wit">
+        	<p> 
+        		<h2>Vorige edities</h2>
+
+        		De EK pronostiek van 2020 was een gigantisch succes met maar liefst 34 deelnemers. Voorlopig hebben we bij elke Pr(emed)onostiek een hoger aantal deelnemers dan de editie ervoor. We hopen dus om ook deze keer weer een talrijke deelname te mogen noteren.	
+<table>
+<tr>
+	<th>Pr(emed)onostiek</th>        
+	<th># deelnemers</th>
+	<th>Winnaar</th>
+</tr>
+
+<tr>
+	<td>
+		
+	</td>
+Pr(emed)onostiek	# deelnemers	Winnaar
+WK 2014	26	Nele Sijmens
+WK 2018	31	Sandor Gezel
+EK 2020	34	Joost Van den Brande
+	   
+	
+	
+		<br/><br/>
+        		<h2>Waarom zou ik meedoen?</h2>
+
+        		De winnaar van deze wedstrijd mag natuurlijk een leuke prijs verwachten. Afhankelijk van het aantal deelnemers en dus het bedrag dat gespendeerd kan worden, zal er een overwinningscadeau voorzien worden. Maar nog belangrijker dan de prijs, is natuurlijk de eer. Wie zou zich niet 4 jaar lang de onbetwistbare nummer één van de WK Pr(emed)onostiek willen noemen. Word jij het dit jaar?
+<br/>
+Je moet zeker geen schrik hebben om deel te nemen. Kennis is van geen belang. De score in de pronostiek is zo opgebouwd dat iemand zonder enige kennis van voetbal zou kunnen winnen.
+
+		      <br/><br/>
+        		<h2>Hoe betaal ik mijn bijdrage? </h2>
+
+        		We vragen ook dit jaar om de bijdrage over te schrijven op het rekeningnummer van Dieter. Velen onder jullie komen nog maar weinig op kantoor (Leuven) en daarom vragen we om de 2 euro over te schrijven op rekeningnummer BE69 9731 1595 8278 met vermelding van je naam, of de barcode te gebruiken. Indien je wel op Premed komt, mag je dit ook altijd cash betalen. (Maar overschrijven heeft de voorkeur)                <br/>
+                <img src="images/qr.png" width=150 /> 
+        	
+<br/>
+            <br/>
+                <h2>Wie mag er deelnemen? </h2>
+
+               Iedere werknemer van Premed mag deelnemen. Per werknemer mag er maar 1 account worden gemaakt. Indien je zelf niet wil meespelen, maar je vriend, vriendin, man, vrouw, kind wil meespelen, kan dit onder jouw naam. De eventuele overwinningsprijs zal ook enkel uitgereikt worden aan een Premediaan.
+<br/><br/>
+        		<h2>Uit welke onderdelen bestaat de pronostiek?</h2>
+
+        		De Pr(emed)onostiek bestaat uit 2 delen.<br/>
+				<ol>
+					<li>De vragenronde: deze bestaat uit een aantal vragen die voor het WK moeten ingevuld worden. Juiste antwoorden op deze vragen zorgen voor bonuspunten.</li>
+					<li>De pronostiekronde: Je vult een einduitslag in per wedstrijd. Per wedstijd zijn er punten te verdienen.</li>
+				</ol>
+        
+
+            <br/><br/>
+                <h2>Tot wanneer kan ik mijn pronostiek invullen?</h2>
+De bonusvragen kan je beantwoorden en wijzigen tot het begin van het WK. Dit is dus tot 20/11/2022 17u00.
+De wedstrijden kan je invullen en wijzigen tot één uur voor de aanvang van de wedstrijd.
+
+
+         <br/><br/>
+        		<h2>Hoe worden de punten verdeeld?</h2>
+
+        		In de vragenronde wordt een juist antwoord gelijkgesteld aan vier punten. Er zijn 9 vragen, dus in deze ronde zijn er 36 punten te verdienen. Dit komt overeen met ongeveer 12,5% van het totaal van de te verdienen punten. Per wedstijd zijn er vier punten te verdienen.
+
+                <br/>
+	<ul>
+		<li>1 punt als je het aantal doelpunten van de thuisploeg juist hebt</li>
+		<li>1 punt als je het aantal doelpunten van de uitploeg juist hebt</li>
+		<li>1 punt als het verschil in doelpunten juist is (2-1 verschilt evenveel als 1-2)</li>
+		<li>1 punt als je de winnaar juist hebt (ook bij gelijkspel)</li>
+
+	</ul>
+    <br/>
+    Er zijn 64 wedstrijden dit WK. Er zijn dus 256 punten te verdienen bij de pronostiekronde. Dit komt overeen met ongeveer 87,5% van het totaal van de te verdienen punten.
+<br/><br/>
+        		<h2>Hoe wordt er berekend wie wint?</h2>
+
+        		De winnaar zal degene zijn met het hoogst aantal totaalpunten (pronostiek- en vragenronde). Indien er een ex aequo is wordt er gekeken naar het aantal punten dat gehaald werd in de pronostiekronde. Moest het dan nog steeds gelijk zijn wordt er gekeken naar het aantal correct ingevulde uitslagen. Indien dit nog geen uitsluitsel geeft, zijn er meerdere winnaars.
+        	</p>
+        </div>
+    </section>
+
+    <?php include("footer.php"); ?>
