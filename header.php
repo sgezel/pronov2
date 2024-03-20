@@ -50,3 +50,13 @@
          </div>
       </div>
    <?php endif; ?>
+
+   <?php if (isset($success_message)) : ?>
+      <div class="row">
+         <div class="col-md-12">
+            <div class="alert alert-success">
+               <?= $success_message; ?>
+            </div>
+         </div>
+      </div>
+   <?php endif; ?>

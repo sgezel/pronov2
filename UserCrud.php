@@ -46,6 +46,7 @@ class UserCrud
         {
             array_push($data[$listName], $userdata);
             file_put_contents($this->filePath, json_encode($data));
+            $_SESSION["success_message"] = "U bent geregistreerd en kan nu inloggen.";
         }
         else
         {
@@ -106,21 +107,19 @@ class UserCrud
             $data = $this->data;
 
             foreach ($data[$listName] as $id => $userdata) {
-
-                echo $username;
-
                 if ($userdata["username"] == $username) {
-                    if (password_verify($password, $userdata["password"]))
-                    {
+
+
+                    if(password_verify($password, $userdata["password"])){
                         $_SESSION["loggedin"] = true;
                         header("Location: " . $this->homePath);
-                    }
+                    }                   
                     break;
-                }                
+                }
             }
-
-            die("woops");
+           
             $_SESSION["error_message"] = "Deze gebruiker bestaat niet of het wachtwoord is verkeerd";
+            die();
             header("Location: " . $this->loginPath);
         }
     }

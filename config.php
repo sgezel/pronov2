@@ -16,3 +16,13 @@ else
 {
     unset($error_message);
 }
+
+if(isset($_SESSION["success_message"]))
+{
+    $success_message = $_SESSION["success_message"];
+    unset($_SESSION["success_message"]);
+}
+else
+{
+    unset($success_message);
+}
