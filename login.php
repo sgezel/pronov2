@@ -10,8 +10,8 @@ require_once("header.php");
                   <div class="mail_section_1">
                      <h1 class="contact_taital">Inloggen</h1>
                      <div class="form">
-                        <input type="text" class="mail_text" placeholder="Naam" name="prono_username" />
-                        <input type="password" class="mail_text" placeholder="Wachtwoord" name="prono_password" />                       
+                        <input type="text" class="mail_text" placeholder="Naam" name="username" />
+                        <input type="password" class="mail_text" placeholder="Wachtwoord" name="password" />                       
                      </div>
                      <input type="submit" class="btn btn-primary" value="Log In" />
                   </div>

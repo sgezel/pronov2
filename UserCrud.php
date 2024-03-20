@@ -3,6 +3,8 @@
 class UserCrud
 {
     private $homePath;
+    private $regPath;
+    private $loginPath;
     private $filePath;
     private $fileContent;
     public $data;
@@ -11,7 +13,11 @@ class UserCrud
 
     public function __construct($filePath = 'data.json')
     {
-        $this->homePath = "/pronov2/register.php";
+        $filePath = $_SESSION["datafile"];
+        $this->regPath = $_SESSION["install_path"] . "/register.php";
+        $this->homePath = $_SESSION["install_path"] . "/main.php";
+        $this->loginPath = $_SESSION["install_path"] . "/login.php";
+
         if (file_exists($filePath)) {
             $this->filePath = $filePath;
             $this->fileContent = file_get_contents($filePath);
@@ -47,7 +53,7 @@ class UserCrud
         }
 
        
-        header("Location: " . $this->homePath);
+        header("Location: " . $this->regPath);
     }
 
     public function actionUserData($username = null)
@@ -86,7 +92,7 @@ class UserCrud
                 $data[$listName][$id] = $post;
                 file_put_contents($this->filePath, json_encode($data));
             }
-            header("Location: /" . $this->homePath);
+            header("Location: " . $this->regPath);
         }
     }
 
@@ -99,17 +105,23 @@ class UserCrud
             $listName = $this->listName;
             $data = $this->data;
 
-            foreach ($data as $id) {
-                if ($data[$listName][$id]["username"] == $username) {
-                    if (password_verify($password, $data[$listName][$id]["password"]))
-                        die("login ok");
+            foreach ($data[$listName] as $id => $userdata) {
 
-                    die("password not valid");
+                echo $username;
+
+                if ($userdata["username"] == $username) {
+                    if (password_verify($password, $userdata["password"]))
+                    {
+                        $_SESSION["loggedin"] = true;
+                        header("Location: " . $this->homePath);
+                    }
                     break;
-                }
-
-                die("user not found");
+                }                
             }
+
+            die("woops");
+            $_SESSION["error_message"] = "Deze gebruiker bestaat niet of het wachtwoord is verkeerd";
+            header("Location: " . $this->loginPath);
         }
     }
 }
