@@ -109,9 +109,9 @@ class UserCrud
             foreach ($data[$listName] as $id => $userdata) {
                 if ($userdata["username"] == $username) {
 
-
                     if(password_verify($password, $userdata["password"])){
                         $_SESSION["loggedin"] = true;
+                        $_SESSION["admin"] = $userdata["admin"];
                         header("Location: " . $this->homePath);
                     }                   
                     break;
