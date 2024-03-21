@@ -7,6 +7,8 @@ $userCrud = new UserCrud();
 $settingsCrud = new SettingCrud();
 
 $settings = $settingsCrud->actionGetAllSettings();
+
+$allUserData = $userCrud->actionRead();
 ?>
 
 
@@ -34,27 +36,53 @@ $settings = $settingsCrud->actionGetAllSettings();
                 <div class="tab-pane " id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
                     <br />
                     <h2>Gebruikers aanpassen</h2>
+                    
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">email</th>
+                                <th scope="col">name</th>
+                                <th scope="col">paid</th>
+                                <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($allUserData as $id => $data): ?>
+
+                                    <tr>
+                                        <td><?= $id ?></td>
+                                        <td><?= $data["username"]; ?></td>
+                                        <td><?= $data["name"]; ?></td>
+                                        <td><?= $data["paid"] ?></td>
+                                        <td><button class="btn btn-primary">Edit</button></td>
+                                    </tr>
+
+                                <?php endforeach; ?>
+
+                            </tbody>
+                        </table>
                 </div>
 
-                <div class="tab-pane " id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
-                    <br />
-                    <h2>Instellingen aanpassen</h2>
+                    <div class="tab-pane " id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+                        <br />
+                        <h2>Instellingen aanpassen</h2>
 
-                    <form method="post" action="action_admin_settings.php">
-                        <label for="registrations">Gebruikers mogen registreren:</label>
-                        <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
+                        <form method="post" action="action_admin_settings.php">
+                            <label for="registrations">Gebruikers mogen registreren:</label>
+                            <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
 
-                        <br/>
-                        <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
-                    </form>
+                            <br />
+                            <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
     </div>
-</div>
 
-<?php
-require_once("footer.php");
-?>
+    <?php
+    require_once("footer.php");
+    ?>
