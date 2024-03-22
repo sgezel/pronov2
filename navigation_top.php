@@ -28,12 +28,11 @@ $registration = $settingsCrud->actionGetSetting("registrations");
                   <li class="nav-item">
                      <a class="nav-link" href="admin.php">Admin</a>
                   </li>
-
-                  <li class="nav-item">
-                     <a class="nav-link" href="logout.php">Uitloggen</a>
-                  </li>
                <?php endif; ?>
 
+               <li class="nav-item">
+                  <a class="nav-link" href="logout.php">Uitloggen</a>
+               </li>
 
             <?php else : ?>
                <li class="nav-item">
