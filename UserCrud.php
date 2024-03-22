@@ -134,7 +134,7 @@ class UserCrud
             $data = $this->data;
 
             foreach ($data[$listName] as $id => $userdata) {
-                if ($userdata["username"] == $username) {
+                if (strtolower($userdata["username"]) == strtolower($username)) {
 
                     if(password_verify($password, $userdata["password"])){
                         $_SESSION["loggedin"] = true;
