@@ -114,13 +114,13 @@ class UserCrud
                         $_SESSION["loggedin"] = true;
                         $_SESSION["admin"] = $userdata["admin"];
                         header("Location: " . $this->homePath);
+                        die("test");
                     }                   
                     break;
                 }
             }
            
             $_SESSION["error_message"] = "Deze gebruiker bestaat niet of het wachtwoord is verkeerd";
-            die();
             header("Location: " . $this->loginPath);
         }
     }
