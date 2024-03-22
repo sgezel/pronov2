@@ -55,7 +55,7 @@ $allUserData = $userCrud->actionRead();
                                         <td><?= $data["username"]; ?></td>
                                         <td><?= $data["name"]; ?></td>
                                         <td><?= $data["paid"] ?></td>
-                                        <td><button class="btn btn-primary">Edit</button></td>
+                                        <td><a href="edituser.php?id=<?= $id; ?>"  class="btn btn-primary">Edit</a></td>
                                     </tr>
 
                                 <?php endforeach; ?>

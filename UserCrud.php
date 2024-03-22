@@ -5,6 +5,7 @@ class UserCrud
     private $homePath;
     private $regPath;
     private $loginPath;
+    private $adminPath;
     private $filePath;
     private $fileContent;
     public $data;
@@ -17,6 +18,7 @@ class UserCrud
         $this->regPath = $_SESSION["install_path"] . "/register.php";
         $this->homePath = $_SESSION["install_path"] . "/main.php";
         $this->loginPath = $_SESSION["install_path"] . "/login.php";
+        $this->adminPath = $_SESSION["install_path"] . "/admin.php";
 
         if (file_exists($filePath)) {
             $this->filePath = $filePath;
@@ -58,6 +60,21 @@ class UserCrud
         header("Location: " . $this->regPath);
     }
 
+
+    public function actionUserDataById($id = null)
+    {
+        $listName = $this->listName;
+        $data = $this->data;
+
+        $itemData = $data[$listName][$id];
+
+        if ($itemData) {
+            return $itemData;
+        }
+
+        return null;
+    }
+
     public function actionUserData($username = null)
     {
         $listName = $this->listName;
@@ -86,7 +103,16 @@ class UserCrud
             $itemData = $data[$listName][$id];
 
             foreach ($this->attributesList as $value) {
-                $post[$value] = isset($_POST[$value]) ? $_POST[$value] : "";
+
+                if($value == "password")
+                {
+                    $post[$value] = password_hash($_POST[$value], PASSWORD_DEFAULT);
+                }
+                else
+                {
+                    $post[$value] = isset($_POST[$value]) ? $_POST[$value] : "";
+                }
+
             }
 
             if ($itemData) {
@@ -94,7 +120,7 @@ class UserCrud
                 $data[$listName][$id] = $post;
                 file_put_contents($this->filePath, json_encode($data));
             }
-            header("Location: " . $this->regPath);
+            header("Location: " . $this->adminPath);
         }
     }
 
