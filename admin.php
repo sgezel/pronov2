@@ -83,7 +83,7 @@ $allMatchData = $matchCrud->actionRead();
                             <?php foreach ($allMatchData as $id => $data) : ?>
 
                                 <tr>
-                                    <td><?= $data["id"] ?></td>
+                                    <td><?= $id ?></td>
                                     <td><?= $data["date"]; ?></td>
                                     <td><?= $data["home"]; ?></td>
                                     <td><?= $data["away"] ?></td>
