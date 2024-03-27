@@ -40,8 +40,8 @@ $allMatchData = $matchCrud->actionRead();
                             <label for="date">Datum:</label>
                             <input class="mail_text" type="date" name="date" />
                             <br />
-                            <label for="hour">Uur:</label>
-                            <input class="mail_text" type="time" name="hour" />
+                            <label for="time">Uur:</label>
+                            <input class="mail_text" type="time" name="time" />
                             <br />
                             <label for="home">Thuisploeg:</label>
                             <input class="mail_text" type="text" name="home" />
@@ -74,6 +74,7 @@ $allMatchData = $matchCrud->actionRead();
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">date</th>
+                                <th scope="col">time</th>
                                 <th scope="col">home</th>
                                 <th scope="col">away</th>
                                 <th scope="col">Edit</th>
@@ -85,6 +86,7 @@ $allMatchData = $matchCrud->actionRead();
                                 <tr>
                                     <td><?= $id ?></td>
                                     <td><?= $data["date"]; ?></td>
+                                    <td><?= $data["time"]; ?></td>
                                     <td><?= $data["home"]; ?></td>
                                     <td><?= $data["away"] ?></td>
                                     <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>

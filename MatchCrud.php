@@ -25,7 +25,7 @@ class MatchCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "matches";
-            $this->attributesList = ["date", "hour", "home", "away", "home_score", "away_score","round","id"];
+            $this->attributesList = ["date", "time", "home", "away", "home_score", "away_score", "round", "id"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -39,25 +39,22 @@ class MatchCrud
         $matchdata = [];
 
         $matchdata["date"] = $_POST["date"];
-        $matchdata["hour"] = $_POST["hour"];
+        $matchdata["time"] = $_POST["time"];
         $matchdata["home"] = $_POST["home"];
         $matchdata["away"] = $_POST["away"];
         $matchdata["home_score"] = "";
         $matchdata["away_score"] = "";
         $matchdata["round"] = $_POST["round"];
 
-        if($this->actionMatchData($matchdata["id"]) == null)
-        {
+        if ($this->actionMatchData($matchdata["id"]) == null) {
             $data[$listName][$_POST["id"]] =  $matchdata;
             file_put_contents($this->filePath, json_encode($data));
             $_SESSION["success_message"] = "Match werd succesvol toegevoegd.";
-        }
-        else
-        {
+        } else {
             $_SESSION["error_message"] = "Deze wedstrijd werd reeds toegevoegd.";
         }
 
-       
+
         header("Location: " . $this->adminPath);
     }
 
@@ -92,8 +89,29 @@ class MatchCrud
 
     public function actionRead()
     {
+
+        // Custom comparison function for sorting
+        usort($this->data[$this->listName], function ($a, $b) {
+            // First compare by round
+            $roundComparison = strcmp($a['round'], $b['round']);
+            if ($roundComparison !== 0) {
+                return $roundComparison;
+            }
+
+            // If rounds are equal, compare by date
+            $dateComparison = strcmp($a['date'], $b['date']);
+            if ($dateComparison !== 0) {
+                return $dateComparison;
+            }
+
+            // If dates are equal, compare by time
+            return strcmp($a['time'], $b['time']);
+        });
+
         return $this->data[$this->listName];
     }
+
+
 
     public function actionEdit()
     {
@@ -104,8 +122,8 @@ class MatchCrud
             $itemData = $data[$listName][$id];
 
             foreach ($this->attributesList as $value) {
-                    $post[$value] = isset($_POST[$value]) ? $_POST[$value] : "";
-                }
+                $post[$value] = isset($_POST[$value]) ? $_POST[$value] : "";
+            }
 
             if ($itemData) {
                 unset($data[$listName][$id]);
