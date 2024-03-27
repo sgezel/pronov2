@@ -11,6 +11,14 @@ $crud = new UserCrud();
       <div class="col-sm-12">
         <h1 class="blog_taital">Pronostiek invullen</h1>
       </div>
+
+      <div class="alert alert-dark" role="alert">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">QuickPick inschakelen.</label><strong> <a href="quickpick.php">Lees hier meer over de nieuwe QuickPick &trade; feature!</a> </strong>
+        </div>
+      </div>
+
     </div>
     <div class="blog_section_2">
       <div class="row">
