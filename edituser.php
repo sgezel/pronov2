@@ -45,6 +45,11 @@ if ($userData == null) {
                             <label class="form-check-label" for="flexSwitchPaid">Paid</label>
                         </div>
                     
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="quickpicker" type="checkbox" id="flexSwitchQuickPick" <?= $userData["quickpicker"] ? "checked=checked" : "" ?>>
+                            <label class="form-check-label" for="flexSwitchQuickPick">QuickPick&trade;</label>
+                        </div>
+
                         <input type="submit" class="btn btn-primary" value="Opslaan" />
                     </div>
 
