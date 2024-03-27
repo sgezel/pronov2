@@ -25,7 +25,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid"];
+            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -44,6 +44,7 @@ class UserCrud
         $userdata["admin"] = false;
         $userdata["visible"] = true;
         $userdata["paid"] = false;
+        $userdata["quickpicker"] = false;
 
         if($this->actionUserData($userdata["username"]) == null)
         {

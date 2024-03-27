@@ -18,6 +18,10 @@ $registration = $settingsCrud->actionGetSetting("registrations");
                <a class="nav-link" href="index.php">Home</a>
             </li>
 
+            <li class="nav-item">
+               <a class="nav-link" href="reglement.php">Reglement</a>
+            </li>
+
             <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
 
                <li class="nav-item">

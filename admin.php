@@ -1,14 +1,17 @@
 <?php
 require_once("header.php");
 include_once("UserCrud.php");
+include_once("MatchCrud.php");
 include_once("SettingCrud.php");
 
 $userCrud = new UserCrud();
+$matchCrud = new MatchCrud();
 $settingsCrud = new SettingCrud();
 
 $settings = $settingsCrud->actionGetAllSettings();
 
 $allUserData = $userCrud->actionRead();
+$allMatchData = $matchCrud->actionRead();
 ?>
 
 
@@ -29,60 +32,123 @@ $allUserData = $userCrud->actionRead();
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane show active" id="matches-tab-pane" role="tabpanel" aria-labelledby="matches-tab" tabindex="0">
-                    <br />
-                    <h2>Matchen toevoegen/aanpassen</h2>
+                    <div>
+                    <h2>Matchen toevoegen</h2>
+
+                    <form method="post" action="action_admin_addmatch.php">
+                        <div class="form">
+                            <label for="date">Datum:</label>
+                            <input class="mail_text" type="date" name="date" />
+                            <br />
+                            <label for="hour">Uur:</label>
+                            <input class="mail_text" type="time" name="hour" />
+                            <br />
+                            <label for="home">Thuisploeg:</label>
+                            <input class="mail_text" type="text" name="home" />
+                            <br />
+                            <label for="away">Uitploeg:</label>
+                            <input class="mail_text" type="text" name="away" />
+                            <br />
+                            <label for="round">Ronde:</label><br />
+                            <select class="mail_text" name="round">
+                                <option selected>Kies...</option>
+                                <option value="1">Groepsfase</option>
+                                <option value="2">Achtste finales</option>
+                                <option value="3">Kwartfinales</option>
+                                <option value="4">Halve finales</option>
+                                <option value="5">Finale</option>
+                            </select>
+                            <br />
+                            <label for="id">ID:</label>
+                            <input class="mail_text" type="number" name="id" />
+                            <br />
+                            <br />
+                            <input type="submit" class="btn btn-primary" value="Wedstrijd Opslaan" />
+                        </div>
+                    </form>
+                    </div>
+                    <div>
+                    <h2>Matchen aanpassen</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">date</th>
+                                <th scope="col">home</th>
+                                <th scope="col">away</th>
+                                <th scope="col">Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($allMatchData as $id => $data) : ?>
+
+                                <tr>
+                                    <td><?= $data["id"] ?></td>
+                                    <td><?= $data["date"]; ?></td>
+                                    <td><?= $data["home"]; ?></td>
+                                    <td><?= $data["away"] ?></td>
+                                    <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
+                                </tr>
+
+                            <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+                    </div>
+
+
                 </div>
 
                 <div class="tab-pane " id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
                     <br />
                     <h2>Gebruikers aanpassen</h2>
-                    
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">email</th>
                                 <th scope="col">name</th>
                                 <th scope="col">paid</th>
                                 <th scope="col">Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($allUserData as $id => $data) : ?>
+
+                                <tr>
+                                    <td><?= $id ?></td>
+                                    <td><?= $data["username"]; ?></td>
+                                    <td><?= $data["name"]; ?></td>
+                                    <td><?= $data["paid"] ?></td>
+                                    <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($allUserData as $id => $data): ?>
 
-                                    <tr>
-                                        <td><?= $id ?></td>
-                                        <td><?= $data["username"]; ?></td>
-                                        <td><?= $data["name"]; ?></td>
-                                        <td><?= $data["paid"] ?></td>
-                                        <td><a href="edituser.php?id=<?= $id; ?>"  class="btn btn-primary">Edit</a></td>
-                                    </tr>
+                            <?php endforeach; ?>
 
-                                <?php endforeach; ?>
-
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
                 </div>
 
-                    <div class="tab-pane " id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+                <div class="tab-pane " id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+                    <br />
+                    <h2>Instellingen aanpassen</h2>
+
+                    <form method="post" action="action_admin_settings.php">
+                        <label for="registrations">Gebruikers mogen registreren:</label>
+                        <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
+
                         <br />
-                        <h2>Instellingen aanpassen</h2>
-
-                        <form method="post" action="action_admin_settings.php">
-                            <label for="registrations">Gebruikers mogen registreren:</label>
-                            <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
-
-                            <br />
-                            <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
-                        </form>
-                    </div>
-
+                        <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
+                    </form>
                 </div>
 
             </div>
+
         </div>
     </div>
+</div>
 
-    <?php
-    require_once("footer.php");
-    ?>
+<?php
+require_once("footer.php");
+?>
