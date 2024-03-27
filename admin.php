@@ -137,7 +137,23 @@ $allMatchData = $matchCrud->actionRead();
                     <form method="post" action="action_admin_settings.php">
                         <label for="registrations">Gebruikers mogen registreren:</label>
                         <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
-
+                        <br />
+                        <br />
+                        <h3>Zichtbaarheid wedstrijdrondes</h3>
+                        <label for="round1">Groepsfase:</label>
+                        <input type="checkbox" name="round1" <?= $settings["round1"] ? "checked=checked" : "" ?> />
+                        <br />
+                        <label for="round2">Achtste finales:</label>
+                        <input type="checkbox" name="round2" <?= $settings["round2"] ? "checked=checked" : "" ?> />
+                        <br />
+                        <label for="round3">Kwartfinales:</label>
+                        <input type="checkbox" name="round3" <?= $settings["round3"] ? "checked=checked" : "" ?> />
+                        <br />
+                        <label for="round4">Halve finales:</label>
+                        <input type="checkbox" name="round4" <?= $settings["round4"] ? "checked=checked" : "" ?> />
+                        <br />
+                        <label for="round5">Finale:</label>
+                        <input type="checkbox" name="round5" <?= $settings["round5"] ? "checked=checked" : "" ?> />
                         <br />
                         <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
                     </form>
