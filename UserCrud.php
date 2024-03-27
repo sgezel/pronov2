@@ -140,6 +140,7 @@ class UserCrud
                     if(password_verify($password, $userdata["password"])){
                         $_SESSION["loggedin"] = true;
                         $_SESSION["admin"] = $userdata["admin"];
+                        $_SESSION["userid"] = $id;
                         header("Location: " . $this->homePath);
                         die("test");
                     }                   
@@ -150,5 +151,22 @@ class UserCrud
             $_SESSION["error_message"] = "Deze gebruiker bestaat niet of het wachtwoord is verkeerd";
             header("Location: " . $this->loginPath);
         }
+    }
+
+    public function actionSaveQuickPick(){       
+
+        $id = $_SESSION["userid"];
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$id];
+
+        $quickpick = $_POST["quickpick"];
+        $itemData["quickpicker"] = $quickpick;
+
+        unset($data[$listName][$id]);
+        $data[$listName][$id] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+
+
     }
 }

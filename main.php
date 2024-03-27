@@ -5,6 +5,8 @@ include_once("UserCrud.php");
 $crud = new UserCrud();
 ?>
 
+
+
 <div class="blog_section layout_padding">
   <div class="container">
     <div class="row">
@@ -14,8 +16,8 @@ $crud = new UserCrud();
 
       <div class="alert alert-dark" role="alert">
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-          <label class="form-check-label" for="flexSwitchCheckDefault">QuickPick inschakelen.</label><strong> <a href="quickpick.php">Lees hier meer over de nieuwe QuickPick &trade; feature!</a> </strong>
+          <input class="form-check-input" type="checkbox" id="flexSwitchQuickPick" name="quickpick">
+          <label class="form-check-label" for="flexSwitchQuickPick">QuickPick inschakelen.</label><strong> <a href="quickpick.php">Lees hier meer over de nieuwe QuickPick &trade; feature!</a> </strong>
         </div>
       </div>
 
@@ -58,6 +60,30 @@ $crud = new UserCrud();
     </div>
   </div>
 </div>
+
+<script>
+  var checkbox = document.getElementById('flexSwitchQuickPick');
+  checkbox.addEventListener("change", functionname, false);
+
+  function functionname() {
+    var isChecked = checkbox.checked;
+
+    var http = new XMLHttpRequest();
+    var url = 'action_user_quickpick.php';
+    var params = 'quickpick=' + isChecked;
+    http.open('POST', url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() { //Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+       
+      }
+    }
+    http.send(params);
+  }
+</script>
 
 <?php
 require_once("footer.php");
