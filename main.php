@@ -3,6 +3,8 @@ require_once("header.php");
 include_once("UserCrud.php");
 
 $crud = new UserCrud();
+
+$data = $crud->actionUserDataById($_SESSION["userid"]);
 ?>
 
 
@@ -16,7 +18,7 @@ $crud = new UserCrud();
 
       <div class="alert alert-dark" role="alert">
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchQuickPick" name="quickpick">
+          <input class="form-check-input" type="checkbox" id="flexSwitchQuickPick" <?= $data["quickpicker"] == "true" ? "checked" : ""; ?>  name="quickpick">
           <label class="form-check-label" for="flexSwitchQuickPick">QuickPick inschakelen.</label><strong> <a href="quickpick.php">Lees hier meer over de nieuwe QuickPick &trade; feature!</a> </strong>
         </div>
       </div>
