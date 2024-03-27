@@ -45,11 +45,10 @@ class MatchCrud
         $matchdata["home_score"] = "";
         $matchdata["away_score"] = "";
         $matchdata["round"] = $_POST["round"];
-        $matchdata["id"] = $_POST["id"];
 
         if($this->actionMatchData($matchdata["id"]) == null)
         {
-            array_push($data[$listName], $matchdata);
+            $data[$listName][$_POST["id"]] =  $matchdata;
             file_put_contents($this->filePath, json_encode($data));
             $_SESSION["success_message"] = "Match werd succesvol toegevoegd.";
         }
@@ -77,13 +76,13 @@ class MatchCrud
         return null;
     }
 
-    public function actionMatchData($id = null)
+    public function actionMatchData($matchid = null)
     {
         $listName = $this->listName;
         $data = $this->data;
 
         foreach ($data[$listName] as $id => $matchdata) {
-            if ($matchdata["id"] == $id) {
+            if ($matchid == $id) {
                 return $matchdata;
             }
         }
