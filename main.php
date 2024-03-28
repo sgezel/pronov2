@@ -5,6 +5,7 @@ include_once("MatchCrud.php");
 
 $crud = new UserCrud();
 $matchCrud = new MatchCrud();
+$settingCrud = new SettingCrud();
 
 $data = $crud->actionUserDataById($_SESSION["userid"]);
 $allMatchData = $matchCrud->actionRead();
@@ -30,6 +31,8 @@ $allMatchData = $matchCrud->actionRead();
     <div class="blog_section_2">
 
       <div>
+      
+
         <?php $round = "";
         $rounddesc = ""; ?>
         <?php foreach ($allMatchData as $id => $data) :
@@ -41,19 +44,39 @@ $allMatchData = $matchCrud->actionRead();
 
             $round = $data["round"];
             if ($round == "1") {
-              $rounddesc = "Groepsfase";
+              if ($settingCrud->actionGetSetting("round1") == true) {
+                $rounddesc = "Groepsfase";
+              } else {
+                break;
+              }
             }
             if ($round == "2") {
-              $rounddesc = "Achtste finale";
+              if ($settingCrud->actionGetSetting("round2") == true) {
+                $rounddesc = "Achtste finale";
+              } else {
+                break;
+              }
             }
             if ($round == "3") {
-              $rounddesc = "Kwartfinale";
+              if ($settingCrud->actionGetSetting("round3") == true) {
+                $rounddesc = "Kwartfinale";
+              } else {
+                break;
+              }
             }
             if ($round == "4") {
-              $rounddesc = "Halve finale";
+              if ($settingCrud->actionGetSetting("round4") == true) {
+                $rounddesc = "Halve finale";
+              } else {
+                break;
+              }
             }
             if ($round == "5") {
-              $rounddesc = "Finale";
+              if ($settingCrud->actionGetSetting("round5") == true) {
+                $rounddesc = "Finale";
+              } else {
+                break;
+              }
             } ?>
             <h2><?= $rounddesc; ?></h2>
             <table class="table table-hover w-100">
