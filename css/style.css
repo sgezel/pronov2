@@ -214,7 +214,7 @@ button {
 
 .header_section {
     width: 100%;
-    float: left;
+   /* float: left; */
     background-color: #6cbd15;
     height: auto;
     background-size: 100%;
@@ -278,7 +278,7 @@ button {
 }
 
 
-/* header section end */
+/* header section end */ 
 
 
 /* banner section start */
