@@ -87,10 +87,10 @@ $allMatchData = $matchCrud->actionRead();
               <?php endif; ?>
 
               <tr class="daterow">
-                <td colspan="9"><?= date_format(date_create($data["date"]), 'd/m/Y'); ?> <?= $data["time"]; ?></td>
+                <td colspan="9"><nobr><?= date_format(date_create($data["date"]), 'd/m'); ?> <?= $data["time"]; ?></nobr></td>
               </tr>
               <tr>
-                <td class="datefield"><?= date_format(date_create($data["date"]), 'd/m/Y'); ?> <?= $data["time"]; ?></td>
+                <td class="datefield"><?= date_format(date_create($data["date"]), 'd/m'); ?> <?= $data["time"]; ?></td>
                 <td><img src=".\\vlaggen\\<?= $data["home"]; ?>.png" class="flag"><?= $data["home"]; ?></td>
                 <td><?= $data["home_score"]; ?></td>
                 <td><input type="number" width="20px" class="form-control input-score" name="" value="" ?></td>
