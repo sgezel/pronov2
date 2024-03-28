@@ -31,7 +31,7 @@ $allMatchData = $matchCrud->actionRead();
     <div class="blog_section_2">
 
       <div>
-      
+      <form method="post" action="action_main_save.php">
 
         <?php $round = "";
         $rounddesc = ""; ?>
@@ -102,12 +102,13 @@ $allMatchData = $matchCrud->actionRead();
 
             <?php endforeach; ?>
             <tr>
-              <td colspan="7">
+              <td colspan="9">
                 <input type="submit" value="Opslaan" class="btn btn-primary w-100" />
               </td>
             </tr>
               </tbody>
             </table>
+      </form>
       </div>
 
     </div>

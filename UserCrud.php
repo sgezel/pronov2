@@ -169,4 +169,10 @@ class UserCrud
 
 
     }
+
+    public function actionSaveMatches(){
+
+        $_SESSION["success_message"] = "De pronostiek is goed opgeslagen.";
+        header("Location: " . $this->homePath);
+    }
 }
