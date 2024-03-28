@@ -1,4 +1,3 @@
-
 <?php
 require_once("header.php");
 include_once("UserCrud.php");
@@ -6,6 +5,7 @@ include_once("MatchCrud.php");
 
 $crud = new UserCrud();
 $matchCrud = new MatchCrud();
+$settingCrud = new SettingCrud();
 
 $data = $crud->actionUserDataById($_SESSION["userid"]);
 $allMatchData = $matchCrud->actionRead();
@@ -31,7 +31,7 @@ $allMatchData = $matchCrud->actionRead();
     <div class="blog_section_2">
 
       <div>
-      
+
 
         <?php $round = "";
         $rounddesc = ""; ?>
@@ -44,19 +44,39 @@ $allMatchData = $matchCrud->actionRead();
 
             $round = $data["round"];
             if ($round == "1") {
-              $rounddesc = "Groepsfase";
+              if ($settingCrud->actionGetSetting("round1") == true) {
+                $rounddesc = "Groepsfase";
+              } else {
+                break;
+              }
             }
             if ($round == "2") {
-              $rounddesc = "Achtste finale";
+              if ($settingCrud->actionGetSetting("round2") == true) {
+                $rounddesc = "Achtste finale";
+              } else {
+                break;
+              }
             }
             if ($round == "3") {
-              $rounddesc = "Kwartfinale";
+              if ($settingCrud->actionGetSetting("round3") == true) {
+                $rounddesc = "Kwartfinale";
+              } else {
+                break;
+              }
             }
             if ($round == "4") {
-              $rounddesc = "Halve finale";
+              if ($settingCrud->actionGetSetting("round4") == true) {
+                $rounddesc = "Halve finale";
+              } else {
+                break;
+              }
             }
             if ($round == "5") {
-              $rounddesc = "Finale";
+              if ($settingCrud->actionGetSetting("round5") == true) {
+                $rounddesc = "Finale";
+              } else {
+                break;
+              }
             } ?>
             <h2><?= $rounddesc; ?></h2>
             <table class="table table-hover">
@@ -74,16 +94,16 @@ $allMatchData = $matchCrud->actionRead();
               </thead>
               <tbody>
               <?php endif; ?>
-            
+
               <tr>
                 <td><?= $id ?></td>
                 <td><?= date_format(date_create($data["date"]), 'd/m/Y'); ?></td>
                 <td><?= $data["time"]; ?></td>
-                <td><img src=".\\vlaggen\\<?=$data["home"]; ?>.png"><?= $data["home"]; ?></td>
-                <td><input type="number" width="20px" class="form-control" name="<?= $data["home_score"]; ?>"  value="<?= $data["home_score"]; ?>"  ?></td>
+                <td><img src=".\\vlaggen\\<?= $data["home"]; ?>.png"><?= $data["home"]; ?></td>
+                <td><input type="number" width="20px" class="form-control" name="<?= $data["home_score"]; ?>" value="<?= $data["home_score"]; ?>" ?></td>
                 <td> - </td>
-                <td><input type="number" width="20px" class="form-control" name="<?= $data["away_score"]; ?>"  value="<?= $data["away_score"]; ?>"  ?></td>
-                <td><?= $data["away"] ?><img src=".\\vlaggen\\<?=$data["away"]; ?>.png"></td>
+                <td><input type="number" width="20px" class="form-control" name="<?= $data["away_score"]; ?>" value="<?= $data["away_score"]; ?>" ?></td>
+                <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png"></td>
               </tr>
 
             <?php endforeach; ?>
