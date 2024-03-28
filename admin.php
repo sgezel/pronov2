@@ -72,11 +72,11 @@ $allMatchData = $matchCrud->actionRead();
                             <?php $round = "";
                             $rounddesc = ""; ?>
                             <?php foreach ($allMatchData as $id => $data) :
-                                if (strcmp($round, $data["round"]) != 0) {
-                                    if($round != "") {?>
+                                if (strcmp($round, $data["round"]) != 0) :
+                                    if($round != "") :?>
                                         </tbody>
                                 </table>
-                                    <?php }
+                                    <?php endif; 
 
                                     $round = $data["round"];
                                     if ($round == "1") {
@@ -107,7 +107,7 @@ $allMatchData = $matchCrud->actionRead();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                <?php } ?>
+                                <?php endif; ?>
                                 
                                         <tr>
                                             <td><?= $id ?></td>

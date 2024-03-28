@@ -1,23 +1,75 @@
+<?php
+session_set_cookie_params(604800);
+/*session_start();*/
+?>
 <?php include("header.php"); ?>
 
 <div class="contact_section layout_padding">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
 
-        <div class="col-md-12">
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit a orci ut ultricies. Aliquam sagittis semper blandit. Vivamus neque lorem, interdum eu erat in, laoreet dapibus metus. In a scelerisque nunc. Maecenas tincidunt cursus tortor, ac viverra sapien sagittis vitae. Pellentesque feugiat vulputate ligula, vel pharetra nunc placerat ut. Pellentesque sed purus metus.
+            <div class="col-md-12">
+                <h1 class="blog_taital">QuickPick&trade;.</h1>
 
-Morbi eros dolor, congue at libero bibendum, vulputate molestie justo. Ut eget ligula vitae felis porta semper eget posuere nibh. Pellentesque a justo in elit eleifend faucibus lobortis vel lectus. Vivamus eget molestie urna. Integer tincidunt tortor vitae tellus mollis, et convallis purus facilisis. Aliquam auctor iaculis interdum. Nulla nec vestibulum tellus. In imperdiet risus et nibh dictum, et ultricies odio aliquet. Nulla ut iaculis nibh, quis egestas orci. Donec bibendum ut magna ac fermentum. Suspendisse sit amet quam at ipsum scelerisque mollis. Etiam lobortis libero a egestas congue. Morbi iaculis porta semper.
+            </div>
+            <div class="blog_section_2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                        <h2>Wat is de QuickPick&trade;?</h2>
+                        De QuickPick&trade; is een automatisch hulpsysteem voor het invullen van wedstrijden, die door de deelnemer zelf niet ingevuld werden. 
+                        <div>
+                            <figure class="text-end" alert alert-dark>
+                                <blockquote class="blockquote">
+                                    <p>De QuickPick is de meest innovatieve feature dat er de laatste decennia bedacht is.</p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    <cite title="Source Title">Niemand.</cite>
+                                </figcaption>
+                            </figure>
+                        </div>
 
-Duis gravida eget ex at commodo. Nam dignissim, nisl ultricies hendrerit gravida, libero lacus pharetra erat, ut viverra ligula lectus at enim. Nulla fermentum odio eget velit eleifend viverra in nec augue. Aliquam magna risus, convallis eget quam id, imperdiet euismod purus. Curabitur quis odio nec magna consequat lacinia. Nullam a erat eget nulla pellentesque ornare. Mauris non tortor ut eros pretium gravida. Nullam non libero hendrerit, pulvinar massa nec, facilisis velit.
+                        <h2>Hoe kan ik de QuickPick&trade; gebruiken?</h2>
+                        Je kan de QuickPick&trade; door bovenaan de pagina '<a href="./main.php">Invullen</a>') de toggle op aan (blauw) te zetten.<br/><br/>
 
-Vestibulum ultrices mauris libero, ac lacinia eros feugiat non. Praesent arcu enim, posuere non lacus eget, pharetra congue urna. Nullam fringilla quis ante id auctor. Donec molestie placerat faucibus. Praesent pharetra lectus quis dolor condimentum, vitae pretium ligula bibendum. Fusce nec ante sed mi maximus malesuada. Nunc porta non quam non facilisis. Nunc viverra erat eget ex efficitur tincidunt.
+                        <h2>Hoe werkt de QuickPick&trade;?</h2>
+                        Het systeem zorgt er voor dat wedstrijden die niet ingevuld zijn op het moment dat de pronostiek afgesloten wordt (1 uur voor aanvang van de wedstrijd), automatisch toch worden in gevuld. 
+                        Het systeem vult niet zo maar een score in, maar maakt statistisch gebruik van de scores die de vorige 3 EK's zijn voorgekomen. Zo is de kans dat je een score van 1-1 van de QuickPick&trade; krijgt, veel groter dan een score van 5-5. <br/><br/>
+                        Het QuickPick&trade; systeem wordt dus enkel en alleen maar gebruikt voor wedstrijden die door de deelnemer niet zijn ingevuld. Je kan dus de toggle op aan zetten, en nooit van het systeem gebruik maken als je alle scores zelf op tijd invult.
+                        
+                        <br/><br/>
+                        Let wel: Aangezien het systeem de score voor een wedstrijd pas invult wanneer de pronostiek wordt afgesloten, kan de deelnemer dus ook de score niet meer aanpassen.
+                        <br/><br/>
 
-Nunc ac blandit sem, id consectetur velit. Proin sit amet est quis eros ullamcorper gravida vitae eu urna. Donec mollis lorem at luctus mollis. Curabitur in ligula ut ipsum lacinia rhoncus. Sed vel neque at arcu vulputate pellentesque. Integer lorem turpis, ornare ac urna ut, volutpat posuere mauris. Vestibulum ac neque condimentum, placerat nisi eu, faucibus tortor.
-            </p>
-        </div>
+                        <div>
+                            <figure class="text-end" alert alert-dark>
+                                <blockquote class="blockquote">
+                                    <p>Ik zal het zo zeggen: als ik niets doe, dan ben ik blij dat de QuickPick het voor mij doet.<br/>Zo doe ik dat trouwens met mijn werk ook.</p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    <cite title="Source Title">Björn.</cite>
+                                </figcaption>
+                            </figure>
+                        </div>
 
+                        <h2>Wat is het voordeel van de QuickPick&trade; te gebruiken?</h2>
+                        Het systeem heeft heel wat voordelen:
+                        <ul>
+                            <li>Sommige deelnemers vinden dat er te veel wedstrijden moeten worden ingevuld. Door dit systeem kunnen ze er voor kiezen om een aantal wedstrijden automatisch te laten invullen.</li>
+                            <li>Sommige deelnemers vergeten wel eens een wedstrijd in te vullen. Zeker wanneer de volgende rondes beginnen. Door dit systeem hebben ze toch nog kans om punten te scoren voor die wedstrijden.</li>
+                            <li>Sommige deelnemers kunnen bepaalde wedstrijden moeilijk inschatten en kunnen dus dit systeem bepaalde wedstrijden laten invullen.</li>
+                        </ul>
+                        <br/><br/>
+                        <h2>Krijg ik strafpunten voor het gebruik van de QuickPick&trade;?</h2>
+                        Neen, je krijg geen strafpunten voor het gebruik van het QuickPick&trade; systeem. Je kan net zoals iedereen 4 punten verdienen op elke match.<br/><br/>
+                        Wel krijgen de deelnemers die zelden of nooit gebruik maken van het systeem een bonus. Zij krijgen namelijk per 17 wedstrijden dat ze het systeem niet gebruiken 2 punten. In totaal kan de bonus dus oplopen tot 6 punten.
+
+
+                        </p>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
