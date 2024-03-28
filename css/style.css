@@ -1043,3 +1043,30 @@ figure:hover+span {
 .margin_top90 {
     margin-top: 90px;
 }
+
+/*******/
+
+.flag
+{
+    width:25px;
+    
+}
+
+.input-score
+{
+    width: 35px;
+}
+
+@media (max-width: 500px) {
+    .datefield{
+        display: none;
+    }
+}
+
+@media (min-width: 500px) {
+   
+
+    .daterow{
+        display: none;
+    }
+}
