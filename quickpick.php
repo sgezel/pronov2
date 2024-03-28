@@ -30,7 +30,7 @@ session_set_cookie_params(604800);
                         </div>
 
                         <h2>Hoe kan ik de QuickPick&trade; gebruiken?</h2>
-                        Je kan de QuickPick&trade; door bovenaan de pagina '<a href="./main.php">Invullen</a>') de toggle op aan (blauw) te zetten.<br/><br/>
+                        Je kan de QuickPick&trade; door bovenaan de pagina '<a href="./main.php">Invullen</a>' de toggle op aan (blauw) te zetten.<br/><br/>
 
                         <h2>Hoe werkt de QuickPick&trade;?</h2>
                         Het systeem zorgt er voor dat wedstrijden die niet ingevuld zijn op het moment dat de pronostiek afgesloten wordt (1 uur voor aanvang van de wedstrijd), automatisch toch worden in gevuld. 

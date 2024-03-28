@@ -1,3 +1,4 @@
+
 <?php
 require_once("header.php");
 include_once("UserCrud.php");
@@ -30,6 +31,8 @@ $allMatchData = $matchCrud->actionRead();
     <div class="blog_section_2">
 
       <div>
+      
+
         <?php $round = "";
         $rounddesc = ""; ?>
         <?php foreach ($allMatchData as $id => $data) :
@@ -67,22 +70,20 @@ $allMatchData = $matchCrud->actionRead();
                   <th scope="col"></th>
                   <th scope="col"></th>
                   <th scope="col">away</th>
-                  <th scope="col">Edit</th>
                 </tr>
               </thead>
               <tbody>
               <?php endif; ?>
-
+            
               <tr>
                 <td><?= $id ?></td>
                 <td><?= date_format(date_create($data["date"]), 'd/m/Y'); ?></td>
                 <td><?= $data["time"]; ?></td>
                 <td><img src=".\\vlaggen\\<?=$data["home"]; ?>.png"><?= $data["home"]; ?></td>
-                <td><?= $data["home_score"]; ?></td>
+                <td><input type="number" width="20px" class="form-control" name="<?= $data["home_score"]; ?>"  value="<?= $data["home_score"]; ?>"  ?></td>
                 <td> - </td>
-                <td><?= $data["away_score"]; ?></td>
+                <td><input type="number" width="20px" class="form-control" name="<?= $data["away_score"]; ?>"  value="<?= $data["away_score"]; ?>"  ?></td>
                 <td><?= $data["away"] ?><img src=".\\vlaggen\\<?=$data["away"]; ?>.png"></td>
-                <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
               </tr>
 
             <?php endforeach; ?>
