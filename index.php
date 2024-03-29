@@ -30,8 +30,8 @@ require_once("header.php");
          <div class="col-md-12">
             <div class="about_taital">Wat is er nieuw?</div>
             <p class="about_text">
-               Dit is een tekst die gaat over de gloednieuwe features zoals de quickpick.  <br />
-               Dit is een tekst over dat de nieuwe website ook voor mobiele apparaten werd gemaakt!
+               De vernieuwde website is smartphonecompatibel, dus nog meer plezier op nog meer toestellen!   <br />
+               Voor de vergeetachtige of voor de niet-voetbalfan hebben we nu het nieuwe QuickPick&trade;, het systeem dat het werk voor jou doet!
             </p>
             
          </div>
