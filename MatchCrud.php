@@ -48,7 +48,7 @@ class MatchCrud
 
         if ($this->actionMatchData($matchdata["id"]) == null) {
             $data[$listName][$_POST["id"]] =  $matchdata;
-            file_put_contents($this->filePath, json_encode($data));
+            file_put_contents($this->filePath, json_encode($this->actionSort($data)));
             $_SESSION["success_message"] = "Match werd succesvol toegevoegd.";
         } else {
             $_SESSION["error_message"] = "Deze wedstrijd werd reeds toegevoegd.";
@@ -87,11 +87,10 @@ class MatchCrud
         return null;
     }
 
-    public function actionRead()
+    public function actionSort($matcharray)
     {
-        
-        // Custom comparison function for sorting
-        uasort($this->data[$this->listName], function ($a, $b) {
+
+        uasort($matcharray, function ($a, $b) {
             // First compare by round
             $roundComparison = strcmp($a['round'], $b['round']);
             if ($roundComparison !== 0) {
@@ -107,6 +106,14 @@ class MatchCrud
             // If dates are equal, compare by time
             return strcmp($a['time'], $b['time']);
         });
+
+        return $matcharray;
+    }
+
+    public function actionRead($sorted = false)
+    {
+        if($sorted)
+            return $this->actionSort($this->data[$this->listName]);
 
         return $this->data[$this->listName];
     }
