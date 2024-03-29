@@ -25,7 +25,7 @@ class MatchCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "matches";
-            $this->attributesList = ["date", "time", "home", "away", "home_score", "away_score", "round", "id"];
+            $this->attributesList = ["date", "time", "home", "away", "home_score", "away_score", "round"];
         } else {
             throw new Exception("No file found", 1);
         }
