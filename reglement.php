@@ -71,7 +71,7 @@ session_set_cookie_params(604800);
 					<p>
 					<h2>Hoe betaal ik mijn bijdrage? </h2>
 
-					We vragen ook dit jaar om de bijdrage over te schrijven op het rekeningnummer van Dieter. Velen onder jullie komen nog maar weinig op kantoor (Leuven) en daarom vragen we om de 2 euro over te schrijven op rekeningnummer BE69 9731 1595 8278 met vermelding van je naam, of de barcode te gebruiken. Indien je wel op Premed komt, mag je dit ook altijd cash betalen. (Maar overschrijven heeft de voorkeur) <br /><br />
+					We vragen ook dit jaar om de bijdrage over te schrijven op het rekeningnummer van Dieter. Velen onder jullie komen nog maar weinig op kantoor (Leuven) en daarom vragen we om de 2 euro over te schrijven op rekeningnummer BE69 9731 1595 8278 met vermelding van je naam, of de barcode te gebruiken. Indien je wel op Premed komt, mag je dit ook altijd cash betalen. (Maar overschrijven heeft de voorkeur). Het geld gaat integraal naar een cadeau voor de winnaar. <br /><br />
 					Indien je niet betaald hebt bij de start van het EK, zal er geen score op het scorebord berekend worden voor jou. <br />
 
 					<img src="images/qr.png" width=150 />

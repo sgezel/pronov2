@@ -58,7 +58,6 @@ class UserCrud
             $_SESSION["error_message"] = "Deze gebruiker bestaat reeds.";
         }
 
-       
         header("Location: " . $this->regPath);
     }
 
@@ -109,6 +108,10 @@ class UserCrud
                 if($value == "password")
                 {
                     $post[$value] = password_hash($_POST[$value], PASSWORD_DEFAULT);
+                }
+                else if ($value == "matches")
+                {
+                    $post[$value] = isset($itemData["matches"]) ? $itemData["matches"] : [];
                 }
                 else
                 {

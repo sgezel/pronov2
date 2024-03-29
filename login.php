@@ -17,7 +17,7 @@ require_once("header.php");
                   </div>
                </div>
                <div class="col-md-6 padding_right_0">
-                  <div class="contact_img"><img src="images/contact-img.png"></div>
+                  <div class="contact_img"><img src="images/about-img.png"></div>
                </div>
             </div>
          </div>
