@@ -102,6 +102,7 @@ $allMatchData = $matchCrud->actionRead();
                 <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][away]" value="<?= $userData["matches"][$id]["away"] ?>" ?></td>
                 <td><?= $data["away_score"]; ?></td>
                 <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
+                <td><?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?></td>
               </tr>
 
             <?php endforeach; ?>
