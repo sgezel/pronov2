@@ -1054,7 +1054,7 @@ figure:hover+span {
 
 .input-score
 {
-    width: 35px;
+    width: 50px;
 }
 
 .daterow, .daterow>td{
@@ -1069,9 +1069,11 @@ figure:hover+span {
 }
 
 @media (min-width: 770px) {
-   
-
-    .daterow{
+   .daterow{
         display: none;
+    }
+
+    .input-score{
+        width:60px;
     }
 }
