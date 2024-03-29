@@ -48,7 +48,8 @@ class MatchCrud
 
         if ($this->actionMatchData($matchdata["id"]) == null) {
             $data[$listName][$_POST["id"]] =  $matchdata;
-            file_put_contents($this->filePath, json_encode($this->actionSort($data)));
+            $data[$listName] = $this->actionSort($data[$listName]);
+            file_put_contents($this->filePath, json_encode($data));
             $_SESSION["success_message"] = "Match werd succesvol toegevoegd.";
         } else {
             $_SESSION["error_message"] = "Deze wedstrijd werd reeds toegevoegd.";
