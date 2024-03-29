@@ -89,9 +89,9 @@ class MatchCrud
 
     public function actionRead()
     {
-
+        
         // Custom comparison function for sorting
-        usort($this->data[$this->listName], function ($a, $b) {
+        uasort($this->data[$this->listName], function ($a, $b) {
             // First compare by round
             $roundComparison = strcmp($a['round'], $b['round']);
             if ($roundComparison !== 0) {
