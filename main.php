@@ -7,10 +7,9 @@ $crud = new UserCrud();
 $matchCrud = new MatchCrud();
 $settingCrud = new SettingCrud();
 
-$data = $crud->actionUserDataById($_SESSION["userid"]);
+$userData = $crud->actionUserDataById($_SESSION["userid"]);
 $allMatchData = $matchCrud->actionRead();
 ?>
-
 
 
 <div class="blog_section layout_padding">
@@ -22,7 +21,7 @@ $allMatchData = $matchCrud->actionRead();
 
       <div class="alert alert-dark" role="alert">
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchQuickPick" <?= $data["quickpicker"] == "true" || $data["quickpicker"] == "on" ? "checked" : ""; ?> name="quickpick">
+          <input class="form-check-input" type="checkbox" id="flexSwitchQuickPick" <?= $userData["quickpicker"] == "true" || $userData["quickpicker"] == "on" ? "checked" : ""; ?> name="quickpick">
           <label class="form-check-label" for="flexSwitchQuickPick">QuickPick&trade; inschakelen.</label><strong> <a href="quickpick.php">Lees hier meer over de nieuwe QuickPick&trade; feature!</a> </strong>
         </div>
       </div>
@@ -98,9 +97,9 @@ $allMatchData = $matchCrud->actionRead();
                   <img src=".\\vlaggen\\<?= $data["home"]; ?>.png" class="flag"><?= $data["home"]; ?>
                 </td>
                 <td><?= $data["home_score"]; ?></td>
-                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][home]" value="" ?></td>
+                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][home]" value="<?= $userData["matches"][$id]["home"] ?>" ?></td>
                 <td> - </td>
-                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][away]" value="" ?></td>
+                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][away]" value="<?= $userData["matches"][$id]["away"] ?>" ?></td>
                 <td><?= $data["away_score"]; ?></td>
                 <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
               </tr>

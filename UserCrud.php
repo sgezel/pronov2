@@ -45,6 +45,7 @@ class UserCrud
         $userdata["visible"] = true;
         $userdata["paid"] = false;
         $userdata["quickpicker"] = false;
+        $userdata["matches"] = [];
 
         if($this->actionUserData($userdata["username"]) == null)
         {
