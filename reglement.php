@@ -85,9 +85,9 @@ session_set_cookie_params(604800);
 					<p>
 					<h2>Uit welke onderdelen bestaat de pronostiek?</h2>
 
-					De Pr(emed)onostiek bestaat uit 2 delen.<br />
+					De Pr(emed)onostiek bestaat uit 2 delen:<br />
 					<ol>
-						<li>De vragenronde: deze bestaat uit een aantal vragen die voor het WK moeten ingevuld worden. Juiste antwoorden op deze vragen zorgen voor bonuspunten.</li>
+						<li>De vragenronde: deze bestaat uit een aantal vragen die vóór het WK moeten ingevuld worden. Juiste antwoorden op deze vragen zorgen voor bonuspunten.</li>
 						<li>De pronostiekronde: Je vult een einduitslag in per wedstrijd. Per wedstijd zijn er punten te verdienen.</li>
 					</ol>
 					</p>

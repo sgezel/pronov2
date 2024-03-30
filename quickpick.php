@@ -30,12 +30,12 @@ session_set_cookie_params(604800);
                         </div>
 
                         <h2>Hoe kan ik de QuickPick&trade; gebruiken?</h2>
-                        Je kan de QuickPick&trade; door bovenaan de pagina '<a href="./main.php">Invullen</a>' de toggle op aan (blauw) te zetten.<br/><br/>
+                        Je kan de QuickPick&trade; door bovenaan de pagina '<a href="./main.php">Invullen</a>' de toggle op 'aan' (blauw) te zetten.<br/><br/>
 
                         <h2>Hoe werkt de QuickPick&trade;?</h2>
-                        Het systeem zorgt er voor dat wedstrijden die niet ingevuld zijn op het moment dat de pronostiek afgesloten wordt (1 uur voor aanvang van de wedstrijd), automatisch toch worden in gevuld. 
+                        Het systeem zorgt er voor dat wedstrijden die niet ingevuld zijn op het moment dat de pronostiek afgesloten wordt (1 uur voor aanvang van de wedstrijd), automatisch worden in gevuld. 
                         Het systeem vult niet zo maar een score in, maar maakt statistisch gebruik van de scores die de vorige 3 EK's zijn voorgekomen. Zo is de kans dat je een score van 1-1 van de QuickPick&trade; krijgt, veel groter dan een score van 5-5. <br/><br/>
-                        Het QuickPick&trade; systeem wordt dus enkel en alleen maar gebruikt voor wedstrijden die door de deelnemer niet zijn ingevuld. Je kan dus de toggle op aan zetten, en nooit van het systeem gebruik maken als je alle scores zelf op tijd invult.
+                        Het QuickPick&trade; systeem wordt dus enkel en alleen maar gebruikt voor wedstrijden die niet door de deelnemer zijn ingevuld. Je kan dus de toggle op 'aan' zetten en nooit van het systeem gebruik maken als je alle scores zelf op tijd invult.
                         
                         <br/><br/>
                         Let wel: Aangezien het systeem de score voor een wedstrijd pas invult wanneer de pronostiek wordt afgesloten, kan de deelnemer dus ook de score niet meer aanpassen.

@@ -122,7 +122,7 @@ $allMatchData = $matchCrud->actionRead();
                                     </tbody>
                                 </table>
                     </div>
-
+                    <hr class="solid">
 
                 </div>
 
