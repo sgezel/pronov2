@@ -1,6 +1,9 @@
 <?php
 require_once("header.php");
 include_once("UserCrud.php");
+
+CheckAdminAccess();
+
 $userCrud = new UserCrud();
 $id  = $_GET["id"];
 

@@ -2,10 +2,11 @@
 require_once("header.php");
 include_once("UserCrud.php");
 include_once("MatchCrud.php");
-
 $crud = new UserCrud();
 $matchCrud = new MatchCrud();
 $settingCrud = new SettingCrud();
+
+CheckAccess(); 
 
 $userData = $crud->actionUserDataById($_SESSION["userid"]);
 $allMatchData = $matchCrud->actionRead();

@@ -56,3 +56,19 @@ function sanitize($data)
     }
 }
 
+
+function CheckAccess()
+{
+    if (!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"]) {
+        $_SESSION["error_message"] = "U heeft geen toegang tot deze pagina. gelieve eerst in te loggen.";
+        header("location: login.php");
+    }
+}
+
+function CheckAdminAccess()
+{
+    if (!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] &&  !isset($_SESSION["admin"]) && !$_SESSION["admin"]) {
+        $_SESSION["error_message"] = "U heeft geen toegang tot deze pagina. gelieve eerst in te loggen.";
+        header("location: login.php");
+    }
+}

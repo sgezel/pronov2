@@ -4,6 +4,8 @@ include_once("UserCrud.php");
 include_once("MatchCrud.php");
 include_once("SettingCrud.php");
 
+CheckAdminAccess();
+
 $userCrud = new UserCrud();
 $matchCrud = new MatchCrud();
 $settingsCrud = new SettingCrud();

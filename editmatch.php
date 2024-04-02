@@ -1,6 +1,8 @@
 <?php
 require_once("header.php");
 include_once("MatchCrud.php");
+CheckAdminAccess();
+
 $matchCrud = new MatchCrud();
 $id  = $_GET["id"];
 
