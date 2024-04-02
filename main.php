@@ -33,12 +33,16 @@ $allMatchData = $matchCrud->actionRead();
       <form method="post" action="action_main_save.php">
 
         <?php $round = "";
-        $rounddesc = ""; ?>
+        $rounddesc = ""; ?>        
+        <table class="table table-hover w-100">
+              <thead>
+             
+              </thead>
+              <tbody>
         <?php foreach ($allMatchData as $id => $data) :
           if (strcmp($round, $data["round"]) != 0) :
             if ($round != "") : ?>
-              </tbody>
-              </table>
+              
             <?php endif;
 
             $round = $data["round"];
@@ -77,12 +81,8 @@ $allMatchData = $matchCrud->actionRead();
                 break;
               }
             } ?>
-            <h2><?= $rounddesc; ?></h2>
-            <table class="table table-hover w-100">
-              <thead>
-             
-              </thead>
-              <tbody>
+            <tr class="table-light gridHeaderTitle"><td colspan="9"><h2><?= $rounddesc; ?></h2></td></tr>
+            
               <?php endif; ?>
 
               <tr class="daterow">
@@ -106,6 +106,8 @@ $allMatchData = $matchCrud->actionRead();
               </tr>
 
             <?php endforeach; ?>
+            </tbody>
+              </table>
             <tr>
               <td colspan="9">
                 <input type="submit" value="Opslaan" class="btn btn-primary w-100" />

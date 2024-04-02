@@ -137,6 +137,7 @@ class MatchCrud
             if ($itemData) {
                 unset($data[$listName][$id]);
                 $data[$listName][$id] = $post;
+                $data[$listName] = $this->actionSort($data[$listName]);
                 file_put_contents($this->filePath, json_encode($data));
             }
             header("Location: " . $this->adminPath);

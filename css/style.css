@@ -209,6 +209,10 @@ button {
     padding: 0px;
 }
 
+.gridHeaderTitle {
+    height: 70px !important;
+    vertical-align: bottom !important;
+}
 
 /* header section start */
 
@@ -1077,3 +1081,8 @@ figure:hover+span {
         width:60px;
     }
 }
+
+/* Solid border */
+hr.solid {
+    border-top: 3px solid #bbb;
+  }

@@ -68,7 +68,6 @@ $allMatchData = $matchCrud->actionRead();
                         </form>
                     </div>
                     <div>
-                        <h2>Matchen aanpassen</h2>
                             <?php $round = "";
                             $rounddesc = ""; ?>
                             <?php foreach ($allMatchData as $id => $data) :
@@ -115,7 +114,7 @@ $allMatchData = $matchCrud->actionRead();
                                             <td><?= $data["time"]; ?></td>
                                             <td><?= $data["home"]; ?></td>
                                             <td><?= $data["away"] ?></td>
-                                            <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
+                                            <td><a href="editMatch.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
                                         </tr>
 
                                     <?php endforeach; ?>
@@ -123,7 +122,7 @@ $allMatchData = $matchCrud->actionRead();
                                     </tbody>
                                 </table>
                     </div>
-
+                    <hr class="solid">
 
                 </div>
 
