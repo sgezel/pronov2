@@ -190,4 +190,19 @@ class UserCrud
         $_SESSION["success_message"] = "De pronostiek is goed opgeslagen.";
         header("Location: " . $this->homePath);
     }
+
+    public function actionUpdateMatchScore($userid, $userdata)
+    {
+        
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$userid];
+
+        $itemData = $userdata;
+
+        unset($data[$listName][$userid]);
+        $data[$listName][$userid] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+        
+    }
 }
