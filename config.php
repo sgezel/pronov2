@@ -26,3 +26,33 @@ else
 {
     unset($success_message);
 }
+
+// Usage with $_POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $_POST = array_map('sanitize_input', $_POST);
+}
+
+// Usage with $_GET
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $_GET = array_map('sanitize_input', $_GET);
+}
+
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+function sanitize($data)
+{
+    if(is_array($data))
+    {
+        return array_map('sanitize_input', $data);
+    }
+    else
+    {
+        return sanitize_input($data);
+    }
+}
+
