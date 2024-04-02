@@ -98,9 +98,9 @@ $allMatchData = $matchCrud->actionRead();
                   <img src=".\\vlaggen\\<?= $data["home"]; ?>.png" class="flag"><?= $data["home"]; ?>
                 </td>
                 <td><?= $data["home_score"]; ?></td>
-                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][home]" value="<?= $userData["matches"][$id]["home"] ?>" ?></td>
+                <td><input type="number" width="20px" class="form-control input-score" <?= $data["locked"] ? "readonly disabled" : "" ?> name="matches[<?= $id; ?>][home]" value="<?= $userData["matches"][$id]["home"] ?>" ?></td>
                 <td> - </td>
-                <td><input type="number" width="20px" class="form-control input-score" name="matches[<?= $id; ?>][away]" value="<?= $userData["matches"][$id]["away"] ?>" ?></td>
+                <td><input type="number" width="20px" class="form-control input-score" <?= $data["locked"] ? "readonly disabled" : "" ?> name="matches[<?= $id; ?>][away]" value="<?= $userData["matches"][$id]["away"] ?>" ?></td>
                 <td><?= $data["away_score"]; ?></td>
                 <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
                 <td><?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?></td>
