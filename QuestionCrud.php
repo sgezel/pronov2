@@ -71,13 +71,13 @@ class QuestionCrud
         return null;
     }
 
-    public function actionQuestionData($questionid = null)
+    public function actionQuestionData($question = null)
     {
         $listName = $this->listName;
         $data = $this->data;
 
         foreach ($data[$listName] as $id => $questiondata) {
-            if ($questionid == $id) {
+            if ($questiondata["question"] == $question) {
                 return $questiondata;
             }
         }
