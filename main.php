@@ -43,7 +43,7 @@ $allQuestionData = $questionCrud->actionRead();
                             <tr>
                                         <td><?= $id ?></td>
                                         <td><?= $data["question"]; ?></td>
-                                        <td><input type="text" class="form-control" name="questions[<?= $id; ?>][answer]" value="<?= $userData["questions"][$id]["answer"] ?>" /></td>
+                                        <td><input type="text" class="form-control" name="questions[<?= $id; ?>][answer]" value="<?= isset($userData["questions"][$id]["answer"]) ?  $userData["questions"][$id]["answer"] : "" ?>" /></td>
                                     </tr>
                         <?php endforeach; ?>
                         </table>  
