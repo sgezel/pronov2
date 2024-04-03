@@ -29,7 +29,7 @@ $allQuestionData = $questionCrud->actionRead();
                     <button class="nav-link active" id="matches-tab" data-bs-toggle="tab" data-bs-target="#matches-tab-pane" type="button" role="tab" aria-controls="matches-tab-pane" aria-selected="true">Matches</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions-tab-pane" type="button" role="tab" aria-controls="questions-tab-pane" aria-selected="true">Questions</button>
+                    <button class="nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions-tab-pane" type="button" role="tab" aria-controls="questions-tab-pane" aria-selected="false">Questions</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane" type="button" role="tab" aria-controls="users-tab-pane" aria-selected="false">Users</button>
@@ -136,7 +136,7 @@ $allQuestionData = $questionCrud->actionRead();
                     </div>
                 </div>
 
-                <div class="tab-pane show active" id="questions-tab-pane" role="tabpanel" aria-labelledby="questions-tab" tabindex="0">
+                <div class="tab-pane" id="questions-tab-pane" role="tabpanel" aria-labelledby="questions-tab" tabindex="1">
                     <div>
 
                         <br />
@@ -175,7 +175,7 @@ $allQuestionData = $questionCrud->actionRead();
                     </div>
                 </div>
 
-                <div class="tab-pane " id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
+                <div class="tab-pane" id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="2">
                     <br />
                     <h2>Gebruikers aanpassen</h2>
 
@@ -206,7 +206,7 @@ $allQuestionData = $questionCrud->actionRead();
                     </table>
                 </div>
 
-                <div class="tab-pane " id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+                <div class="tab-pane" id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="3">
                     <br />
                     <h2>Instellingen aanpassen</h2>
 
