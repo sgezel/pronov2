@@ -175,11 +175,9 @@ class UserCrud
         unset($data[$listName][$id]);
         $data[$listName][$id] = $itemData;
         file_put_contents($this->filePath, json_encode($data));
-
-
     }
 
-    public function actionSaveMatches(){
+    public function actionSaveData(){
        
         $id = $_SESSION["userid"];
         $listName = $this->listName;
@@ -187,22 +185,6 @@ class UserCrud
         $itemData = $data[$listName][$id];
 
         $itemData["matches"] = $_POST["matches"];
-
-        unset($data[$listName][$id]);
-        $data[$listName][$id] = $itemData;
-        file_put_contents($this->filePath, json_encode($data));
-
-        $_SESSION["success_message"] = "De pronostiek is goed opgeslagen.";
-        header("Location: " . $this->homePath);
-    }
-
-    public function actionSaveQuestions(){
-       
-        $id = $_SESSION["userid"];
-        $listName = $this->listName;
-        $data = $this->data;
-        $itemData = $data[$listName][$id];
-
         $itemData["questions"] = $_POST["questions"];
 
         unset($data[$listName][$id]);
@@ -212,6 +194,7 @@ class UserCrud
         $_SESSION["success_message"] = "De pronostiek is goed opgeslagen.";
         header("Location: " . $this->homePath);
     }
+
 
     public function actionUpdateMatchScore($userid, $userdata)
     {

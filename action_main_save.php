@@ -8,7 +8,4 @@ CheckAccess();
 $crud = new UserCrud();
 
 if(isset($_POST))
-    $crud->actionSaveQuestions();
-
-if(isset($_POST))
-    $crud->actionSaveMatches();
+    $crud->actionSaveData();
