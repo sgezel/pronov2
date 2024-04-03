@@ -25,7 +25,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker", "matches"];
+            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker", "questions", "matches"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -45,6 +45,7 @@ class UserCrud
         $userdata["visible"] = true;
         $userdata["paid"] = false;
         $userdata["quickpicker"] = false;
+        $userdata["questions"] = [];
         $userdata["matches"] = [];
 
         if($this->actionUserData($userdata["username"]) == null)
@@ -112,6 +113,10 @@ class UserCrud
                 else if ($value == "matches")
                 {
                     $post[$value] = isset($itemData["matches"]) ? $itemData["matches"] : [];
+                }
+                else if ($value == "questions")
+                {
+                    $post[$value] = isset($itemData["questions"]) ? $itemData["questions"] : [];
                 }
                 else
                 {
@@ -182,6 +187,23 @@ class UserCrud
         $itemData = $data[$listName][$id];
 
         $itemData["matches"] = $_POST["matches"];
+
+        unset($data[$listName][$id]);
+        $data[$listName][$id] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+
+        $_SESSION["success_message"] = "De pronostiek is goed opgeslagen.";
+        header("Location: " . $this->homePath);
+    }
+
+    public function actionSaveQuestions(){
+       
+        $id = $_SESSION["userid"];
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$id];
+
+        $itemData["questions"] = $_POST["questions"];
 
         unset($data[$listName][$id]);
         $data[$listName][$id] = $itemData;

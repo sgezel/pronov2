@@ -29,12 +29,12 @@ else
 
 // Usage with $_POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_POST = array_map('sanitize_input', $_POST);
+    //$_POST = array_map('sanitize_input', $_POST);
 }
 
 // Usage with $_GET
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $_GET = array_map('sanitize_input', $_GET);
+    //$_GET = array_map('sanitize_input', $_GET);
 }
 
 function sanitize_input($data) {

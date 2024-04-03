@@ -2,14 +2,17 @@
 require_once("header.php");
 include_once("UserCrud.php");
 include_once("MatchCrud.php");
+include_once("QuestionCrud.php");
 $crud = new UserCrud();
 $matchCrud = new MatchCrud();
+$questionCrud = new QuestionCrud();
 $settingCrud = new SettingCrud();
 
 CheckAccess(); 
 
 $userData = $crud->actionUserDataById($_SESSION["userid"]);
 $allMatchData = $matchCrud->actionRead();
+$allQuestionData = $questionCrud->actionRead();
 ?>
 
 
@@ -29,10 +32,22 @@ $allMatchData = $matchCrud->actionRead();
 
     </div>
     <div class="blog_section_2">
-
+      
       <div>
       <form method="post" action="action_main_save.php">
-
+      <h2>Vragen</h2>
+                        <table class="table table-hover">
+                                    <thead>
+                                    </thead>
+                        <?php foreach ($allQuestionData as $id => $data) :?>
+                            <tr>
+                                        <td><?= $id ?></td>
+                                        <td><?= $data["question"]; ?></td>
+                                        <td><input type="text" class="form-control" name="questions[<?= $id; ?>][answer]" value="<?= $userData["questions"][$id]["answer"] ?>" /></td>
+                                    </tr>
+                        <?php endforeach; ?>
+                        </table>  
+      <h2>Wedstrijden</h2>
         <?php $round = "";
         $rounddesc = ""; ?>        
         <table class="table table-hover w-100">
