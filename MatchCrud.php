@@ -25,7 +25,7 @@ class MatchCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "matches";
-            $this->attributesList = ["date", "time", "home", "away", "home_score", "away_score", "round" , "locked"];
+            $this->attributesList = ["date", "time", "home", "away", "home_score", "away_score", "round" , "locked", "finished"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -46,6 +46,7 @@ class MatchCrud
         $matchdata["away_score"] = "";
         $matchdata["round"] = $_POST["round"];
         $matchdata["locked"] = false;
+        $matchdata["finished"] = false;
 
         if ($this->actionMatchData($matchdata["id"]) == null) {
             $data[$listName][$_POST["id"]] =  $matchdata;
