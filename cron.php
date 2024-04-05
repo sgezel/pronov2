@@ -2,13 +2,55 @@
 session_start();
 require_once("UserCrud.php");
 require_once("MatchCrud.php");
+
+$userCrud = new UserCrud();
+$matchCrud = new MatchCrud();
+
 echo" <pre>";
-calculateScores();
+lockMatches($matchCrud);
+calculateScores($userCrud, $matchCrud);
 echo "</pre>";
+
 die("done");
+
+function isMatchLocked($matchDate, $matchTime)
+{
+    $now = new DateTime("now");
+    $currentTime = strtotime($now->format('Y-m-d H:i:s'));     
+
+    // Combine date and time into a single timestamp
+    $matchTimestamp = strtotime("$matchDate $matchTime");
+
+    // Calculate the difference between current time and match time
+    $timeDifference = $matchTimestamp - $currentTime;    
+
+    if ( $timeDifference <= 3600) {
+        return "true";
+    } 
+
+    return "false";
+}
+
 function lockMatches()
 {
+    $matchCrud = new MatchCrud();
 
+    $matchData  = $matchCrud->actionRead();
+
+    foreach($matchData as $matchId => $match)
+    {
+        if(isset($match["locked"]))
+        {
+           // print($match["date"] . " " . $match["time"] . ": " .  isMatchLocked($match["date"], $match["time"]) . "\n");
+            $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]) ;
+        }
+        else
+        {
+            $matchData[$matchId]["locked"] = "false";
+        }
+    }
+
+    //$matchCrud->actionUpdateMatchData($matchData);
 }
 
 function quickPick()
@@ -21,11 +63,8 @@ function calculateScoreboard()
 
 }
 
-function calculateScores()
+function calculateScores($userCrud, $matchCrud)
 {
-    $userCrud = new UserCrud();
-    $matchCrud = new MatchCrud();
-
     $data  = $userCrud->actionRead();
     $matchData  = $matchCrud->actionRead();
 
@@ -70,9 +109,6 @@ function calculateScores()
 
                     if($match_score == 4)
                         $matches_correct++;
-
-
-                
 
                     $userdata["matches"][$matchId]["points"]= $match_score;
                     
