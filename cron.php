@@ -15,11 +15,13 @@ $dataChanged  = lockMatches() || $dataChanged;
 $dataChanged  = getLiveScore() || $dataChanged;
 $dataChanged = calculateScores() || $dataChanged;
 
+
+
 echo "</pre>";
 
 if ($dataChanged) {
     print("data aangepast, opslaan\n");
-    file_put_contents($userCrud->filePath, json_encode($dataSet));
+    file_put_contents($userCrud->filePath, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
 die("done");
@@ -53,6 +55,9 @@ function lockMatches()
     foreach ($matchData as $matchId => $match) {
         if (isset($match["locked"])) {
             $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]);
+
+            quickPick($matchId);
+
             $datachanged = true;
         } else {
             $matchData[$matchId]["locked"] = false;
@@ -66,12 +71,80 @@ function lockMatches()
     return $datachanged;
 }
 
-function quickPick()
+function quickPick($matchId)
 {
+     global $dataSet;
+
+     $userdata = $dataSet["users"];
+
+     foreach($userdata as $userid => $data)
+     {
+        if(isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true"))
+        {
+            if(isset($userdata[$userid]["matches"][$matchId]))
+            {
+                if(!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
+                {
+                    $userdata[$userid]["matches"][$matchId] = getQuickPickScore();  
+                }
+            }
+            else
+            {
+                $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
+            }
+        }
+        else
+        {
+            $userdata[$userid]["matches"][$matchId]["quickpicked"] = false;
+        }
+     }
+
+     $dataSet["users"] = $userdata;
+     return true;
+}
+
+function getQuickPickScore()
+{
+    $homeWeights = [
+        0 => 3083,
+        1 => 3609,
+        2 => 1880,
+        3 => 1053,
+        4 => 301,
+        5 => 75
+    ];
+
+    $awayWeights = [
+        0 => 2857,
+        1 => 3759,
+        2 => 2180,
+        3 => 677,
+        4 => 376,
+        5 => 150
+    ];
+
+    return ["home" => getWeightedResult($homeWeights), "away" => getWeightedResult($awayWeights), "quickpicked" => true];
+
+}
+
+function getWeightedResult($weighted_array)
+{
+    $total_weight = array_sum(array_values($weighted_array));
+    $selection = random_int(1, $total_weight);
+
+    $count = 0;
+    foreach($weighted_array as $score => $weight) {
+        
+        $count += $weight;
+        if ($count >= $selection) {
+          return $score;
+        }
+      }
 }
 
 function calculateScoreboard()
 {
+
 }
 
 function getLiveScore()
