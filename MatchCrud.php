@@ -58,7 +58,7 @@ class MatchCrud
         }
 
 
-        header("Location: " . $this->adminPath);
+        header("Location: " . $this->adminPath . "?tab=matches");
     }
 
 
@@ -141,7 +141,7 @@ class MatchCrud
                 $data[$listName] = $this->actionSort($data[$listName]);
                 file_put_contents($this->filePath, json_encode($data));
             }
-            header("Location: " . $this->adminPath);
+            header("Location: " . $this->adminPath . "?tab=matches");
         }
     }
 }

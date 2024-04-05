@@ -53,7 +53,7 @@ class QuestionCrud
         }
 
 
-        header("Location: " . $this->adminPath);
+        header("Location: " . $this->adminPath . "?tab=questions");
     }
 
 
@@ -109,7 +109,7 @@ class QuestionCrud
                 $data[$listName][$id] = $post;
                 file_put_contents($this->filePath, json_encode($data));
             }
-            header("Location: " . $this->adminPath);
+            header("Location: " . $this->adminPath. "?tab=questions");
         }
     }
 }

@@ -10,4 +10,4 @@ if (isset($_POST)) {
     file_put_contents($crud->filePath, $_POST["datafile"]);
 }
 
-header("location: admin.php");
+header("location: admin.php?tab=data");

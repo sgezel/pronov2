@@ -258,6 +258,24 @@ $allQuestionData = $questionCrud->actionRead();
     </div>
 </div>
 
+
 <?php
 require_once("footer.php");
 ?>
+
+<script>
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+
+let tabvalue = params.tab.toLowerCase();
+
+console.log(tabvalue);
+
+if(tabvalue !== undefined)
+{
+    document.getElementById(tabvalue + "-tab").click();
+   
+}
+
+</script>
