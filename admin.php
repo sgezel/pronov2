@@ -37,6 +37,9 @@ $allQuestionData = $questionCrud->actionRead();
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings-tab-pane" type="button" role="tab" aria-controls="settings-tab-pane" aria-selected="false">Instellingen</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane show active" id="matches-tab-pane" role="tabpanel" aria-labelledby="matches-tab" tabindex="0">
@@ -238,7 +241,17 @@ $allQuestionData = $questionCrud->actionRead();
                         <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
                     </form>
                 </div>
+                <div class="tab-pane" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="3">
+                
+                    <form method="post" action="action_admin_data.php">
+                        <textarea class="form-control textas vh-60" name="datafile"> 
+                            <?= json_encode($userCrud->data, JSON_PRETTY_PRINT); ?>
+                        </textarea>
+                        <br/><br/>
+                        <input type="submit" class="btn btn-primary" value="Data Opslaan" />
+                    </form>
 
+                </div>                
             </div>
 
         </div>
