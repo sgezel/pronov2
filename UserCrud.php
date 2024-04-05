@@ -184,9 +184,15 @@ class UserCrud
         $data = $this->data;
         $itemData = $data[$listName][$id];
 
-        $itemData["matches"] = $_POST["matches"];
-        $itemData["questions"] = $_POST["questions"];
+       // $itemData["matches"] = $_POST["matches"];
 
+      
+        foreach($_POST["matches"] as $match => $udata)
+        {
+            $itemData["matches"][$match] = $udata;
+        }       
+        $itemData["questions"] = $_POST["questions"];
+       
         unset($data[$listName][$id]);
         $data[$listName][$id] = $itemData;
         file_put_contents($this->filePath, json_encode($data));
