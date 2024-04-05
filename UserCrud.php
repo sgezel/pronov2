@@ -6,7 +6,7 @@ class UserCrud
     private $regPath;
     private $loginPath;
     private $adminPath;
-    private $filePath;
+    public $filePath;
     private $fileContent;
     public $data;
     public $listName;
