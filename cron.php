@@ -36,10 +36,10 @@ function isMatchLocked($matchDate, $matchTime)
     $timeDifference = $matchTimestamp - $currentTime;
 
     if ($timeDifference <= 3600) {
-        return "true";
+        return true;
     }
 
-    return "false";
+    return false;
 }
 
 function lockMatches()
@@ -52,11 +52,10 @@ function lockMatches()
 
     foreach ($matchData as $matchId => $match) {
         if (isset($match["locked"])) {
-            // print($match["date"] . " " . $match["time"] . ": " .  isMatchLocked($match["date"], $match["time"]) . "\n");
             $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]);
             $datachanged = true;
         } else {
-            $matchData[$matchId]["locked"] = "false";
+            $matchData[$matchId]["locked"] = false;
             $datachanged = true;
 
         }
