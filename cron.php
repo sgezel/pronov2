@@ -1,11 +1,26 @@
 <?php
 session_start();
 require_once("UserCrud.php");
-require_once("MatchCrud.php");
+
+$userCrud = new UserCrud();
+
+$dataSet = $userCrud->data; //Global
+
+$dataChanged = false;
 
 echo "<pre>";
-getLiveScore();
+
+
+$dataChanged  = lockMatches() || $dataChanged;
+$dataChanged  = getLiveScore() || $dataChanged;
+$dataChanged = calculateScores() || $dataChanged;
+
 echo "</pre>";
+
+if ($dataChanged) {
+    print("data aangepast, opslaan\n");
+    file_put_contents($userCrud->filePath, json_encode($dataSet));
+}
 
 die("done");
 
@@ -29,20 +44,27 @@ function isMatchLocked($matchDate, $matchTime)
 
 function lockMatches()
 {
-    $matchCrud = new MatchCrud();
+    global $dataSet;
 
-    $matchData  = $matchCrud->actionRead();
+    $datachanged = false;
+
+    $matchData  = $dataSet["matches"];
 
     foreach ($matchData as $matchId => $match) {
         if (isset($match["locked"])) {
             // print($match["date"] . " " . $match["time"] . ": " .  isMatchLocked($match["date"], $match["time"]) . "\n");
             $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]);
+            $datachanged = true;
         } else {
             $matchData[$matchId]["locked"] = "false";
+            $datachanged = true;
+
         }
     }
 
-    //$matchCrud->actionUpdateMatchData($matchData);
+    $dataSet["matches"] = $matchData;
+
+    return $datachanged;
 }
 
 function quickPick()
@@ -55,18 +77,22 @@ function calculateScoreboard()
 
 function getLiveScore()
 {
-    $matchCrud = new MatchCrud();
+    global $dataSet;
 
-    $matchData  = $matchCrud->actionRead();
+    $datachanged = false;
+
+    $matchData  = $dataSet["matches"];
 
     $today = date("Y-m-d");
     $currentTime = date("H:i");
 
     foreach ($matchData as $matchId => $match) {
-
-           if (($match["date"] === $today) && (!$match["finished"])  && strtotime($match["time"]) < strtotime($currentTime)) {
-
-                     //API code
+        if (($match["date"] === $today)
+            && (!$match["finished"])
+            && strtotime($match["time"]) < strtotime($currentTime)
+            
+        ) {
+            //API code
             $apiUrl = 'https://free-football-live-score.p.rapidapi.com/live/all-details';
             $headers = [
                 'Content-type' => 'application/json',
@@ -89,37 +115,42 @@ function getLiveScore()
                 $context = stream_context_create($options);
                 $result = file_get_contents($apiUrl, false, $context);
                 if ($result === false) {
-                    die("fout bij ophalen data");
+                    print("fout bij ophalen data\n");
                 } else {
                     $data = json_decode($result, true);
+
                     if (isset($data)) {
                         $scores = explode("-", $data["header"]["status"]["scoreStr"]);
                         $finished = $data["header"]["status"]["finished"];
 
-                        $match["home_score"] = $scores[0];
-                        $match["away_score"] = $scores[1];
+                        $matchData[$matchId]["home_score"] = trim($scores[0]);
+                        $matchData[$matchId]["away_score"] = trim($scores[1]);
+                        
+                        if ($finished == true)
+                            $matchData[$matchId]["finished"] = true;
 
-                        if ($finished === true)
-                            $match["finished"] = true;
-
-                        echo  $match["home_score"] . " - " . $match["away_score"] . "---------" . $match["finished"];
-                    }
+                        $datachanged = true;
+                }
                 }
             } catch (Exception $e) {
                 echo "Error fetching data: " . $e->getMessage();
             }
         }
     }
+    $dataSet["matches"] = $matchData;
+
+    return $datachanged;
 }
 
 
 function calculateScores()
 {
-    $userCrud = new UserCrud();
-    $matchCrud = new MatchCrud();
+    global $dataSet;
 
-    $data  = $userCrud->actionRead();
-    $matchData  = $matchCrud->actionRead();
+    $datachanged = false;
+
+    $data  = $dataSet["users"];
+    $matchData  = $dataSet["matches"];
 
     foreach ($data as $userId => $userdata) {
         foreach ($matchData as $matchId => $match) {
@@ -159,10 +190,15 @@ function calculateScores()
                         $matches_correct++;
 
                     $userdata["matches"][$matchId]["points"] = $match_score;
+                    $datachanged = true;
                 }
             }
         }
 
-        $userCrud->actionUpdateMatchScore($userId, $userdata);
+        $data[$userId] = $userdata;
     }
+
+    $dataSet["users"] = $data;
+
+    return $datachanged;
 }
