@@ -1,30 +1,46 @@
 <?php
-session_start();
-require_once("UserCrud.php");
 
-$userCrud = new UserCrud();
+/*
+c:\xampp\php\php.exe C:\xampp\htdocs\pronov2\cron.php lockMatches getLiveScore
+*/
 
-$dataSet = $userCrud->data; //Global
+error_reporting(E_ALL ^ E_WARNING); 
+require_once("config.php");
+
+var_dump($argv);
+
+$dataSet = json_decode(file_get_contents($cron_file), true);
 
 $dataChanged = false;
 
-echo "<pre>";
+$functions_to_execute = [];
 
+for($i = 1; $i< count($argv); $i++)
+{
+    if(function_exists($argv[$i]))
+        $functions_to_execute[] = $argv[$i];
+}
 
+foreach($functions_to_execute as $function)
+{
+    echo "calling $function \n";
+    $dataChanged  = $function() || $dataChanged;
+}
+
+/*
 $dataChanged  = lockMatches() || $dataChanged;
 $dataChanged  = getLiveScore() || $dataChanged;
 $dataChanged = calculateScores() || $dataChanged;
-
-
-
-echo "</pre>";
+*/
 
 if ($dataChanged) {
     print("data aangepast, opslaan\n");
-    file_put_contents($userCrud->filePath, json_encode($dataSet, JSON_PRETTY_PRINT));
+    file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
 die("done");
+
+
 
 function isMatchLocked($matchDate, $matchTime)
 {

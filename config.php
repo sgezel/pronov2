@@ -5,6 +5,9 @@ $title = "Pr(emed)onostiek";
 $_SESSION["datafile"] = "data.json";
 $_SESSION["install_path"] =  "/pronov2";
 
+$cron_file = "data.json";
+
+
 require_once("functions.php");
 
 if(isset($_SESSION["error_message"]))
