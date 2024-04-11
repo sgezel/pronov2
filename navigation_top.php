@@ -28,6 +28,10 @@ $registration = $settingsCrud->actionGetSetting("registrations");
                   <a class="nav-link" href="main.php">Invullen</a>
                </li>
 
+               <li class="nav-item">
+                  <a class="nav-link" href="scoreboard.php">Scorebord</a>
+               </li>
+
                <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true) : ?>
                   <li class="nav-item">
                      <a class="nav-link" href="admin.php">Admin</a>
