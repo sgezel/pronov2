@@ -160,6 +160,34 @@ function getWeightedResult($weighted_array)
 
 function calculateScoreboard()
 {
+    global $dataSet;
+
+    $scoreboard = [];
+    $datachanged = false;
+
+    $data = $dataSet["users"];
+
+    foreach($data as $id => $userdata)
+    {
+
+        $totalscore = 0;
+
+        foreach($userdata["matches"] as $match)
+        {
+            if(isset($match["points"]))
+                $totalscore = $totalscore + $match["points"];
+        }
+
+        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore];
+        $datachanged = true;
+    }
+
+    $key_values = array_column($scoreboard, 'score'); 
+    array_multisort($key_values, SORT_DESC, $scoreboard);
+
+    $dataSet["scoreboard"] = $scoreboard;
+    return $datachanged;
+
 
 }
 
