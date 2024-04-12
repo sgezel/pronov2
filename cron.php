@@ -184,16 +184,21 @@ function cron_calculateScoreboard()
 
     foreach($data as $id => $userdata)
     {
-
         $totalscore = 0;
+        $correct = 0;
 
         foreach($userdata["matches"] as $match)
         {
             if(isset($match["points"]))
+            {
                 $totalscore = $totalscore + $match["points"];
+                
+                if($match["points"] == 4)
+                    $correct++;
+            }
         }
 
-        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore];
+        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct];
         $datachanged = true;
     }
 
