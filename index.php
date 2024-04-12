@@ -31,7 +31,9 @@ require_once("header.php");
             <div class="about_taital">Wat is er nieuw?</div>
             <p class="about_text">
                De vernieuwde website is smartphonecompatibel, dus nog meer plezier op nog meer toestellen!   <br />
-               Voor de vergeetachtige of voor de niet-voetbalfan hebben we nu het nieuwe QuickPick&trade;, het systeem dat het werk voor jou doet!
+               Voor de vergeetachtige of voor de niet-voetbalfan hebben we nu het nieuwe QuickPick&trade;, het systeem dat het werk voor jou doet! <br />
+               Probeer ook al onze badges te verzamelen! <br />
+               De tussenstanden worden tijdens de wedstrijd elke 5 minuten, automatisch, geüpdatet. Hierdoor kan je bijna Live de stand volgen en zien waar je op het scorebord zal staan.
             </p>
             
          </div>
