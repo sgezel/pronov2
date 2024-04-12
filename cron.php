@@ -39,7 +39,7 @@ if($web)
 
 foreach($functions_to_execute as $function)
 {
-    echo "calling $function \n";
+    echo (new DateTime("now"))->format('Y-m-d H:i:s') .  ": calling $function \n";
     $dataChanged  = $function() || $dataChanged;
 }
 
