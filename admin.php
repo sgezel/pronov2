@@ -269,7 +269,7 @@ $allQuestionData = $questionCrud->actionRead();
 
                 </div>
 
-                <div class="cron-pane" id="cron-tab-pane" role="tabpanel" aria-labelledby="cron-tab" tabindex="3">
+                <div class="tab-pane" id="cron-tab-pane" role="tabpanel" aria-labelledby="cron-tab" tabindex="3">
                 <br />
                     <h2>Cron functies aanroepen</h2>
 
