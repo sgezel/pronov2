@@ -7,19 +7,35 @@ c:\xampp\php\php.exe C:\xampp\htdocs\pronov2\cron.php lockMatches getLiveScore
 error_reporting(E_ALL ^ E_WARNING); 
 require_once("config.php");
 
-var_dump($argv);
-
 $dataSet = json_decode(file_get_contents($cron_file), true);
 
 $dataChanged = false;
 
 $functions_to_execute = [];
 
-for($i = 1; $i< count($argv); $i++)
+$web = false;
+
+if(isset($argv))
 {
-    if(function_exists($argv[$i]))
-        $functions_to_execute[] = $argv[$i];
+    for($i = 1; $i< count($argv); $i++)
+    {
+        if(function_exists("cron_" . $argv[$i]))
+            $functions_to_execute[] = "cron_" . $argv[$i];
+    }
 }
+else if(isset($_GET["func"]))
+{
+    $web = true;
+    foreach(explode(",",$_GET["func"]) as $func)
+    {
+        if(function_exists("cron_" . $func))
+            $functions_to_execute[] = "cron_" . $func;
+    }
+}
+
+if($web)
+    echo "<pre>";
+
 
 foreach($functions_to_execute as $function)
 {
@@ -38,9 +54,8 @@ if ($dataChanged) {
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
-die("done");
-
-
+if($web)
+    echo "</pre>";
 
 function isMatchLocked($matchDate, $matchTime)
 {
@@ -60,7 +75,7 @@ function isMatchLocked($matchDate, $matchTime)
     return false;
 }
 
-function lockMatches()
+function cron_lockMatches()
 {
     global $dataSet;
 
@@ -72,7 +87,7 @@ function lockMatches()
         if (isset($match["locked"])) {
             $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]);
 
-            quickPick($matchId);
+            cron_quickPick($matchId);
 
             $datachanged = true;
         } else {
@@ -87,7 +102,7 @@ function lockMatches()
     return $datachanged;
 }
 
-function quickPick($matchId)
+function cron_quickPick($matchId)
 {
      global $dataSet;
 
@@ -158,7 +173,7 @@ function getWeightedResult($weighted_array)
       }
 }
 
-function calculateScoreboard()
+function cron_calculateScoreboard()
 {
     global $dataSet;
 
@@ -191,7 +206,7 @@ function calculateScoreboard()
 
 }
 
-function getLiveScore()
+function cron_getLiveScore()
 {
     global $dataSet;
 
@@ -259,7 +274,7 @@ function getLiveScore()
 }
 
 
-function calculateScores()
+function cron_calculateScores()
 {
     global $dataSet;
 

@@ -4,6 +4,16 @@ include_once("UserCrud.php");
 include_once("MatchCrud.php");
 include_once("QuestionCrud.php");
 include_once("SettingCrud.php");
+require_once("cron.php");
+
+$functions =  get_defined_functions()["user"];
+
+$starts_with = "cron_";
+$cron_actions =  array_filter($functions, function ($var) use ($starts_with) {
+    return (substr($var, 0, 5) == $starts_with);
+});
+
+
 
 CheckAdminAccess();
 
@@ -39,6 +49,10 @@ $allQuestionData = $questionCrud->actionRead();
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cron-tab" data-bs-toggle="tab" data-bs-target="#cron-tab-pane" type="button" role="tab" aria-controls="cron-tab-pane" aria-selected="false">Cron</button>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -154,26 +168,26 @@ $allQuestionData = $questionCrud->actionRead();
                             </div>
                         </form>
                     </div>
-                    
+
                     <hr class="solid">
                     <div>
                         <br />
                         <h2>Overzicht</h2>
                         <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">question</th>
-                                            <th scope="col">Edit</th>
-                                        </tr>
-                                    </thead>
-                        <?php foreach ($allQuestionData as $id => $data) :?>
-                            <tr>
-                                        <td><?= $id ?></td>
-                                        <td><?= $data["question"]; ?></td>
-                                        <td><a href="editQuestion.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
-                                    </tr>
-                        <?php endforeach; ?>
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">question</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($allQuestionData as $id => $data) : ?>
+                                <tr>
+                                    <td><?= $id ?></td>
+                                    <td><?= $data["question"]; ?></td>
+                                    <td><a href="editQuestion.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </table>
                     </div>
                 </div>
@@ -242,16 +256,33 @@ $allQuestionData = $questionCrud->actionRead();
                     </form>
                 </div>
                 <div class="tab-pane" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="3">
-                
+                <br />
+                    <h2>Data file aanpassen</h2>
+
                     <form method="post" action="action_admin_data.php">
-                        <textarea class="form-control textas vh-60" name="datafile"> 
+                        <textarea class="form-control textas vh-60" name="datafile">
                             <?= json_encode($userCrud->data, JSON_PRETTY_PRINT); ?>
                         </textarea>
-                        <br/><br/>
+                        <br /><br />
                         <input type="submit" class="btn btn-primary" value="Data Opslaan" />
                     </form>
 
-                </div>                
+                </div>
+
+                <div class="cron-pane" id="cron-tab-pane" role="tabpanel" aria-labelledby="cron-tab" tabindex="3">
+                <br />
+                    <h2>Cron functies aanroepen</h2>
+
+                    <div class="list-group">
+                 
+                        <?php foreach ($cron_actions as $action) : ?>
+                            <a href="cron.php?func=<?= str_replace("cron_", "", $action); ?>" class="list-group-item list-group-item-action" target="_blank"><?= str_replace("cron_", "",$action); ?></a>
+                        <?php endforeach; ?>
+                    
+                    </div>
+
+                    
+                </div>
             </div>
 
         </div>
@@ -264,18 +295,16 @@ require_once("footer.php");
 ?>
 
 <script>
-const params = new Proxy(new URLSearchParams(window.location.search), {
-  get: (searchParams, prop) => searchParams.get(prop),
-});
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
 
-let tabvalue = params.tab.toLowerCase();
+    let tabvalue = params.tab.toLowerCase();
 
-console.log(tabvalue);
+    console.log(tabvalue);
 
-if(tabvalue !== undefined)
-{
-    document.getElementById(tabvalue + "-tab").click();
-   
-}
+    if (tabvalue !== undefined) {
+        document.getElementById(tabvalue + "-tab").click();
 
+    }
 </script>
