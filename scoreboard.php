@@ -45,11 +45,7 @@ $place_counter = 0;
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td>
-                                    <img src="badges/Donkey1.png" title="loser." width=32 />
-                                    <img src="badges/Donkey5.png" width=32 />
-                                    <img src="badges/Donkey10.png" width=32 />
-                                    <img src="badges/eerste.png" width=32 />
-                                    <img src="badges/puntenkoning.png" width=32 />
+                                   &nbsp;
                                 </td>
 
                             <?php endforeach; ?>
