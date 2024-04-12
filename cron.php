@@ -5,6 +5,7 @@ c:\xampp\php\php.exe C:\xampp\htdocs\pronov2\cron.php lockMatches getLiveScore
 */
 
 error_reporting(E_ALL ^ E_WARNING); 
+date_default_timezone_set('Europe/Brussels');
 require_once("config.php");
 
 $dataSet = json_decode(file_get_contents($cron_file), true);
