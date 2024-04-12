@@ -47,7 +47,7 @@ if ($questionData == null) {
 <br /><br /><br />
 <div class="mail_section_1">
     <h2>Antwoorden van Spelers</h2>
-    
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -60,7 +60,7 @@ if ($questionData == null) {
         <tbody>
             <?php foreach ($allUserData as $uid => $userdata) : ?>
                 <tr>
-                    <td hidden><?= $uid?></td>
+                    <td hidden><?= $uid ?></td>
                     <td><?= $userdata["name"] ?></td>
                     <td><?= isset($userdata["questions"][$id]["answer"]) ? $userdata["questions"][$id]["answer"] : ""; ?></td>
                     <td><input type="checkbox" name="user[<?= $uid; ?>][questions][<?= $id; ?>][correct]" value="<?= isset($userData["questions"][$id]["correct"]) ?  $userData["questions"][$id]["correct"] : "" ?>" /></td>
@@ -69,10 +69,8 @@ if ($questionData == null) {
         </tbody>
     </table>
     <div class="mail_section_1">
-
-                        <input type="submit" class="btn btn-primary" value="Opslaan" />
-                    </div>
-
+        <input type="submit" class="btn btn-primary" value="Opslaan" />
+    </div>
 </div>
 
 

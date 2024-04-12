@@ -162,6 +162,25 @@ class UserCrud
         }
     }
 
+    public function actionReset()
+    {
+        if (isset($_POST["username"])) {
+            $username = $_POST["username"];
+
+            $listName = $this->listName;
+            $data = $this->data;
+
+            foreach ($data[$listName] as $id => $userdata) {
+                if (strtolower($userdata["username"]) == strtolower($username)) {
+                        //Send mail
+                }
+            }
+           
+            $_SESSION["error_message"] = "Deze gebruiker bestaat niet.";
+            header("Location: " . $this->loginPath);
+        }
+    }
+
     public function actionSaveQuickPick(){       
 
         $id = $_SESSION["userid"];
