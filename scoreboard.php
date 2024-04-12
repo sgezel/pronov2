@@ -1,6 +1,6 @@
 <?php
-require_once ("header.php");
-require_once ("ScoreboardCrud.php");
+require_once("header.php");
+require_once("ScoreboardCrud.php");
 
 $crud = new ScoreboardCrud();
 
@@ -19,28 +19,38 @@ $place_counter = 0;
                     <thead>
                         <tr>
 
-                            <th>#</th>
+                            <th>&nbsp;</th>
                             <th>Naam</th>
-                            <th>Score</th>
+                            <th class="text-center">Score</th>
+                            <th class="text-center"># juist</th>
+                            <th>badges</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <?php foreach ($data["scoreboard"] as $score): ?>
+                        <?php foreach ($data["scoreboard"] as $score) : ?>
                             <?php
                             ++$place_counter;
                             ?>
 
                             <tr>
                                 <td>
-                                    <?php if($place_counter < 4): ?>
+                                    <?php if ($place_counter < 4) : ?>
                                         <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:40px;" />
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
                                 </td>
-                                <td><?= $score["name"]; ?></td>
-                                <td><?= $score["score"]; ?></td>
+                                <td ><?= $score["name"]; ?></td>
+                                <td class="text-center"><?= $score["score"]; ?></td>
+                                <td class="text-center"><?= $score["correct"]; ?></td>
+                                <td>
+                                    <img src="badges/Donkey1.png" title="loser." width=32 />
+                                    <img src="badges/Donkey5.png" width=32 />
+                                    <img src="badges/Donkey10.png" width=32 />
+                                    <img src="badges/eerste.png" width=32 />
+                                    <img src="badges/puntenkoning.png" width=32 />
+                                </td>
 
                             <?php endforeach; ?>
                     </tbody>
@@ -51,5 +61,5 @@ $place_counter = 0;
 </div>
 
 <?php
-require_once ("footer.php");
+require_once("footer.php");
 ?>
