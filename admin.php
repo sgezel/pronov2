@@ -228,6 +228,15 @@ $allQuestionData = $questionCrud->actionRead();
                     <h2>Instellingen aanpassen</h2>
 
                     <form method="post" action="action_admin_settings.php">
+                        <label for="baseurl">Baseurl:</label>
+                        <input type="text" class="form-control" name="baseurl" value="<?= $settings["baseurl"] ?>" />
+                        <br/>
+                        <br/>
+                        <label for="apikey">API Key:</label>
+                        <input type="text" class="form-control" name="apikey" value="<?= $settings["apikey"] ?>" />
+                        <br/>
+                        <br/>
+
                         <label for="registrations">Gebruikers mogen registreren:</label>
                         <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
                         <br />
@@ -235,7 +244,7 @@ $allQuestionData = $questionCrud->actionRead();
                         <label for="questionvalue">Waarde van 1 vraag:</label>
                         <input type="number" width="20px" class="form-control input-score" name="questionvalue" value="<?= $settings["questionvalue"] ?>" />
                         <br />
-                        <br />
+                        <br />                        
                         <h3>Zichtbaarheid wedstrijdrondes</h3>
                         <label for="round1">Groepsfase:</label>
                         <input type="checkbox" name="round1" <?= $settings["round1"] ? "checked=checked" : "" ?> />

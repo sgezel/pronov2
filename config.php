@@ -1,9 +1,10 @@
 <?php
 session_start();
+require_once("SettingCrud.php");
 $title = "Pr(emed)onostiek";
 
 $_SESSION["datafile"] = "data.json";
-$_SESSION["install_path"] =  "/pronov2";
+$_SESSION["install_path"] =  (new SettingCrud())->actionGetSetting("baseurl");
 
 $cron_file = "data.json";
 

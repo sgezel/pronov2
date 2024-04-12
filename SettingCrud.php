@@ -19,7 +19,7 @@ class SettingCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "settings";
-            $this->attributesList = ["registrations", "questionvalue", "round1", "round2", "round3", "round4", "round5"];
+            $this->attributesList = ["baseurl","apikey","registrations", "questionvalue", "round1", "round2", "round3", "round4", "round5"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -42,9 +42,6 @@ class SettingCrud
                 {
                     $post[$value] = isset($_POST[$value]) ? $_POST[$value] : "";
                 }
-
-                
-
             }
 
             if ($itemData) {

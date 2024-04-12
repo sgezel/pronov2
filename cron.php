@@ -233,7 +233,7 @@ function cron_getLiveScore()
             $apiUrl = 'https://free-football-live-score.p.rapidapi.com/live/all-details';
             $headers = [
                 'Content-type' => 'application/json',
-                'X-RapidAPI-Key' => '625dee17c3mshbe3761434ffa1fdp19767ejsn126181a8d6b0',
+                'X-RapidAPI-Key' => (new SettingCrud())->actionGetSetting("apikey"),
                 'X-RapidAPI-Host' => 'free-football-live-score.p.rapidapi.com',
             ];
             $payload = ['match_id' => $matchId];
