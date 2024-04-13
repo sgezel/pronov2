@@ -80,20 +80,20 @@ function cron_lockMatches()
 {
     global $dataSet;
 
-    $datachanged = false;
+    $datachanged = true;
 
     $matchData  = $dataSet["matches"];
 
     foreach ($matchData as $matchId => $match) {
-        if (isset($match["locked"])) {
-            $matchData[$matchId]["locked"] = isMatchLocked($match["date"], $match["time"]);
+        if (isMatchLocked($match["date"], $match["time"])) {
+            $matchData[$matchId]["locked"] = true;
 
+            echo "quickpicking $matchId \n";
             cron_quickPick($matchId);
 
-            $datachanged = true;
         } else {
             $matchData[$matchId]["locked"] = false;
-            $datachanged = true;
+       
 
         }
     }
@@ -111,12 +111,18 @@ function cron_quickPick($matchId)
 
      foreach($userdata as $userid => $data)
      {
+
+        print $data["name"] . "\n";
+
         if(isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true"))
         {
             if(isset($userdata[$userid]["matches"][$matchId]))
             {
-                if(!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
+                if((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"])) 
+                || 
+                   ( $userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === ""))
                 {
+                    print "setting score\n";
                     $userdata[$userid]["matches"][$matchId] = getQuickPickScore();  
                 }
             }
