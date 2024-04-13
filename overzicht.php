@@ -71,11 +71,13 @@ foreach ($matches as $id => $match) {
                                         <tr>
                                             <th colspan="4" class="text-center"> 
                                                 
-                                                <span class="score"><?= $currentmatch["home_score"]; ?></span>  
+                                               
                                                 <img src="vlaggen/<?=  $currentmatch["home"]; ?>.png" />
                                                 <?= $currentmatch["home"]; ?> -  <?= $currentmatch["away"]; ?> 
                                                 <img src="vlaggen/<?=  $currentmatch["away"]; ?>.png" />
-                                                    <span class="score"><?= $currentmatch["away_score"]; ?></span>
+                                                   
+                                                    <br/>
+                                                    <span class="score"><?= $currentmatch["home_score"]; ?></span>   -  <span class="score"><?= $currentmatch["away_score"]; ?></span>
                                         
                                             </th>
                                         </tr>
