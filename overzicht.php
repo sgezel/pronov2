@@ -11,6 +11,15 @@ $matches = array_reverse($matchCrud->actionRead(true), true);
 $userCrud = new UserCrud();
 $users = $userCrud->actionRead();
 
+uasort($users, function ($a, $b) {
+    // First compare by round
+    $roundComparison = strcmp($a['name'], $b['name']);
+    if ($roundComparison !== 0) {
+        return $roundComparison;
+    }
+});
+
+
 $matchdata = [];
 
 $previousdate = null;
