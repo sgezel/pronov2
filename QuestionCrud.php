@@ -25,7 +25,7 @@ class QuestionCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "questions";
-            $this->attributesList = ["question", "locked"];
+            $this->attributesList = ["question"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -39,7 +39,6 @@ class QuestionCrud
         $questiondata = [];
 
         $questiondata["question"] = $_POST["question"];
-        $questiondata["locked"] = false;
 
         if($this->actionQuestionData($questiondata["question"]) == null)
         {

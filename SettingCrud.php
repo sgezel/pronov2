@@ -19,7 +19,7 @@ class SettingCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "settings";
-            $this->attributesList = ["baseurl","apikey","registrations", "questionvalue", "round1", "round2", "round3", "round4", "round5"];
+            $this->attributesList = ["baseurl","apikey","registrations", "questionvalue","questionslocked", "round1", "round2", "round3", "round4", "round5"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -34,7 +34,7 @@ class SettingCrud
 
             foreach ($this->attributesList as $value) {
 
-                if($value == "registrations" ||$value == "round1"||$value == "round2"||$value == "round3"||$value == "round4"||$value == "round5") 
+                if($value == "registrations" ||$value == "round1"||$value == "round2"||$value == "round3"||$value == "round4"||$value == "round5"||$value == "questionslocked") 
                 {
                     $post[$value] = isset($_POST[$value]) ? true : false;
                 }

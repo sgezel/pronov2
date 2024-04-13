@@ -244,6 +244,10 @@ $allQuestionData = $questionCrud->actionRead();
                         <label for="questionvalue">Waarde van 1 vraag:</label>
                         <input type="number" width="20px" class="form-control input-score" name="questionvalue" value="<?= $settings["questionvalue"] ?>" />
                         <br />
+                        <br />  
+                        <label for="questionslocked">Vragen afsluiten?</label>
+                        <input type="checkbox" name="questionslocked" <?= $settings["questionslocked"] ? "checked=checked" : "" ?> />
+                        <br />
                         <br />                        
                         <h3>Zichtbaarheid wedstrijdrondes</h3>
                         <label for="round1">Groepsfase:</label>
