@@ -79,7 +79,7 @@ foreach ($matches as $id => $match) {
                                         <?php foreach ($users as $userid => $user): ?>
 
                                             <?php $usermatch = $user["matches"][$matchid]; ?>
-                                            <tr>
+                                            <tr class="<?= (isset($usermatch["points"]) && $usermatch["points"] == 4) ? "table-success" : ""; ?>">
                                                 <td><?= $user["name"]; ?></td>
                                                 <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?></td>
                                                 <td><?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?></td>
