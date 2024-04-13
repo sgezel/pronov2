@@ -42,7 +42,7 @@ foreach ($matches as $id => $match) {
                     <?php endforeach; ?>
 
                 </div>
-                <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-content w-100" id="v-pills-tabContent">
 
                 <?php $first = true; ?>
 
@@ -60,9 +60,13 @@ foreach ($matches as $id => $match) {
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th colspan="4" class="center-text"> 
+                                            <th colspan="4" class="text-center"> 
                                                 
-                                                (<?= $currentmatch["home_score"]; ?>)   <?= $currentmatch["home"]; ?> - <?= $currentmatch["away"]; ?> (<?= $currentmatch["away_score"]; ?>)
+                                                <span class="score"><?= $currentmatch["home_score"]; ?></span>  
+                                                <img src="vlaggen/<?=  $currentmatch["home"]; ?>.png" />
+                                                <?= $currentmatch["home"]; ?> -  <?= $currentmatch["away"]; ?> 
+                                                <img src="vlaggen/<?=  $currentmatch["away"]; ?>.png" />
+                                                    <span class="score"><?= $currentmatch["away_score"]; ?></span>
                                         
                                             </th>
                                         </tr>
