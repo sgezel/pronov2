@@ -3,6 +3,8 @@ require_once ("header.php");
 require_once ("UserCrud.php");
 require_once ("MatchCrud.php");
 
+CheckAccess();
+
 $matchCrud = new MatchCrud();
 $matches = array_reverse($matchCrud->actionRead(true), true);
 

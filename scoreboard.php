@@ -2,6 +2,8 @@
 require_once("header.php");
 require_once("ScoreboardCrud.php");
 
+CheckAccess(); 
+
 $crud = new ScoreboardCrud();
 
 $data = $crud->data;
