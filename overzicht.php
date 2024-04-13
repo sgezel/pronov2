@@ -45,7 +45,7 @@ foreach ($matches as $id => $match) {
                         <button class="nav-link <?= $first ? "active":  "" ?>" id="v-pills-home-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-<?= $date; ?>" type="button" role="tab"
                             aria-controls="v-pills-<?= $date; ?>"
-                            aria-selected="true"><?= date("d/m/Y", strtotime($date)); ?></button>
+                            aria-selected="true"><?= date("d/m ", strtotime($date)); ?></button>
 
                             <?php $first = false; ?>
                     <?php endforeach; ?>
