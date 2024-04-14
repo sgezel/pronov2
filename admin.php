@@ -143,7 +143,7 @@ $allQuestionData = $questionCrud->actionRead();
                                         <td><?= $data["time"]; ?></td>
                                         <td><?= $data["home"]; ?></td>
                                         <td><?= $data["away"] ?></td>
-                                        <td><a href="editMatch.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="editmatch.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
                                     </tr>
 
                                 <?php endforeach; ?>
@@ -185,7 +185,7 @@ $allQuestionData = $questionCrud->actionRead();
                                 <tr>
                                     <td><?= $id ?></td>
                                     <td><?= $data["question"]; ?></td>
-                                    <td><a href="editQuestion.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
+                                    <td><a href="editquestion.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
