@@ -42,7 +42,6 @@ $currentToken = "";
             <?php foreach ($allQuestionData as $id => $data) : ?>
               <tr>
                 <td><?= $id ?></td>
-                <td> <input type="text" calss="form-control" name="devicekey" value="<?= $currentToken === null ? "" : $currentToken ?>" /></td>
                 <td><?= $data["question"]; ?></td>
                 <td><input type="text" class="form-control" <?= $settingCrud->actionGetSetting("questionslocked") == true ? "readonly disabled" : "" ?> name="questions[<?= $id; ?>][answer]" value="<?= isset($userData["questions"][$id]["answer"]) ?  $userData["questions"][$id]["answer"] : "" ?>" /></td>
                 <td><?= isset($userData['questions'][$id]['points']) ? $userData["questions"][$id]["points"] . "p" : "" ?></td>
