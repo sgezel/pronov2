@@ -50,9 +50,11 @@ $allQuestionData = $questionCrud->actionRead();
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
                 </li>
-
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="cron-tab" data-bs-toggle="tab" data-bs-target="#cron-tab-pane" type="button" role="tab" aria-controls="cron-tab-pane" aria-selected="false">Cron</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification-tab-pane" type="button" role="tab" aria-controls="notification-tab-pane" aria-selected="false">Notifications</button>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -230,12 +232,12 @@ $allQuestionData = $questionCrud->actionRead();
                     <form method="post" action="action_admin_settings.php">
                         <label for="baseurl">Baseurl:</label>
                         <input type="text" class="form-control" name="baseurl" value="<?= $settings["baseurl"] ?>" />
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <label for="apikey">API Key:</label>
                         <input type="text" class="form-control" name="apikey" value="<?= $settings["apikey"] ?>" />
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
 
                         <label for="registrations">Gebruikers mogen registreren:</label>
                         <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
@@ -244,11 +246,11 @@ $allQuestionData = $questionCrud->actionRead();
                         <label for="questionvalue">Waarde van 1 vraag:</label>
                         <input type="number" width="20px" class="form-control input-score" name="questionvalue" value="<?= $settings["questionvalue"] ?>" />
                         <br />
-                        <br />  
+                        <br />
                         <label for="questionslocked">Vragen afsluiten?</label>
                         <input type="checkbox" name="questionslocked" <?= $settings["questionslocked"] ? "checked=checked" : "" ?> />
                         <br />
-                        <br />                        
+                        <br />
                         <h3>Zichtbaarheid wedstrijdrondes</h3>
                         <label for="round1">Groepsfase:</label>
                         <input type="checkbox" name="round1" <?= $settings["round1"] ? "checked=checked" : "" ?> />
@@ -269,7 +271,7 @@ $allQuestionData = $questionCrud->actionRead();
                     </form>
                 </div>
                 <div class="tab-pane" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="3">
-                <br />
+                    <br />
                     <h2>Data file aanpassen</h2>
 
                     <form method="post" action="action_admin_data.php">
@@ -283,18 +285,45 @@ $allQuestionData = $questionCrud->actionRead();
                 </div>
 
                 <div class="tab-pane" id="cron-tab-pane" role="tabpanel" aria-labelledby="cron-tab" tabindex="3">
-                <br />
+                    <br />
                     <h2>Cron functies aanroepen</h2>
 
                     <div class="list-group">
-                 
+
                         <?php foreach ($cron_actions as $action) : ?>
-                            <a href="cron.php?func=<?= str_replace("cron_", "", $action); ?>" class="list-group-item list-group-item-action" target="_blank"><?= str_replace("cron_", "",$action); ?></a>
+                            <a href="cron.php?func=<?= str_replace("cron_", "", $action); ?>" class="list-group-item list-group-item-action" target="_blank"><?= str_replace("cron_", "", $action); ?></a>
                         <?php endforeach; ?>
-                    
+
                     </div>
 
-                    
+
+                </div>
+
+                <div class="tab-pane" id="notification-tab-pane" role="tabpanel" aria-labelledby="notification-tab" tabindex="3">
+                    <br />
+                    <h2>Melding versturen?</h2>
+
+                    <form method="post" action="action_admin_notification.php">
+                        <label for="devicekey">Devicekey:</label>
+                        <input type="text" class="form-control" name="devicekey" />
+                        <br />
+                        <br />
+                        <label for="notificationtitle">Title:</label>
+                        <input type="text" class="form-control" name="notificationtitle" />
+                        <br />
+                        <br />
+                        <label for="notificationtext">Text:</label>
+                        <input type="text" class="form-control" name="notificationtext" />
+                        <br />
+                        <br />
+                        <label for="notificationimg">ImageURL:</label>
+                        <input type="text" class="form-control" name="notificationimg" />
+                        <br />
+                        <br />
+                        <br /><br />
+                        <input type="submit" class="btn btn-primary" value="Versturen" />
+                    </form>
+
                 </div>
             </div>
 
