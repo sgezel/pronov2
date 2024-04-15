@@ -251,4 +251,38 @@ class UserCrud
         file_put_contents($this->filePath, json_encode($data));
         
     }
+
+    public function actionSaveQuestions(){
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName];
+
+        print_r($_POST);
+        foreach($itemData as $uid => $udata)
+        {
+            echo "userid: $uid\n";
+            if(isset($udata["questions"]))
+            {
+                echo "questions set\n";
+                foreach($udata[$uid]["questions"] as $qid => $questiondata)
+                {
+                    if(isset($_POST["user"][$uid]["questions"][$qid]))
+                    {
+                        $itemData[$uid]["questions"][$qid]["correct"] = true; 
+                    }
+                    else
+                    {
+                        $itemData[$uid]["questions"][$qid]["correct"] = false;
+                    }
+                }
+            }
+            
+        }
+        
+        die(print_r($itemData, true));
+
+        unset($data[$listName]);
+        $data[$listName] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+    }
 }

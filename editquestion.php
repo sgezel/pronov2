@@ -48,6 +48,8 @@ if ($questionData == null) {
 <div class="mail_section_1">
     <h2>Antwoorden van Spelers</h2>
 
+    <form method="post" action="action_admin_savequestionanswers.php">
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -63,7 +65,7 @@ if ($questionData == null) {
                     <td hidden><?= $uid ?></td>
                     <td><?= $userdata["name"] ?></td>
                     <td><?= isset($userdata["questions"][$id]["answer"]) ? $userdata["questions"][$id]["answer"] : ""; ?></td>
-                    <td><input type="checkbox" name="user[<?= $uid; ?>][questions][<?= $id; ?>][correct]" value="<?= isset($userData["questions"][$id]["correct"]) ?  $userData["questions"][$id]["correct"] : "" ?>" /></td>
+                    <td><input type="checkbox" name="user[<?= $uid; ?>][questions][<?= $id; ?>]" <?= isset($userdata["questions"][$id]["correct"]) ?  "checked=checked" : "" ?>" /></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -71,6 +73,8 @@ if ($questionData == null) {
     <div class="mail_section_1">
         <input type="submit" class="btn btn-primary" value="Opslaan" />
     </div>
+
+    </form>
 </div>
 
 
