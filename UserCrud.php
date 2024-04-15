@@ -25,7 +25,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker", "questions", "matches"];
+            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker","devicekey", "questions", "matches"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -45,6 +45,7 @@ class UserCrud
         $userdata["visible"] = true;
         $userdata["paid"] = false;
         $userdata["quickpicker"] = false;
+        $userdata["devicekey"] = "";
         $userdata["questions"] = [];
         $userdata["matches"] = [];
 
@@ -190,6 +191,21 @@ class UserCrud
 
         $quickpick = $_POST["quickpick"];
         $itemData["quickpicker"] = $quickpick;
+
+        unset($data[$listName][$id]);
+        $data[$listName][$id] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+    }
+
+    public function actionSaveDeviceKey(){       
+
+        $id = $_SESSION["userid"];
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$id];
+
+        $devicekey = $_POST["devicekey"];
+        $itemData["devicekey"] = $devicekey;
 
         unset($data[$listName][$id]);
         $data[$listName][$id] = $itemData;
