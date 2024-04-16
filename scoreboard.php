@@ -25,6 +25,7 @@ $place_counter = 0;
                             <th>Naam</th>
                             <th class="text-center">Score</th>
                             <th class="text-center"># juist</th>
+                            <th class="text-center"># vragen</th>
                             <th>badges</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@ $place_counter = 0;
                                 <td ><?= $score["name"]; ?></td>
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
+                                <td class="text-center"><?= $score["questions"]; ?></td>
                                 <td>
                                    &nbsp;
                                 </td>
