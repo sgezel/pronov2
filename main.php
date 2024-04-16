@@ -107,8 +107,11 @@ $currentToken = "";
                 <?php endif; ?>
 
                 <tr class="daterow">
-                  <td colspan="9">
+                  <td class="daterow-field" colspan="6">
                     <nobr><?= date_format(date_create($data["date"]), 'd/m'); ?> <?= $data["time"]; ?></nobr>
+                  </td>
+                  <td class="points text-left" colspan="3">
+                    <?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?>
                   </td>
                 </tr>
                 <tr>
@@ -125,7 +128,7 @@ $currentToken = "";
                   <td><input type="number" width="20px" class="form-control input-score" <?= $data["locked"] ? "readonly disabled" : "" ?> name="matches[<?= $id; ?>][away]" value="<?= isset($userData["matches"][$id]["away"]) ?  $userData["matches"][$id]["away"] : "" ?>" ?></td>
                   <td><?= $data["away_score"]; ?></td>
                   <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
-                  <td><?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?></td>
+                  <td class="datefield"><?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?></td>
                 </tr>
 
               <?php endforeach; ?>

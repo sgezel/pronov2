@@ -60,7 +60,7 @@ class UserCrud
             $_SESSION["error_message"] = "Deze gebruiker bestaat reeds.";
         }
 
-        header("Location: " . $this->regPath);
+        header("Location: " . $this->loginPath);
     }
 
 
@@ -250,5 +250,38 @@ class UserCrud
         $data[$listName][$userid] = $itemData;
         file_put_contents($this->filePath, json_encode($data));
         
+    }
+
+    public function actionSaveQuestions(){
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName];
+
+        print_r($_POST);
+        
+        $qid = $_POST["qid"];
+
+
+        foreach($itemData as $uid => $udata)
+        {
+            if(!isset($udata["questions"]))
+            {
+                $itemData[$uid]["questions"] = [];
+            }    
+
+            if(isset($_POST["question"][$uid]))
+            {
+                $itemData[$uid]["questions"][$qid]["correct"] = true;
+            }
+            else
+            {
+                $itemData[$uid]["questions"][$qid]["correct"] = false;
+            }
+        }
+     
+        unset($data[$listName]);
+        $data[$listName] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+        header("location: " . $this->adminPath . "?tab=questions");
     }
 }

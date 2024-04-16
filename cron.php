@@ -4,7 +4,7 @@
 c:\xampp\php\php.exe C:\xampp\htdocs\pronov2\cron.php lockMatches getLiveScore
 */
 
-error_reporting(E_ALL ^ E_WARNING); 
+error_reporting(E_ALL ^ E_WARNING);
 date_default_timezone_set('Europe/Brussels');
 
 $cron_file = getcwd() . "/data.json";
@@ -18,30 +18,24 @@ $functions_to_execute = [];
 
 $web = false;
 
-if(isset($argv))
-{
-    for($i = 1; $i< count($argv); $i++)
-    {
-        if(function_exists("cron_" . $argv[$i]))
+if (isset($argv)) {
+    for ($i = 1; $i < count($argv); $i++) {
+        if (function_exists("cron_" . $argv[$i]))
             $functions_to_execute[] = "cron_" . $argv[$i];
     }
-}
-else if(isset($_GET["func"]))
-{
+} else if (isset($_GET["func"])) {
     $web = true;
-    foreach(explode(",",$_GET["func"]) as $func)
-    {
-        if(function_exists("cron_" . $func))
+    foreach (explode(",", $_GET["func"]) as $func) {
+        if (function_exists("cron_" . $func))
             $functions_to_execute[] = "cron_" . $func;
     }
 }
 
-if($web)
+if ($web)
     echo "<pre>";
 
 
-foreach($functions_to_execute as $function)
-{
+foreach ($functions_to_execute as $function) {
     echo (new DateTime("now"))->format('Y-m-d H:i:s') .  ": calling $function \n";
     $dataChanged  = $function() || $dataChanged;
 }
@@ -57,7 +51,7 @@ if ($dataChanged) {
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
-if($web)
+if ($web)
     echo "</pre>";
 
 function isMatchLocked($matchDate, $matchTime)
@@ -92,11 +86,8 @@ function cron_lockMatches()
 
             echo "quickpicking $matchId \n";
             cron_quickPick($matchId);
-
         } else {
             $matchData[$matchId]["locked"] = false;
-       
-
         }
     }
 
@@ -107,40 +98,33 @@ function cron_lockMatches()
 
 function cron_quickPick($matchId)
 {
-     global $dataSet;
+    global $dataSet;
 
-     $userdata = $dataSet["users"];
+    $userdata = $dataSet["users"];
 
-     foreach($userdata as $userid => $data)
-     {
+    foreach ($userdata as $userid => $data) {
 
         print $data["name"] . "\n";
 
-        if(isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true"))
-        {
-            if(isset($userdata[$userid]["matches"][$matchId]))
-            {
-                if((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"])) 
-                || 
-                   ( $userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === ""))
-                {
+        if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
+            if (isset($userdata[$userid]["matches"][$matchId])) {
+                if ((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
+                    ||
+                    ($userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === "")
+                ) {
                     print "setting score\n";
-                    $userdata[$userid]["matches"][$matchId] = getQuickPickScore();  
+                    $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
                 }
-            }
-            else
-            {
+            } else {
                 $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
             }
-        }
-        else
-        {
+        } else {
             $userdata[$userid]["matches"][$matchId]["quickpicked"] = false;
         }
-     }
+    }
 
-     $dataSet["users"] = $userdata;
-     return true;
+    $dataSet["users"] = $userdata;
+    return true;
 }
 
 function getQuickPickScore()
@@ -164,7 +148,6 @@ function getQuickPickScore()
     ];
 
     return ["home" => getWeightedResult($homeWeights), "away" => getWeightedResult($awayWeights), "quickpicked" => true];
-
 }
 
 function getWeightedResult($weighted_array)
@@ -173,13 +156,13 @@ function getWeightedResult($weighted_array)
     $selection = random_int(1, $total_weight);
 
     $count = 0;
-    foreach($weighted_array as $score => $weight) {
-        
+    foreach ($weighted_array as $score => $weight) {
+
         $count += $weight;
         if ($count >= $selection) {
-          return $score;
+            return $score;
         }
-      }
+    }
 }
 
 function cron_calculateScoreboard()
@@ -190,34 +173,38 @@ function cron_calculateScoreboard()
     $datachanged = false;
 
     $data = $dataSet["users"];
+    $questionPoints = $dataSet["settings"][0]["questionvalue"];
 
-    foreach($data as $id => $userdata)
-    {
+    foreach ($data as $id => $userdata) {
         $totalscore = 0;
         $correct = 0;
+        $questionsCorrect  = 0;
 
-        foreach($userdata["matches"] as $match)
-        {
-            if(isset($match["points"]))
-            {
+        foreach ($userdata["matches"] as $match) {
+            if (isset($match["points"])) {
                 $totalscore = $totalscore + $match["points"];
-                
-                if($match["points"] == 4)
+
+                if ($match["points"] == 4)
                     $correct++;
             }
         }
 
-        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct];
+        foreach ($userdata["questions"] as $question) {
+            if ($question["correct"] == true) {
+                $totalscore = $totalscore + $questionPoints;
+                $questionsCorrect++;
+            }
+        }
+
+        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
         $datachanged = true;
     }
 
-    $key_values = array_column($scoreboard, 'score'); 
+    $key_values = array_column($scoreboard, 'score');
     array_multisort($key_values, SORT_DESC, $scoreboard);
 
     $dataSet["scoreboard"] = $scoreboard;
     return $datachanged;
-
-
 }
 
 function cron_getLiveScore()
@@ -235,13 +222,13 @@ function cron_getLiveScore()
         if (($match["date"] === $today)
             && (!$match["finished"])
             && strtotime($match["time"]) < strtotime($currentTime)
-            
+
         ) {
             //API code
             $apiUrl = 'https://free-football-live-score.p.rapidapi.com/live/all-details';
             $headers = [
                 'Content-type' => 'application/json',
-                'X-RapidAPI-Key' => (new SettingCrud())->actionGetSetting("apikey"),
+                'X-RapidAPI-Key' => $dataSet["settings"][0]["apikey"],
                 'X-RapidAPI-Host' => 'free-football-live-score.p.rapidapi.com',
             ];
             $payload = ['match_id' => $matchId];
@@ -270,12 +257,12 @@ function cron_getLiveScore()
 
                         $matchData[$matchId]["home_score"] = trim($scores[0]);
                         $matchData[$matchId]["away_score"] = trim($scores[1]);
-                        
+
                         if ($finished == true)
                             $matchData[$matchId]["finished"] = true;
 
                         $datachanged = true;
-                }
+                    }
                 }
             } catch (Exception $e) {
                 echo "Error fetching data: " . $e->getMessage();
