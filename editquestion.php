@@ -22,6 +22,7 @@ if ($questionData == null) {
     <div class="contact_section layout_padding">
 
 
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -50,6 +51,8 @@ if ($questionData == null) {
 
     <form method="post" action="action_admin_savequestionanswers.php">
 
+    <input type="hidden" name="qid" value="<?= $id ?>" />
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -65,7 +68,7 @@ if ($questionData == null) {
                     <td hidden><?= $uid ?></td>
                     <td><?= $userdata["name"] ?></td>
                     <td><?= isset($userdata["questions"][$id]["answer"]) ? $userdata["questions"][$id]["answer"] : ""; ?></td>
-                    <td><input type="checkbox" name="user[<?= $uid; ?>][questions][<?= $id; ?>]" <?= isset($userdata["questions"][$id]["correct"]) ?  "checked=checked" : "" ?>" /></td>
+                    <td><input type="checkbox" name="question[<?= $uid; ?>]" value="<?= $uid; ?>" <?= isset($userdata["questions"][$id]["correct"]) && $userdata["questions"][$id]["correct"] == true ?  "checked=checked" : "" ?>" /></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

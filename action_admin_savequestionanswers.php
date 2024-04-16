@@ -6,5 +6,11 @@ CheckAdminAccess();
 
 $userCrud = new UserCrud();
 
-if(isset($_POST))
-    $userCrud->actionSaveQuestions();
+?>
+
+<pre>
+    <?php
+    if(isset($_POST))
+        $userCrud->actionSaveQuestions();
+    ?>
+</pre>

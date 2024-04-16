@@ -258,31 +258,30 @@ class UserCrud
         $itemData = $data[$listName];
 
         print_r($_POST);
+        
+        $qid = $_POST["qid"];
+
+
         foreach($itemData as $uid => $udata)
         {
-            echo "userid: $uid\n";
-            if(isset($udata["questions"]))
+            if(!isset($udata["questions"]))
             {
-                echo "questions set\n";
-                foreach($udata[$uid]["questions"] as $qid => $questiondata)
-                {
-                    if(isset($_POST["user"][$uid]["questions"][$qid]))
-                    {
-                        $itemData[$uid]["questions"][$qid]["correct"] = true; 
-                    }
-                    else
-                    {
-                        $itemData[$uid]["questions"][$qid]["correct"] = false;
-                    }
-                }
-            }
-            
-        }
-        
-        die(print_r($itemData, true));
+                $itemData[$uid]["questions"] = [];
+            }    
 
+            if(isset($_POST["question"][$uid]))
+            {
+                $itemData[$uid]["questions"][$qid]["correct"] = true;
+            }
+            else
+            {
+                $itemData[$uid]["questions"][$qid]["correct"] = false;
+            }
+        }
+     
         unset($data[$listName]);
         $data[$listName] = $itemData;
         file_put_contents($this->filePath, json_encode($data));
+        header("location: " . $this->adminPath . "?tab=questions");
     }
 }
