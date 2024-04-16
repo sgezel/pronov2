@@ -60,7 +60,7 @@ class UserCrud
             $_SESSION["error_message"] = "Deze gebruiker bestaat reeds.";
         }
 
-        header("Location: " . $this->regPath);
+        header("Location: " . $this->loginPath);
     }
 
 
