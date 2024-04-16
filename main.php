@@ -107,10 +107,10 @@ $currentToken = "";
                 <?php endif; ?>
 
                 <tr class="daterow">
-                  <td class="daterow-field" colspan="8">
+                  <td class="daterow-field" colspan="6">
                     <nobr><?= date_format(date_create($data["date"]), 'd/m'); ?> <?= $data["time"]; ?></nobr>
                   </td>
-                  <td class="points">
+                  <td class="points text-left" colspan="3">
                     <?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?>
                   </td>
                 </tr>
