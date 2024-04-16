@@ -266,6 +266,22 @@ $allQuestionData = $questionCrud->actionRead();
                         <br />
                         <label for="round5">Finale:</label>
                         <input type="checkbox" name="round5" <?= $settings["round5"] ? "checked=checked" : "" ?> />
+
+                        <br/>
+                        <br/>
+                        <h3>SMTP</h3>
+                        <label for="smtp_host">SMTP host:</label>
+                        <input type="text" name="smtp_host" class="form-control" value="<?= $settings["smtp_host"]; ?>" />
+
+                        <label for="smtp_port">SMTP port:</label>
+                        <input type="text" name="smtp_port" class="form-control" value="<?= $settings["smtp_port"]; ?>" />
+
+                        <label for="smtp_user">SMTP Username:</label>
+                        <input type="text" name="smtp_user" class="form-control" value="<?= $settings["smtp_user"]; ?>" />
+
+                        <label for="smtp_password">SMTP Password:</label>
+                        <input type="password" name="smtp_password" class="form-control" value="<?= $settings["smtp_password"]; ?>" />
+
                         <br />
                         <input type="submit" class="btn btn-primary" value="Instellingen Opslaan" />
                     </form>

@@ -1,4 +1,12 @@
 <?php
+require_once("SettingCrud.php");
+require_once("PHPMailer\PHPMailer.php");
+require_once("PHPMailer\SMTP.php");
+require_once("PHPMailer\Exception.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 
 class UserCrud
 {
@@ -171,12 +179,37 @@ class UserCrud
             $listName = $this->listName;
             $data = $this->data;
 
+            $settingCrud = new SettingCrud();
+
             foreach ($data[$listName] as $id => $userdata) {
                 if (strtolower($userdata["username"]) == strtolower($username)) {
-                        //Send mail
+                    $mail = new PHPMailer();
+                    $mail->isSMTP();   
+                    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                    $mail->Host = $settingCrud->actionGetSetting("smtp_host");
+                    $mail->Port = $settingCrud->actionGetSetting("smtp_port");;
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $settingCrud->actionGetSetting("smtp_user");
+                    $mail->Password = $settingCrud->actionGetSetting("smtp_password");
+
+                    $mail->setFrom($settingCrud->actionGetSetting("smtp_user"));
+       
+                    $mail->addAddress($username);
+
+                    $mail->Subject = 'PHPMailer GMail SMTP test';
+                    $mail->msgHTML(file_get_contents("http://localhost/pronov2/resettemplate.php?id=$id"));
+                    $mail->AltBody = 'This is a plain-text message body';
+
+
+                    if (!$mail->send()) {
+                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    } else {
+                        echo 'Message sent!';
+                    }
                 }
             }
-           
+           die();
             $_SESSION["error_message"] = "Deze gebruiker bestaat niet.";
             header("Location: " . $this->loginPath);
         }
@@ -218,9 +251,6 @@ class UserCrud
         $listName = $this->listName;
         $data = $this->data;
         $itemData = $data[$listName][$id];
-
-       // $itemData["matches"] = $_POST["matches"];
-
       
         foreach($_POST["matches"] as $match => $udata)
         {
