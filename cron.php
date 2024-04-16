@@ -102,24 +102,27 @@ function cron_quickPick($matchId)
 
     $userdata = $dataSet["users"];
 
-    foreach ($userdata as $userid => $data) {
+    if (!isset($dataSet["matches"][$matchId]["finished"]) || ($dataSet["matches"][$matchId]["finished"] != true && $dataSet["matches"][$matchId]["finished"] != "true")) {
 
-        print $data["name"] . "\n";
+        foreach ($userdata as $userid => $data) {
 
-        if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
-            if (isset($userdata[$userid]["matches"][$matchId])) {
-                if ((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
-                    ||
-                    ($userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === "")
-                ) {
-                    print "setting score\n";
+            print $data["name"] . "\n";
+
+            if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
+                if (isset($userdata[$userid]["matches"][$matchId])) {
+                    if ((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
+                        ||
+                        ($userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === "")
+                    ) {
+                        print "setting score\n";
+                        $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
+                    }
+                } else {
                     $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
                 }
             } else {
-                $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
+                $userdata[$userid]["matches"][$matchId]["quickpicked"] = false;
             }
-        } else {
-            $userdata[$userid]["matches"][$matchId]["quickpicked"] = false;
         }
     }
 
