@@ -10,6 +10,7 @@ require_once("header.php");
                <div class="mail_section_1">
                   <h1 class="contact_taital">Nieuw wachtwoord</h1>
                   <div class="form">
+                     <input type="hidden" name="uid" value="<?= $_GET["id"]; ?>" />
                      <input type="password" class="mail_text" placeholder="Nieuw wachtwoord" name="password" />
                   </div> <br />
                   <br />

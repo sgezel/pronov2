@@ -1,4 +1,5 @@
 <?php
+require_once("config.php");
 require_once("SettingCrud.php");
 require_once("PHPMailer/PHPMailer.php");
 require_once("PHPMailer/SMTP.php");
@@ -185,7 +186,7 @@ class UserCrud
                 if (strtolower($userdata["username"]) == strtolower($username)) {
                     $mail = new PHPMailer();
                     $mail->isSMTP();   
-                    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                     $mail->Host = $settingCrud->actionGetSetting("smtp_host");
                     $mail->Port = $settingCrud->actionGetSetting("smtp_port");;
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
@@ -197,21 +198,20 @@ class UserCrud
        
                     $mail->addAddress($username);
 
-                    $mail->Subject = 'PHPMailer GMail SMTP test';
-                    $mail->msgHTML(file_get_contents("http://localhost/pronov2/resettemplate.php?id=$id"));
-                    $mail->AltBody = 'This is a plain-text message body';
+                    $mail->Subject = 'Pr(emed)onostiek: wachtwoord opnieuwe instellen';
+                    $mail->msgHTML(file_get_contents((empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/$_SESSION[install_path]/resettemplate.php?id=$id"));
 
 
                     if (!$mail->send()) {
-                        echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        $_SESSION["error_message"] = "Deze gebruiker bestaat niet.";
+                       
                     } else {
-                        echo 'Message sent!';
+                        $_SESSION["success_message"] = "Er is een mail opgestuurd met een link om uw wachtwoord opnieuw in te stellen.";
                     }
                 }
             }
-           die();
-            $_SESSION["error_message"] = "Deze gebruiker bestaat niet.";
             header("Location: " . $this->loginPath);
+           
         }
     }
 
@@ -288,8 +288,6 @@ class UserCrud
         $listName = $this->listName;
         $data = $this->data;
         $itemData = $data[$listName];
-
-        print_r($_POST);
         
         $qid = $_POST["qid"];
 
@@ -315,5 +313,25 @@ class UserCrud
         $data[$listName] = $itemData;
         file_put_contents($this->filePath, json_encode($data));
         header("location: " . $this->adminPath . "?tab=questions");
+    }
+
+    public function actionNewPassword(){
+        $id = $_POST["uid"];
+        $password = $_POST["password"];
+
+
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$id];
+        
+        $itemData["password"] = password_hash($password, PASSWORD_DEFAULT);
+
+        if ($itemData) {
+            unset($data[$listName][$id]);
+            $data[$listName][$id] = $itemData;
+            file_put_contents($this->filePath, json_encode($data));
+        }
+
+        header("Location: " . $this->loginPath);
     }
 }

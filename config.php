@@ -4,8 +4,8 @@ require_once("SettingCrud.php");
 $title = "Pr(emed)onostiek";
 
 $_SESSION["datafile"] = "data.json";
-$path = (new SettingCrud())->actionGetSetting("baseurl");
-$_SESSION["install_path"] =  empty($path) ? "" : $path;
+$_SESSION["install_path"] = (new SettingCrud())->actionGetSetting("baseurl");
+
 
 $cron_file = "data.json";
 
