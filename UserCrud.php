@@ -255,8 +255,10 @@ class UserCrud
         foreach($_POST["matches"] as $match => $udata)
         {
             $itemData["matches"][$match] = $udata;
-        }       
-        $itemData["questions"] = $_POST["questions"];
+        }
+        
+        if(isset($_POST["questions"]))
+            $itemData["questions"] = $_POST["questions"];
        
         unset($data[$listName][$id]);
         $data[$listName][$id] = $itemData;
