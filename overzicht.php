@@ -82,7 +82,7 @@ foreach ($matches as $id => $match) {
                                                     $now = new DateTime();
                                                     
                                                     if($currentmatch["time"] < $now &&
-                                                    ($currentmatch["finished"] == false || $currentmatch["finished"] == "false"))
+                                                    ($currentmatch["finished"] === false || $currentmatch["finished"] === "false"))
                                                      {?>
                                                         <span class="badge bg-warning text-dark">Live</span>
                                                     <?php } ?>
