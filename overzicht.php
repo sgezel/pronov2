@@ -73,8 +73,19 @@ foreach ($matches as $id => $match) {
                                                 
                                                
                                                 <img src="vlaggen/<?=  $currentmatch["home"]; ?>.png" />
-                                                <?= $currentmatch["home"]; ?> -  <?= $currentmatch["away"]; ?> 
+                                                <?= $currentmatch["home"] ?> -  <?= $currentmatch["away"]; ?> 
                                                 <img src="vlaggen/<?=  $currentmatch["away"]; ?>.png" />
+
+                                                
+                                                <?php 
+                                                 
+                                                    $now = new DateTime();
+                                                    
+                                                    if($currentmatch["time"] < $now &&
+                                                    ($currentmatch["finished"] === false || $currentmatch["finished"] === "false"))
+                                                     {?>
+                                                        <span class="badge bg-warning text-dark">Live</span>
+                                                    <?php } ?>
                                                    
                                                     <br/>
                                                     <span class="score"><?= $currentmatch["home_score"]; ?></span>   -  <span class="score"><?= $currentmatch["away_score"]; ?></span>
