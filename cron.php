@@ -351,11 +351,10 @@ function cron_calculateBadges()
 
         if(!($userdata["paid"] === true))
         {
-            if(!in_array("money", $udata[$userId]["badges"]))
-            {
-                $udata[$userId]["badges"][] = "money";
-                $dataChanged = true;
-            }
+            
+                $udata[$userId]["badges"]["Wanbetaler"] = "money";
+                $datachanged = true;
+            
         }
     }
 
