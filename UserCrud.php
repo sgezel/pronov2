@@ -118,7 +118,10 @@ class UserCrud
 
                 if($value == "password")
                 {
-                    $post[$value] = password_hash($_POST[$value], PASSWORD_DEFAULT);
+                    if(!empty($_POST[$value]))
+                        $post[$value] = password_hash($_POST[$value], PASSWORD_DEFAULT);
+                    else
+                        $post[$value] = $itemData[$value];
                 }
                 else if ($value == "matches")
                 {
@@ -127,6 +130,10 @@ class UserCrud
                 else if ($value == "questions")
                 {
                     $post[$value] = isset($itemData["questions"]) ? $itemData["questions"] : [];
+                }
+                else if ($value == "badges")
+                {
+                    $post[$value] = isset($itemData["badges"]) ? $itemData["badges"] : [];
                 }
                 else
                 {
