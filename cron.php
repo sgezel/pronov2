@@ -199,7 +199,7 @@ function cron_calculateScoreboard()
             }
         }
 
-        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
+        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "badges" => $userdata["badges"]];
         $datachanged = true;
     }
 
@@ -336,4 +336,30 @@ function cron_calculateScores()
     $dataSet["users"] = $data;
 
     return $datachanged;
+}
+
+function cron_calculateBadges()
+{
+    global $dataSet;
+
+    $dataChanged = false;
+
+    $udata = $dataSet["users"];
+
+    /*Wanbetalers*/
+    foreach ($udata as $userId => $userdata) {
+
+        if(!($userdata["paid"] === true))
+        {
+            if(!in_array("money", $udata[$userId]["badges"]))
+            {
+                $udata[$userId]["badges"][] = "money";
+                $dataChanged = true;
+            }
+        }
+    }
+
+    $dataSet["users"] = $udata;
+
+    return $dataChanged;
 }
