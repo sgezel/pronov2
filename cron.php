@@ -36,8 +36,8 @@ if ($web)
 
 
 foreach ($functions_to_execute as $function) {
-    echo (new DateTime("now"))->format('Y-m-d H:i:s') .  ": calling $function \n";
-    $dataChanged  = $function() || $dataChanged;
+    echo (new DateTime("now"))->format('Y-m-d H:i:s') . ": calling $function \n";
+    $dataChanged = $function() || $dataChanged;
 }
 
 /*
@@ -47,7 +47,7 @@ $dataChanged = calculateScores() || $dataChanged;
 */
 
 if ($dataChanged) {
-    print("data aangepast, opslaan\n");
+    print ("data aangepast, opslaan\n");
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
@@ -78,7 +78,7 @@ function cron_lockMatches()
 
     $datachanged = true;
 
-    $matchData  = $dataSet["matches"];
+    $matchData = $dataSet["matches"];
 
     foreach ($matchData as $matchId => $match) {
         if (isMatchLocked($match["date"], $match["time"])) {
@@ -110,9 +110,10 @@ function cron_quickPick($matchId)
 
             if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
                 if (isset($userdata[$userid]["matches"][$matchId])) {
-                    if ((!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
+                    if (
+                        (!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
                         ||
-                        ($userdata[$userid]["matches"][$matchId]["home"] === "" ||  $userdata[$userid]["matches"][$matchId]["away"] === "")
+                        ($userdata[$userid]["matches"][$matchId]["home"] === "" || $userdata[$userid]["matches"][$matchId]["away"] === "")
                     ) {
                         print "setting score\n";
                         $userdata[$userid]["matches"][$matchId] = getQuickPickScore();
@@ -181,7 +182,7 @@ function cron_calculateScoreboard()
     foreach ($data as $id => $userdata) {
         $totalscore = 0;
         $correct = 0;
-        $questionsCorrect  = 0;
+        $questionsCorrect = 0;
 
         foreach ($userdata["matches"] as $match) {
             if (isset($match["points"])) {
@@ -199,7 +200,7 @@ function cron_calculateScoreboard()
             }
         }
 
-        $scoreboard[] = ["name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "badges" => $userdata["badges"]];
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
         $datachanged = true;
     }
 
@@ -216,13 +217,14 @@ function cron_getLiveScore()
 
     $datachanged = false;
 
-    $matchData  = $dataSet["matches"];
+    $matchData = $dataSet["matches"];
 
     $today = date("Y-m-d");
     $currentTime = date("H:i");
 
     foreach ($matchData as $matchId => $match) {
-        if (($match["date"] === $today)
+        if (
+            ($match["date"] === $today)
             && (!$match["finished"])
             && strtotime($match["time"]) < strtotime($currentTime)
 
@@ -250,7 +252,7 @@ function cron_getLiveScore()
                 $context = stream_context_create($options);
                 $result = file_get_contents($apiUrl, false, $context);
                 if ($result === false) {
-                    print("fout bij ophalen data\n");
+                    print ("fout bij ophalen data\n");
                 } else {
                     $data = json_decode($result, true);
 
@@ -284,13 +286,13 @@ function cron_calculateScores()
 
     $datachanged = false;
 
-    $data  = $dataSet["users"];
-    $matchData  = $dataSet["matches"];
+    $data = $dataSet["users"];
+    $matchData = $dataSet["matches"];
 
     foreach ($data as $userId => $userdata) {
         foreach ($matchData as $matchId => $match) {
             if (isset($match["home_score"]) && isset($match["away_score"])) {
-                if (!array_key_exists($matchId,  $userdata["matches"])) {
+                if (!array_key_exists($matchId, $userdata["matches"])) {
                     continue;
                 }
 
@@ -318,7 +320,7 @@ function cron_calculateScores()
                     if (abs($user_home - $user_away) == abs($match_home - $match_away))
                         $match_score++;
 
-                    if (($match_home > $match_away && $user_home > $user_away) || ($match_home == $match_away && $user_home == $user_away)  || ($match_home < $match_away && $user_home < $user_away))
+                    if (($match_home > $match_away && $user_home > $user_away) || ($match_home == $match_away && $user_home == $user_away) || ($match_home < $match_away && $user_home < $user_away))
                         $match_score++;
 
                     if ($match_score == 4)
@@ -341,23 +343,125 @@ function cron_calculateScores()
 function cron_calculateBadges()
 {
     global $dataSet;
+    global $web;
 
     $datachanged = true;
 
+    cron_calculateScoreboard(); //zeker zijn dat het scorebord geupdate is
+
     $udata = $dataSet["users"];
+    $mdata = $dataSet["matches"];
+    $sdata = $dataSet["scoreboard"];
+
+    $matchesplayed = 0;
+
+    foreach ($mdata as $mid => $match) {
+        if ($match["finished"]) {
+            $matchesplayed++;
+
+            if ($matchesplayed > 2)
+                break; //vanaf 3 gaan we winnaar en loser badges berekenen
+        }
+    }
 
     /*Wanbetalers*/
     foreach ($udata as $userId => $userdata) {
-        
-        if((!($userdata["paid"] === true) && !($userdata["paid"] == "on")))
-        {            
-                $udata[$userId]["badges"]["Wanbetaler"] = "money";            
-        }
-        else
-        {
-           unset($udata[$userId]["badges"]["Wanbetaler"]);
+
+        if ((!($userdata["paid"] === true) && !($userdata["paid"] == "on"))) {
+            $udata[$userId]["badges"]["Wanbetaler"] = "money";
+        } else {
+            unset($udata[$userId]["badges"]["Wanbetaler"]);
         }
     }
+
+
+    //Uitslag correct
+    foreach ($sdata as $score) {
+        $uid = $score["uid"];
+
+        switch ($score["correct"]) {
+            case 1: // Deze lege lijnen zijn voor de test data, daar hebben we wat berekeningen "gemist"
+            case 2:
+            case 3:
+            case 4:
+                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct1";
+                break;
+            case 5:
+                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct5";
+                break;
+            case 10:
+                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct10";
+                break;
+        }
+    }
+
+    //Pechvogel && Quickpicked
+    foreach ($udata as $uid => $userdata) {
+        $zeroscore = 0;
+        $quickpicked = 0;
+
+        foreach ($userdata["matches"] as $mid => $match) {
+            if ($mdata[$mid]["finished"] == true) {
+                if ($match["points"] == 0)
+                    $zeroscore++;
+
+                if ($match["quickpicked"] == true)
+                    $quickpicked++;
+            }
+        }
+
+        if ($zeroscore > 0 && $zeroscore < 5) {
+            $udata[$uid]["badges"]["Pechvogel"] = "donkey1";
+        } else if ($zeroscore >= 5 && $zeroscore < 10) {
+            $udata[$uid]["badges"]["Pechvogel"] = "donkey5";
+        } else if ($zeroscore >= 10) {
+            $udata[$uid]["badges"]["Pechvogel"] = "donkey10";
+        }
+
+        if ($quickpicked > 0 && $quickpicked < 5) {
+            $udata[$uid]["badges"]["QuickPicker"] = "qp1";
+        } else if ($quickpicked >= 5 && $quickpicked < 10) {
+            $udata[$uid]["badges"]["QuickPicker"] = "qp5";
+        } else if ($quickpicked >= 10) {
+            $udata[$uid]["badges"]["QuickPicker"] = "qp10";
+        }
+    }
+
+    //puntenkoning
+
+    foreach ($udata as $uid => $userdata) {
+
+        if (count($userdata["matches"]) >= 3) {
+
+            $keys = array_keys($userdata["matches"]);
+
+            for ($i = 2; $i < count($keys); $i++) {
+                $points= [];
+                $points[] = $userdata["matches"][$keys[$i]]["points"];
+                $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
+                $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
+
+                if (array_sum($points) > 6)
+                    $udata[$uid]["badges"]["Puntenkoning"] = "puntenkoning";
+            }
+        }
+
+
+    }
+
+    if (!$web) //deze mogen maar een keer per dag worden berekend.
+    {
+        if ($matchesplayed > 2) {
+            //Winnaar
+            $winnaarid = $sdata[0]["uid"];
+            $udata[$winnaarid]["badges"]["Winnaarsbadge"] = "eerste";
+
+            //Loser
+            $loserid = end($sdata)["uid"];
+            $udata[$loserid]["badges"]["Losersbadge"] = "laatste";
+        }
+    }
+
 
     $dataSet["users"] = $udata;
 
