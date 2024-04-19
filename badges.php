@@ -59,15 +59,15 @@ include("header.php");
                                 </tr>
                                 <tr>
                                     <td><img src="badges\eerste.png" title="Ik ben de beste!" width="32px" height="32px"></td>
-                                    <td>Dit is 'Winnaarsbadge'. Deze kan je verdienen vanaf het moment dat er 3 wedstrijden gespeeld zijn. Iedereen die vanaf dan ooit op de eerste plaats in de rangschikking komt te staan, verdient deze badge.</td>
+                                    <td>Dit is de 'Winnaarsbadge'. Deze kan je verdienen vanaf het moment dat er 3 wedstrijden gespeeld zijn. Iedereen die vanaf dan ooit op de eerste plaats in de rangschikking komt te staan, verdient deze badge.</td>
                                 </tr>
                                 <tr>
                                     <td><img src="badges\laatste.png" title="Laatste" width="32px" height="32px"></td>
-                                    <td>Dit is 'Losersbadge'. Deze kan je krijgen vanaf het moment dat er 3 wedstrijden gespeeld zijn. Iedereen die vanaf dan ooit op de laatste plaats in de rangschikking komt te staan, krijgt deze badge.</td>
+                                    <td>Dit is de 'Losersbadge'. Deze kan je krijgen vanaf het moment dat er 3 wedstrijden gespeeld zijn. Iedereen die vanaf dan ooit op de laatste plaats in de rangschikking komt te staan, krijgt deze badge.</td>
                                 </tr>
                                 <tr>
                                     <td><img src="badges\puntenkoning.png" title="Puntenkoning" width="32px" height="32px"></td>
-                                    <td>Dit is 'Puntenkoningbadge'. Deze verdien je wanneer de som van de behaalde punten over 3 opeenvolgende wedstrijden het totaal van 6 punten overschrijdt. </td>
+                                    <td>Dit is de 'Puntenkoningbadge'. Deze verdien je wanneer de som van de behaalde punten over 3 opeenvolgende wedstrijden het totaal van 6 punten overschrijdt. </td>
                                 </tr>
                             </tbody>
                         </table>
