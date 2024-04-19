@@ -2,6 +2,7 @@
 require_once("header.php");
 include_once("UserCrud.php");
 include_once("MatchCrud.php");
+include_once("SettingCrud.php");
 include_once("QuestionCrud.php");
 $crud = new UserCrud();
 $matchCrud = new MatchCrud();
@@ -11,6 +12,7 @@ $settingCrud = new SettingCrud();
 CheckAccess();
 
 $userData = $crud->actionUserDataById($_SESSION["userid"]);
+$questionValue = $settingCrud->actionGetSetting("questionvalue");
 $allMatchData = $matchCrud->actionRead();
 $allQuestionData = $questionCrud->actionRead();
 $currentToken = "";
@@ -44,7 +46,7 @@ $currentToken = "";
                 <td><?= $id ?></td>
                 <td><?= $data["question"]; ?></td>
                 <td><input type="text" class="form-control" <?= $settingCrud->actionGetSetting("questionslocked") == true ? "readonly disabled" : "" ?> name="questions[<?= $id; ?>][answer]" value="<?= isset($userData["questions"][$id]["answer"]) ?  $userData["questions"][$id]["answer"] : "" ?>" /></td>
-                <td><?= isset($userData['questions'][$id]['points']) ? $userData["questions"][$id]["points"] . "p" : "" ?></td>
+                <td><?= isset($userData['questions'][$id]['correct']) ? ($userData["questions"][$id]["correct"] === true || $userData["questions"][$id]["correct"] === "true" ? $questionValue . " p" : "0 p") : "" ?></td>
               </tr>
             <?php endforeach; ?>
           </table>
