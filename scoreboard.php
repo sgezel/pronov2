@@ -2,7 +2,7 @@
 require_once("header.php");
 require_once("ScoreboardCrud.php");
 
-CheckAccess(); 
+CheckAccess();
 
 $crud = new ScoreboardCrud();
 
@@ -16,7 +16,10 @@ $place_counter = 0;
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="blog_taital">Scorebord</h1>
-
+                <br/><br/><br/>
+                <div class="alert alert-dark" role="alert">
+                       <strong> <a href="badges.php">Lees hier meer over al de badges die je kan verzamelen!</a> </strong>
+                </div>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -44,12 +47,12 @@ $place_counter = 0;
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
                                 </td>
-                                <td ><?= $score["name"]; ?></td>
+                                <td><?= $score["name"]; ?></td>
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td class="text-center"><?= $score["questions"]; ?></td>
                                 <td>
-                                   &nbsp;
+                                    &nbsp;
                                 </td>
 
                             <?php endforeach; ?>
