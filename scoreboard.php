@@ -52,9 +52,10 @@ $place_counter = 0;
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td class="text-center"><?= $score["questions"]; ?></td>
                                 <td>
-                                    <?php foreach($score["badges"] as $badge): ?>
-                                        <img src="badges/<?= $badge; ?>.png" width="32" />
+                                    <?php foreach($score["badges"] as $title => $badge): ?>
+                                        <img src="badges/<?= $badge; ?>.png" width="32" data-bs-toggle="popover"  data-bs-content="<?= $title; ?>" />
                                     <?php endforeach; ?>
+
                                 </td>
 
                             <?php endforeach; ?>
