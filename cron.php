@@ -342,7 +342,7 @@ function cron_calculateBadges()
 {
     global $dataSet;
 
-    $dataChanged = true;
+    $datachanged = true;
 
     $udata = $dataSet["users"];
 
@@ -361,5 +361,5 @@ function cron_calculateBadges()
 
     $dataSet["users"] = $udata;
 
-    return $dataChanged;
+    return $datachanged;
 }
