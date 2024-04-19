@@ -349,7 +349,7 @@ function cron_calculateBadges()
     /*Wanbetalers*/
     foreach ($udata as $userId => $userdata) {
 
-        if(!($userdata["paid"] === true))
+        if(!($userdata["paid"] === true) || !($userdata["paid"] === "on"))
         {
             
                 $udata[$userId]["badges"]["Wanbetaler"] = "money";
