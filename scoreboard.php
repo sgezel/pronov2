@@ -29,7 +29,7 @@ $place_counter = 0;
                             <th class="text-center">Score</th>
                             <th class="text-center"># juist</th>
                             <th class="text-center"># vragen</th>
-                            <th>badges</th>
+                            <th class="scoreboardbadges">badges</th>
                         </tr>
                     </thead>
 
@@ -51,7 +51,7 @@ $place_counter = 0;
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td class="text-center"><?= $score["questions"];  ?></td>
-                                <td >
+                                <td class="scoreboardbadges" >
                                     <div class="badges">
                                     <?php foreach($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
                                         
@@ -62,7 +62,23 @@ $place_counter = 0;
                                     <?php endforeach; ?>
                                     </div>
                                 </td>
-
+                                    </tr> 
+                                    <tr class="scoreboardbadgesresp">
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td colspan="4">
+                                        <div class="badges">
+                                    <?php foreach($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
+                                        
+                                        <div class="hover-badge">
+                                            <img src="badges/<?= $badge; ?>.png"  width="32" />
+                                            <span class="description"><?=$title;?></span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                    </div>
+                                        </td>
+                                    </tr>              
                             <?php endforeach; ?>
                     </tbody>
                 </table>
