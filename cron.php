@@ -368,7 +368,7 @@ function cron_calculateBadges()
     foreach ($udata as $userId => $userdata) {
 
         if ((!($userdata["paid"] === true) && !($userdata["paid"] == "on"))) {
-            $udata[$userId]["badges"]["Wanbetaler"] = "money";
+            $udata[$userId]["badges"]["Wanbetaler"] = "wanbetaler";
         } else {
             unset($udata[$userId]["badges"]["Wanbetaler"]);
         }
@@ -411,19 +411,19 @@ function cron_calculateBadges()
         }
 
         if ($zeroscore > 0 && $zeroscore < 5) {
-            $udata[$uid]["badges"]["Pechvogel"] = "donkey1";
+            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel1";
         } else if ($zeroscore >= 5 && $zeroscore < 10) {
-            $udata[$uid]["badges"]["Pechvogel"] = "donkey5";
+            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel5";
         } else if ($zeroscore >= 10) {
-            $udata[$uid]["badges"]["Pechvogel"] = "donkey10";
+            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel10";
         }
 
         if ($quickpicked > 0 && $quickpicked < 5) {
-            $udata[$uid]["badges"]["QuickPicker"] = "qp1";
+            $udata[$uid]["badges"]["QuickPicker"] = "quickpick1";
         } else if ($quickpicked >= 5 && $quickpicked < 10) {
-            $udata[$uid]["badges"]["QuickPicker"] = "qp5";
+            $udata[$uid]["badges"]["QuickPicker"] = "quickpick5";
         } else if ($quickpicked >= 10) {
-            $udata[$uid]["badges"]["QuickPicker"] = "qp10";
+            $udata[$uid]["badges"]["QuickPicker"] = "quickpick10";
         }
     }
 
@@ -454,7 +454,7 @@ function cron_calculateBadges()
         if ($matchesplayed > 2) {
             //Winnaar
             $winnaarid = $sdata[0]["uid"];
-            $udata[$winnaarid]["badges"]["Winnaarsbadge"] = "eerste";
+            $udata[$winnaarid]["badges"]["Winnaarsbadge"] = "winnaar";
 
             //Loser
             $loserid = end($sdata)["uid"];

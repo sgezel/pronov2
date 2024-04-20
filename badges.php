@@ -27,7 +27,7 @@ include("header.php");
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><img src="badges\money.png" title="Wanbetaler" width="32px" height="32px"></td>
+                                    <td><img src="badges\wanbetaler.png" title="Wanbetaler" width="32px" height="32px"></td>
                                     <td>Dit is de enige badge die je letterlijk gratis krijgt en die je ook zo snel als mogelijk wil kwijtspelen. Dit is de 'Wanbetalerbadge' en staat blijft staan bij iedereen die zijn bijdrage nog niet betaald heeft. Wanneer je deze badge hebt zal er ook geen score worden berekend en zal je altijd onderaan het scorebord blijven staan. (Heb je pas betaald en staat de badge er nog? Geen nood! Dit is een manuele actie die door Sandor of Dieter moet worden uitgevoerd en kan dus wat tijd in beslag nemen)</td>
                                 </tr>
                                 <tr>
@@ -40,7 +40,7 @@ include("header.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="badges\donkey1.png" title="Géén punten verdient bij een wedstrijd" width="32px" height="32px"><img src="badges\donkey5.png" title="Géén punten verdient bij 5 wedstrijden" width="32px" height="32px"><img src="badges\donkey10.png" title="Géén punten verdient bij 10 wedstrijden" width="32px" height="32px"></td>
+                                    <td><img src="badges\pechvogel1.png" title="Géén punten verdient bij een wedstrijd" width="32px" height="32px"><img src="badges\pechvogel5.png" title="Géén punten verdient bij 5 wedstrijden" width="32px" height="32px"><img src="badges\pechvogel10.png" title="Géén punten verdient bij 10 wedstrijden" width="32px" height="32px"></td>
                                     <td>Dit is een badge voor de deelnemers die wat pech hebben. Je krijgt deze badge namelijk wanneer je een volledig foute inschatting maakt en dus 0 punten verdient op die wedstrijd. De badge kan ook nog geüpgrade worden door het behalen van meerdere 0-scores. Dit zijn de te behalen mijlpalen: <ul>
                                             <li>Géén punten verdient bij een wedstrijd</li>
                                             <li>Géén punten verdient bij 5 wedstrijden</li>
@@ -49,7 +49,7 @@ include("header.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="badges\qp1.png" title="Eén wedstrijd laten invullen door de QuickPick&trade;" width="32px" height="32px"><img src="badges\qp5.png" title="5 wedstrijden laten invullen door de QuickPick&trade;" width="32px" height="32px"><img src="badges\qp10.png" title="10 wedstrijden laten invullen door de QuickPick&trade;" width="32px" height="32px"></td>
+                                    <td><img src="badges\quickpick1.png" title="Eén wedstrijd laten invullen door de QuickPick&trade;" width="32px" height="32px"><img src="badges\quickpick5.png" title="5 wedstrijden laten invullen door de QuickPick&trade;" width="32px" height="32px"><img src="badges\quickpick10.png" title="10 wedstrijden laten invullen door de QuickPick&trade;" width="32px" height="32px"></td>
                                     <td>Dit is een badge die je krijgt wanneer je ervoor kiest om het QuickPick&trade;-systeem de wedstrijden voor jou te laten invullen. De badge kan ook nog geüpgrade worden door meerdere wedstrijden te laten invullen door QuickPick&trade;. Dit zijn de te behalen mijlpalen: <ul>
                                             <li>Eén wedstrijd laten invullen door QuickPick&trade;</li>
                                             <li>5 wedstrijd laten invullen door QuickPick&trade;</li>
@@ -58,7 +58,7 @@ include("header.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="badges\eerste.png" title="Ik ben de beste!" width="32px" height="32px"></td>
+                                    <td><img src="badges\winnaar.png" title="Ik ben de beste!" width="32px" height="32px"></td>
                                     <td>Dit is de 'Winnaarsbadge'. Deze kan je verdienen vanaf het moment dat er 3 wedstrijden gespeeld zijn. Iedereen die vanaf dan ooit op de eerste plaats in de rangschikking komt te staan, verdient deze badge.</td>
                                 </tr>
                                 <tr>
