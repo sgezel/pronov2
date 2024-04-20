@@ -50,12 +50,17 @@ $place_counter = 0;
                                 <td><?= $score["name"]; ?></td>
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
-                                <td class="text-center"><?= $score["questions"]; ?></td>
-                                <td>
+                                <td class="text-center"><?= $score["questions"];  ?></td>
+                                <td >
+                                    <div class="badges">
                                     <?php foreach($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
-                                        <img src="badges/<?= $badge; ?>.png" width="32" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="<?= $title; ?>" />
+                                        
+                                        <div class="hover-badge">
+                                            <img src="badges/<?= $badge; ?>.png"  width="32" />
+                                            <span class="description"><?=$title;?></span>
+                                        </div>
                                     <?php endforeach; ?>
-
+                                    </div>
                                 </td>
 
                             <?php endforeach; ?>
