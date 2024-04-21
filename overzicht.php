@@ -11,6 +11,8 @@ $matches = array_reverse($matchCrud->actionRead(true), true);
 $userCrud = new UserCrud();
 $users = $userCrud->actionRead();
 
+$onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
+
 uasort($users, function ($a, $b) {
     // First compare by round
     $roundComparison = strcmp($a['name'], $b['name']);
@@ -36,6 +38,18 @@ foreach ($matches as $id => $match) {
             <div class="col-sm-12">
                 <h1 class="blog_taital">Match overzicht</h1>
             </div>
+            
+            <?php if ($_SESSION["admin"]): ?>
+                    <div class="clearfix">
+                        <?php if (!$_SESSION["visible"]): ?>
+                            <small><a href="action_toggle_visible.php?p=overzicht" class="btn btn-sm btn-outline-danger pull-right"
+                                    role="button">Onzichtbare spelers zichtbaar</a></small>
+                        <?php else: ?>
+                            <small><a href="action_toggle_visible.php?p=overzicht" class="btn btn-sm btn-outline-warning pull-right"
+                                    role="button">Onzichtbare spelers verborgen</a></small>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
             <div class="d-flex align-items-start">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -103,7 +117,11 @@ foreach ($matches as $id => $match) {
                                     <tbody>
 
                                         <?php foreach ($users as $userid => $user): ?>
-
+                                            <?php
+                                                if ($onlyvisible && !(($user["visible"] === true) || ($user["visible"] == "on"))) {
+                                                    continue;
+                                                }
+                                            ?>
                                             <?php $usermatch = $user["matches"][$matchid]; ?>
                                             <tr class="<?= (isset($usermatch["points"]) && $usermatch["points"] == 4) ? "table-success" : ""; ?>">
                                                 <td><?= $user["name"]; ?></td>

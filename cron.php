@@ -206,7 +206,7 @@ function cron_calculateScoreboard()
 
         }
 
-        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible"=> (($userdata["visible"] === true) || ($userdata["visible"] == "on"))];
 
         usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
