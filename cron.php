@@ -201,11 +201,18 @@ function cron_calculateScoreboard()
         }
 
         $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
+        
+        usort($scoreboard, function($a, $b) {
+            if ($a['score'] == $b['score']) {
+                return $b['correct'] - $a['correct'];
+            }
+            return $b['score'] - $a['score'];
+        });
+
         $datachanged = true;
     }
 
-    $key_values = array_column($scoreboard, 'score');
-    array_multisort($key_values, SORT_DESC, $scoreboard);
+    
 
     $dataSet["scoreboard"] = $scoreboard;
     return $datachanged;
