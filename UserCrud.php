@@ -167,6 +167,8 @@ class UserCrud
                         $_SESSION["loggedin"] = true;
                         $_SESSION["admin"] = $userdata["admin"];
                         $_SESSION["userid"] = $id;
+                        $_SESSION["visible"] = (($userdata["visible"] === true) || ($userdata["visible"] == "on"));
+                        
                         header("Location: " . $this->homePath);
                         die("test");
                     }                   

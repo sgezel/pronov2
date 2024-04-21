@@ -37,14 +37,9 @@ if ($web)
 
 foreach ($functions_to_execute as $function) {
     echo (new DateTime("now"))->format('Y-m-d H:i:s') . ": calling $function \n";
+
     $dataChanged = $function() || $dataChanged;
 }
-
-/*
-$dataChanged  = lockMatches() || $dataChanged;
-$dataChanged  = getLiveScore() || $dataChanged;
-$dataChanged = calculateScores() || $dataChanged;
-*/
 
 if ($dataChanged) {
     print ("data aangepast, opslaan\n");
@@ -53,6 +48,12 @@ if ($dataChanged) {
 
 if ($web)
     echo "</pre>";
+
+
+function isActive($variable)
+{
+   return ($variable === true || $variable === "true" || $variable === "on");
+}
 
 function isMatchLocked($matchDate, $matchTime)
 {
@@ -108,7 +109,10 @@ function cron_quickPick($matchId)
 
             print $data["name"] . "\n";
 
-            if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
+            if (isset($data["quickpicker"]) && isActive($data["quickpicker"])) {
+
+                print "quickpicker\n";
+
                 if (isset($userdata[$userid]["matches"][$matchId])) {
                     if (
                         (!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
@@ -184,28 +188,41 @@ function cron_calculateScoreboard()
         $correct = 0;
         $questionsCorrect = 0;
 
-        foreach ($userdata["matches"] as $match) {
-            if (isset($match["points"])) {
-                $totalscore = $totalscore + $match["points"];
+        if (!isset($userdata["badges"]["Wanbetaler"])) {
 
-                if ($match["points"] == 4)
-                    $correct++;
+            foreach ($userdata["matches"] as $match) {
+                if (isset($match["points"])) {
+                    $totalscore = $totalscore + $match["points"];
+
+                    if ($match["points"] == 4)
+                        $correct++;
+                }
             }
+
+            foreach ($userdata["questions"] as $question) {
+                if ($question["correct"] == true) {
+                    $totalscore = $totalscore + $questionPoints;
+                    $questionsCorrect++;
+                }
+            }
+
+
+
         }
 
-        foreach ($userdata["questions"] as $question) {
-            if ($question["correct"] == true) {
-                $totalscore = $totalscore + $questionPoints;
-                $questionsCorrect++;
-            }
-        }
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible"=> (($userdata["visible"] === true) || ($userdata["visible"] == "on"))];
 
-        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
+        usort($scoreboard, function ($a, $b) {
+            if ($a['score'] == $b['score']) {
+                return $b['correct'] - $a['correct'];
+            }
+            return $b['score'] - $a['score'];
+        });
+
         $datachanged = true;
     }
 
-    $key_values = array_column($scoreboard, 'score');
-    array_multisort($key_values, SORT_DESC, $scoreboard);
+
 
     $dataSet["scoreboard"] = $scoreboard;
     return $datachanged;
@@ -436,7 +453,7 @@ function cron_calculateBadges()
             $keys = array_keys($userdata["matches"]);
 
             for ($i = 2; $i < count($keys); $i++) {
-                $points= [];
+                $points = [];
                 $points[] = $userdata["matches"][$keys[$i]]["points"];
                 $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
                 $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
