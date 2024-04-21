@@ -184,25 +184,31 @@ function cron_calculateScoreboard()
         $correct = 0;
         $questionsCorrect = 0;
 
-        foreach ($userdata["matches"] as $match) {
-            if (isset($match["points"])) {
-                $totalscore = $totalscore + $match["points"];
+        if (!isset($userdata["badges"]["Wanbetaler"])) {
 
-                if ($match["points"] == 4)
-                    $correct++;
-            }
-        }
+            foreach ($userdata["matches"] as $match) {
+                if (isset($match["points"])) {
+                    $totalscore = $totalscore + $match["points"];
 
-        foreach ($userdata["questions"] as $question) {
-            if ($question["correct"] == true) {
-                $totalscore = $totalscore + $questionPoints;
-                $questionsCorrect++;
+                    if ($match["points"] == 4)
+                        $correct++;
+                }
             }
+
+            foreach ($userdata["questions"] as $question) {
+                if ($question["correct"] == true) {
+                    $totalscore = $totalscore + $questionPoints;
+                    $questionsCorrect++;
+                }
+            }
+
+
+
         }
 
         $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect];
-        
-        usort($scoreboard, function($a, $b) {
+
+        usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
                 return $b['correct'] - $a['correct'];
             }
@@ -212,7 +218,7 @@ function cron_calculateScoreboard()
         $datachanged = true;
     }
 
-    
+
 
     $dataSet["scoreboard"] = $scoreboard;
     return $datachanged;
@@ -443,7 +449,7 @@ function cron_calculateBadges()
             $keys = array_keys($userdata["matches"]);
 
             for ($i = 2; $i < count($keys); $i++) {
-                $points= [];
+                $points = [];
                 $points[] = $userdata["matches"][$keys[$i]]["points"];
                 $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
                 $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
