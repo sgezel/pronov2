@@ -74,6 +74,10 @@ $allQuestionData = $questionCrud->actionRead();
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification-tab-pane" type="button" role="tab" aria-controls="notification-tab-pane" aria-selected="false">Notifications</button>
                 </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="quickpickfix-tab" data-bs-toggle="tab" data-bs-target="#quickpickfix-tab-pane" type="button" role="tab" aria-controls="quickpickfix-tab-pane" aria-selected="false">QuickPickFix&reg;</button>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane show active" id="matches-tab-pane" role="tabpanel" aria-labelledby="matches-tab" tabindex="0">
@@ -405,6 +409,36 @@ $allQuestionData = $questionCrud->actionRead();
                         <input type="submit" class="btn btn-primary" value="Versturen" />
                     </form>
 
+                </div>
+
+                <div class="tab-pane" id="quickpickfix-tab-pane" role="tabpanel" aria-labelledby="quickpickfix-tab" tabindex="3">
+                    <br />
+                    <h2>QuickPickFix&reg;</h2>
+
+                    <form method="post" action="action_admin_forcquickpick.php">
+                    <select class="mail_text" name="match">
+                    <option selected>Kies match...</option>
+                    <?php foreach($allMatchData as $mid => $match): ?>
+                        <option value="<?= $mid; ?>"> <?= $mid; ?>: <?= $match["home"]; ?> - <?= $match["away"]; ?></option>
+                    <?php endforeach; ?>
+                                    
+                    </select>
+
+                    <select class="mail_text" name="user">
+                    <option selected>Kies gebruiker...</option>
+                    <?php foreach($allUserData as $uid => $user): ?>
+                        <option value="<?= $uid; ?>"> <?= $uid; ?>: <?= $user["name"]; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <br /><br />
+                <p>
+                <br /><br />
+
+                </p>
+                <br /><br />
+                
+                <input type="submit" class="btn btn-primary" value="Forceer quickpick" />
+                    </form>
                 </div>
             </div>
 

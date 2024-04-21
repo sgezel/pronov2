@@ -224,6 +224,19 @@ class UserCrud
         }
     }
 
+    public function actionSetMatchScoreQP($id, $matchid, $quickpickdata)
+    {
+        $listName = $this->listName;
+        $data = $this->data;
+        $itemData = $data[$listName][$id];
+
+        $itemData["matches"][$matchid] = $quickpickdata;
+
+        unset($data[$listName][$id]);
+        $data[$listName][$id] = $itemData;
+        file_put_contents($this->filePath, json_encode($data));
+    }
+
     public function actionSaveQuickPick(){       
 
         $id = $_SESSION["userid"];
