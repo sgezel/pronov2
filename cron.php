@@ -37,14 +37,9 @@ if ($web)
 
 foreach ($functions_to_execute as $function) {
     echo (new DateTime("now"))->format('Y-m-d H:i:s') . ": calling $function \n";
+
     $dataChanged = $function() || $dataChanged;
 }
-
-/*
-$dataChanged  = lockMatches() || $dataChanged;
-$dataChanged  = getLiveScore() || $dataChanged;
-$dataChanged = calculateScores() || $dataChanged;
-*/
 
 if ($dataChanged) {
     print ("data aangepast, opslaan\n");
@@ -53,6 +48,12 @@ if ($dataChanged) {
 
 if ($web)
     echo "</pre>";
+
+
+function isActive($variable)
+{
+   return ($variable === true || $variable === "true" || $variable === "on");
+}
 
 function isMatchLocked($matchDate, $matchTime)
 {
@@ -108,7 +109,10 @@ function cron_quickPick($matchId)
 
             print $data["name"] . "\n";
 
-            if (isset($data["quickpicker"]) && ($data["quickpicker"] === true || $data["quickpicker"] === "true")) {
+            if (isset($data["quickpicker"]) && isActive($data["quickpicker"])) {
+
+                print "quickpicker\n";
+
                 if (isset($userdata[$userid]["matches"][$matchId])) {
                     if (
                         (!isset($userdata[$userid]["matches"][$matchId]["home"]) || !isset($userdata[$userid]["matches"][$matchId]["away"]))
