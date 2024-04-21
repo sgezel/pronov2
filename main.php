@@ -46,7 +46,7 @@ $currentToken = "";
                 <td><?= $id ?></td>
                 <td><?= $data["question"]; ?></td>
                 <td><input type="text" class="form-control" <?= $settingCrud->actionGetSetting("questionslocked") == true ? "readonly disabled" : "" ?> name="questions[<?= $id; ?>][answer]" value="<?= isset($userData["questions"][$id]["answer"]) ?  $userData["questions"][$id]["answer"] : "" ?>" /></td>
-                <td><?= isset($userData['questions'][$id]['correct']) ? ($userData["questions"][$id]["correct"] === true || $userData["questions"][$id]["correct"] === "true" ? $questionValue . " p" : "0 p") : "" ?></td>
+                <td><?= isset($userData['questions'][$id]['correct']) ? ($userData["questions"][$id]["correct"] === true || $userData["questions"][$id]["correct"] === "true" ? $questionValue . "p" : "0p") : "" ?></td>
               </tr>
             <?php endforeach; ?>
           </table>
