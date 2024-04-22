@@ -42,7 +42,7 @@ foreach ($functions_to_execute as $function) {
 }
 
 if ($dataChanged) {
-    print ("data aangepast, opslaan\n");
+    print("data aangepast, opslaan\n");
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
@@ -52,7 +52,7 @@ if ($web)
 
 function isActive($variable)
 {
-   return ($variable === true || $variable === "true" || $variable === "on");
+    return ($variable === true || $variable === "true" || $variable === "on");
 }
 
 function isMatchLocked($matchDate, $matchTime)
@@ -205,12 +205,9 @@ function cron_calculateScoreboard()
                     $questionsCorrect++;
                 }
             }
-
-
-
         }
 
-        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible"=> (($userdata["visible"] === true) || ($userdata["visible"] == "on"))];
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible" => (($userdata["visible"] === true) || ($userdata["visible"] == "on"))];
 
         usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
@@ -269,7 +266,7 @@ function cron_getLiveScore()
                 $context = stream_context_create($options);
                 $result = file_get_contents($apiUrl, false, $context);
                 if ($result === false) {
-                    print ("fout bij ophalen data\n");
+                    print("fout bij ophalen data\n");
                 } else {
                     $data = json_decode($result, true);
 
@@ -371,6 +368,7 @@ function cron_calculateBadges()
     $sdata = $dataSet["scoreboard"];
 
     $matchesplayed = 0;
+    $allmatchesfinished = true;
 
     foreach ($mdata as $mid => $match) {
         if ($match["finished"]) {
@@ -378,6 +376,10 @@ function cron_calculateBadges()
 
             if ($matchesplayed > 2)
                 break; //vanaf 3 gaan we winnaar en loser badges berekenen
+        }
+        else
+        {
+            $allmatchesfinished = false;
         }
     }
 
@@ -462,8 +464,6 @@ function cron_calculateBadges()
                     $udata[$uid]["badges"]["Puntenkoning"] = "puntenkoning";
             }
         }
-
-
     }
 
     if (!$web) //deze mogen maar een keer per dag worden berekend.
@@ -477,6 +477,18 @@ function cron_calculateBadges()
             $loserid = end($sdata)["uid"];
             $udata[$loserid]["badges"]["Losersbadge"] = "laatste";
         }
+    }
+
+    //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn:
+    if ($allmatchesfinished) {
+
+        //QuickPick-ontwijker
+        foreach ($udata as $uid => $userdata) {
+            if (!isset($udata[$uid]["badges"]["QuickPicker"])) {
+                $udata[$uid]["badges"]["QuickPickOntwijker"] = "quickpickontwijker";
+            }
+        }
+
     }
 
 
