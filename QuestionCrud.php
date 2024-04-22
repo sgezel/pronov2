@@ -25,7 +25,7 @@ class QuestionCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "questions";
-            $this->attributesList = ["question"];
+            $this->attributesList = ["question", "solved"];
         } else {
             throw new Exception("No file found", 1);
         }

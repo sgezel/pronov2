@@ -29,14 +29,28 @@ if ($questionData == null) {
                     <div class="mail_section_1">
                         <h1 class="contact_taital">Vraag "<?= $id; ?>" aanpassen. </h1>
                         <div class="form">
-                            <input type="hidden" name="id" value="<?= $id; ?>" />
-                            <label class="form-check-label" for="question">Vraag:</label>
-                            <input type="text" class="mail_text" placeholder="Email" name="question" value="<?= $questionData["question"]; ?>" />
+                            <div><input type="hidden" name="id" value="<?= $id; ?>" />
+                                <label class="form-check-label" for="question">Vraag:</label>
+                                <input type="text" class="mail_text" placeholder="Email" name="question" value="<?= $questionData["question"]; ?>" />
+                            </div>
                         </div>
+                        <br />
+
 
                     </div>
                     <div class="mail_section_1">
-
+                    <br/>
+                    </div>
+                    <div class="mail_section_1">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="solved" type="checkbox" id="flexSwitchSolved" <?= isset($questionData["solved"]) ? "checked=checked" : "" ?>>
+                            <label class="form-check-label" for="flexSwitchSolved">Opgelost?</label>
+                        </div>
+                    </div>
+                    <div class="mail_section_1">
+                    <br/>
+                    </div>
+                    <div class="mail_section_1">
                         <input type="submit" class="btn btn-primary" value="Opslaan" />
                     </div>
                 </div>
@@ -51,31 +65,31 @@ if ($questionData == null) {
 
     <form method="post" action="action_admin_savequestionanswers.php">
 
-    <input type="hidden" name="qid" value="<?= $id ?>" />
+        <input type="hidden" name="qid" value="<?= $id ?>" />
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <td hidden>id</td>
-                <td>User</td>
-                <td>Answer</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($allUserData as $uid => $userdata) : ?>
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td hidden><?= $uid ?></td>
-                    <td><?= $userdata["name"] ?></td>
-                    <td><?= isset($userdata["questions"][$id]["answer"]) ? $userdata["questions"][$id]["answer"] : ""; ?></td>
-                    <td><input type="checkbox" name="question[<?= $uid; ?>]" value="<?= $uid; ?>" <?= isset($userdata["questions"][$id]["correct"]) && $userdata["questions"][$id]["correct"] == true ?  "checked=checked" : "" ?>" /></td>
+                    <td hidden>id</td>
+                    <td>User</td>
+                    <td>Answer</td>
+                    <td></td>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="mail_section_1">
-        <input type="submit" class="btn btn-primary" value="Opslaan" />
-    </div>
+            </thead>
+            <tbody>
+                <?php foreach ($allUserData as $uid => $userdata) : ?>
+                    <tr>
+                        <td hidden><?= $uid ?></td>
+                        <td><?= $userdata["name"] ?></td>
+                        <td><?= isset($userdata["questions"][$id]["answer"]) ? $userdata["questions"][$id]["answer"] : ""; ?></td>
+                        <td><input type="checkbox" name="question[<?= $uid; ?>]" value="<?= $uid; ?>" <?= isset($userdata["questions"][$id]["correct"]) && $userdata["questions"][$id]["correct"] == true ?  "checked=checked" : "" ?>" /></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="mail_section_1">
+            <input type="submit" class="btn btn-primary" value="Opslaan" />
+        </div>
 
     </form>
 </div>
