@@ -366,9 +366,14 @@ function cron_calculateBadges()
     $udata = $dataSet["users"];
     $mdata = $dataSet["matches"];
     $sdata = $dataSet["scoreboard"];
+    $qdata = $dataSet["questions"];
+
+    $settingdata = $dataSet["settings"];
 
     $matchesplayed = 0;
     $allmatchesfinished = true;
+    $questionssolved = 0;
+    $allquestionssolved = true;
 
     foreach ($mdata as $mid => $match) {
         if ($match["finished"]) {
@@ -376,10 +381,16 @@ function cron_calculateBadges()
 
             if ($matchesplayed > 2)
                 break; //vanaf 3 gaan we winnaar en loser badges berekenen
-        }
-        else
-        {
+        } else {
             $allmatchesfinished = false;
+        }
+    }
+
+    foreach ($qdata as $qid => $question) {
+        if ($question["solved" === "on"]) {
+            $questionssolved++;
+        } else {
+            $allquestionssolved = false;
         }
     }
 
@@ -480,15 +491,31 @@ function cron_calculateBadges()
     }
 
     //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn:
-    if ($allmatchesfinished) {
-
+    if ($allquestionssolved) {
         //QuickPick-ontwijker
+        foreach ($udata as $uid => $userdata) {
+
+            $keys = array_keys($userdata["questions"]);
+            
+            $correctquestions = 0;
+            for ($i = 0; $i < count($keys); $i++) {
+                if (isset($userdata["questions"][$keys[$i]]["correct"]) && $userdata["questions"][$keys[$i]]["correct"] === true)
+                {
+                   $correctquestions++;
+                }
+            }
+
+            if ($correctquestions >= (count($qdata)/2))
+                $udata[$uid]["badges"]["vragenvirtuoos"] = "vragenvirtuoos";
+        }
+    }
+
+    if ($allmatchesfinished) {
         foreach ($udata as $uid => $userdata) {
             if (!isset($udata[$uid]["badges"]["QuickPicker"])) {
                 $udata[$uid]["badges"]["QuickPickOntwijker"] = "quickpickontwijker";
             }
         }
-
     }
 
 
