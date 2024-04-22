@@ -19,7 +19,7 @@ session_set_cookie_params(604800);
 					<p>
 					<h2>Vorige edities</h2>
 
-					De WK pronostiek van 2022 was een gigantisch succes met maar liefst ?? deelnemers. Voorlopig hebben we bij elke Pr(emed)onostiek een hoger aantal deelnemers dan de editie ervoor. We hopen dus om ook deze keer weer een talrijke deelname te mogen noteren.
+					De WK pronostiek van 2022 was een succes met maar liefst 32 deelnemers. Net iets minder dan de editie ervoor. We hopen dus om ook deze keer weer een talrijke deelname te mogen noteren.
 
 					<div>
 						<table class="table">
@@ -53,7 +53,7 @@ session_set_cookie_params(604800);
 								<tr>
 									<th scope="row">4</th>
 									<td>WK 2022</td>
-									<td>??</td>
+									<td>32</td>
 									<td>Joost Van den Brande</td>
 								</tr>
 							</tbody>
