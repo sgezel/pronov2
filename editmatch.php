@@ -51,7 +51,7 @@ if ($matchData == null) {
                                 </table>
 
                                 <br />
-                                <label for="round">Ronde: <?= $matchData["round"]  === "1" ? "selected" : "" ?> </label><br />
+                                <label for="round">Ronde: </label><br />
                                 <select class="mail_text" name="round" value="<?= $round ?>">
                                     <option>Kies...</option>
                                     <option value="1" <?= $matchData["round"]  === "1" ? "selected" : "" ?>>Groepsfase</option>
@@ -62,8 +62,8 @@ if ($matchData == null) {
                                 </select>
                                 <br />
 
-                                <label for="id">Uur:</label>
-                                <input class="mail_text" type="id" name="id" value="<?= $id ?>" />
+                                <label for="id">ID:</label>
+                                <input readonly class="mail_text" type="id" name="id" value="<?= $id ?>" />
                                 <br />
 
                                 <br />
