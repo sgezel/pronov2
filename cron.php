@@ -490,7 +490,7 @@ function cron_calculateBadges()
         }
     }
 
-    //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn:
+    //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn en alle vragen verbeterd:
     if ($allquestionssolved) {
         //QuickPick-ontwijker
         foreach ($udata as $uid => $userdata) {
