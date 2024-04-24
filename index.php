@@ -32,45 +32,71 @@ require_once("header.php");
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-image:url(https://ting.blog/wp-content/uploads/Ting-compatible-phones-blog-banner.png);">
-        
+      
+    <?php if($sponsor) : ?>
+      <div class="carousel-item active" style="background-image:url(images/premed.jpg);">
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Smartphone compatibel.</h1>           
-               <p>De vernieuwde website is smartphonecompatibel, dus nog meer plezier op nog meer toestellen!</p>
+            <h1>We hebben een sponsor!</h1>           
+               <p>Een dikke dankjewel aan Premed! Zij zorgen voor een verdubbeling van de binnengekomen inschrijvingsgelden. Hierdoor kunnen we meerdere deelnemers in de bloemetjes zetten.</p>
           </div>
         </div>
       </div>
-      <div class="carousel-item" style="background-image:url(https://assets-global.website-files.com/638736ae08495c0bba245009/64662bc8484ba336da79c0e4_2%20BG%20color%20new-p-500.webp);">
+      <?php endif; ?>
+
+      <div class="carousel-item" <?php !$sponsor ? "active" : "";?> style="background-image:url(images/smartphone.jpg);">
         
         <div class="container">
           <div class="carousel-caption">
-            <h1>QuickPick&trade;.</h1>
+            <h1>De Pr(emed)onostiek, nu ook in jouw handpalm!</h1>
+            <p>De vernieuwde website is smartphonecompatibel, dus nog meer plezier op nog meer toestellen!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item" style="background-image:url(images/quickpick.jpg);">
+        
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Snel, Slim, QuickPick&trade;!</h1>
             <p>Voor de vergeetachtige of voor de niet-voetbalfan hebben we nu het nieuwe QuickPick&trade;, het systeem dat het werk voor jou doet!</p>
           </div>
         </div>
       </div>
-      <div class="carousel-item" style="background-image:url(https://vpbe.cdn.pxr.nl/news/2019/11/11/v2_large_8f9f6f23e8b1f52e6b688eb312ccbca919e836ef.jpg);">
-        
 
+      <div class="carousel-item" style="background-image:url(images/notifications.png);">
+        
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Blijf Voorop met Onze Notificaties!</h1>
+            <p>Op Pr(emed)onostiek is elke seconde belangrijk. Accepteer onze notificatiemeldingen en blijf altijd een stap voor. Ontvang updates, zodat je nooit een kans mist om te pronostikeren of een overwinning te vieren. Jouw succes is onze prioriteit - blijf up-to-date, blijf winnen!</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="carousel-item" style="background-image:url(images/badges.png);">
+        
         <div class="container">
           <div class="carousel-caption text-end">
-            <h1>Mijlpalen</h1>
-            <p>Probeer ook al onze badges te verzamelen! <br />
+            <h1>Verdien Je Badges!</h1>
+            <p>Op Pr(emed)onostiek gaat jouw voorspellingstalent niet onopgemerkt voorbij. Elke mijlpaal brengt u een stap dichter bij het verdienen van exclusieve badges. Pronostikeer, presteer en verzamel ze allemaal<br />
                </p>
           </div>
         </div>
       </div>
       
-      <div class="carousel-item" style="background-image:url(https://img.gadgethacks.com/img/50/92/63632285252732/0/set-persistent-notifications-for-apps-your-iphone.1280x600.jpg);">
+      <div class="carousel-item" style="background-image:url(images/livescore.jpg);">
         
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Live updates!</h1>
-            <p> De tussenstanden worden tijdens de wedstrijd elke 5 minuten, automatisch, geüpdatet.</p>
+            <h1>Beleef de Actie Bijna Live op Pr(emed)onostiek!</h1>
+            <p>Mis geen moment van de spanning! Met onze livescore-updates (elke 5 minuten) blijf je altijd in het hart van de actie. Volg elk doelpunt en elke overwinning terwijl ze gebeuren. Jouw pronostiekervaring is nu levendiger dan ooit. Blijf aan de bal, blijf vooruit met Pr(emed)onostiek!</p>
           </div>
         </div>
       </div>
