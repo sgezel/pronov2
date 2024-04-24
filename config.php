@@ -45,6 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     //$_GET = array_map('sanitize_input', $_GET);
 }
 
+function isActive($variable)
+{
+    return ($variable === true || $variable === "true" || $variable === "on");
+}
+
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);

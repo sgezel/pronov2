@@ -48,12 +48,6 @@ if ($dataChanged) {
 if ($web)
     echo "</pre>";
 
-
-function isActive($variable)
-{
-    return ($variable === true || $variable === "true" || $variable === "on");
-}
-
 function isMatchLocked($matchDate, $matchTime)
 {
     $now = new DateTime("now");
