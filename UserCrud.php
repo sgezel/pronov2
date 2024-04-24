@@ -341,18 +341,34 @@ class UserCrud
         $id = $_POST["uid"];
         $password = $_POST["password"];
 
+        $id = urldecode($id);
 
         $listName = $this->listName;
         $data = $this->data;
-        $itemData = $data[$listName][$id];
+        $itemData = $data[$listName];
+
+        $foundid = 0;
+
+        foreach($itemData as $uid => $udata)
+        {
+            if(password_verify($uid, $id))
+            {
+                $foundid = $uid;
+                break;
+            }
+        }
+
+        $itemData = $data[$listName][$foundid];
         
         $itemData["password"] = password_hash($password, PASSWORD_DEFAULT);
 
         if ($itemData) {
-            unset($data[$listName][$id]);
-            $data[$listName][$id] = $itemData;
+            unset($data[$listName][$foundid]);
+            $data[$listName][$foundid] = $itemData;
             file_put_contents($this->filePath, json_encode($data));
         }
+        
+       
 
         header("Location: " . $this->loginPath);
     }

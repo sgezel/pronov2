@@ -131,6 +131,13 @@ include("header.php");
                                 </tr>
                                 <tr>
                                     <td><div class="hover-badge">
+                                            <img src="badges/quickpickweigeraar.png" width="32" />
+                                            <span class="description">QuickPick Weigeraar</span>
+                                        </div></td>
+                                    <td><strong>QuickPick Weigeraar-badge</strong>, is een badge die wordt toegekend aan deelnemers die <strong>géén enkele wedstrijd gebruikmaken van het QuickPick™-systeem</strong> tijdens het invullen van hun pronostiek voor het aankomende EK. Met andere woorden, als je consequent zelf alle scores invult zonder QuickPick™ te gebruiken, verdien je deze speciale badge.</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="hover-badge">
                                             <img src="badges/vragenvirtuoos.png" width="32" />
                                             <span class="description">Vragenvirtuoos</span>
                                         </div></td>

@@ -5,7 +5,10 @@ require_once("UserCrud.php");
 $crud = new UserCrud();
 $udata = $crud->actionUserDataById($_GET["id"]);
 
-$action_url = "https://pronostiek.codepage.be/newpassword.php?id=" . $_GET["id"];
+$idhashstring = password_hash($_GET["id"], PASSWORD_DEFAULT);
+$idhashencodestring = urlencode($idhashstring);
+
+$action_url = "https://pronostiek.codepage.be/newpassword.php?id=" . $idhashencodestring;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

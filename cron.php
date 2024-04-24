@@ -187,17 +187,26 @@ function cron_calculateScoreboard()
         $totalscore = 0;
         $correct = 0;
         $questionsCorrect = 0;
+        $uquickpicked = 0;
 
         if (!isset($userdata["badges"]["Wanbetaler"])) {
 
             foreach ($userdata["matches"] as $match) {
                 if (isset($match["points"])) {
+                    //score van wedstrijden berekenen
                     $totalscore = $totalscore + $match["points"];
 
                     if ($match["points"] == 4)
                         $correct++;
-                }
+                
+                    //extra punten voor het niet gebruiken van de quickpick berekenen
+                    if(!isset($match["quickpicked"]) || $match["quickpicked"] === false || $match["quickpicked"] === "false")
+                        $uquickpicked++;
+                
+                    }
             }
+
+            $totalscore = $totalscore + (intdiv($uquickpicked, 17) * 2);
 
             foreach ($userdata["questions"] as $question) {
                 if ($question["correct"] == true) {
@@ -385,7 +394,7 @@ function cron_calculateBadges()
     }
 
     foreach ($qdata as $qid => $question) {
-        if ($question["solved" === "on"]) {
+        if ($question["solved"] === "on") {
             $questionssolved++;
         } else {
             $allquestionssolved = false;
@@ -428,7 +437,7 @@ function cron_calculateBadges()
                     break;
             }
 
-            if ($score["score"] >= 30) {
+            if ($score["score"] >= 75) {
                 $udata[$uid]["badges"]["ekexpert"]["icon"] = "ekexpert";
                 $udata[$uid]["badges"]["ekexpert"]["title"] = "EK Expert";
             }
@@ -486,8 +495,7 @@ function cron_calculateBadges()
                     $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
                     $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
 
-                    if (array_sum($points) > 6)
-                    {
+                    if (array_sum($points) > 6) {
                         $udata[$uid]["badges"]["Puntenkoning"]["icon"] = "puntenkoning";
                         $udata[$uid]["badges"]["Puntenkoning"]["title"] = "Puntenkoning";
                     }
@@ -512,16 +520,17 @@ function cron_calculateBadges()
     //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn en alle vragen verbeterd:
     if ($allquestionssolved) {
         foreach ($udata as $uid => $userdata) { // Use reference to modify the original array
-    
+
             $keys = array_keys($userdata["questions"]);
             $correctquestions = 0;
-    
+
             foreach ($keys as $key) {
                 if (isset($userdata["questions"][$key]["correct"]) && $userdata["questions"][$key]["correct"] === true) {
                     $correctquestions++;
                 }
             }
-            if ($correctquestions >= (count($qdata["questions"]) / 2)) {
+
+            if ($correctquestions >= (count($qdata) / 2)) {
                 $udata[$uid]["badges"]["vragenvirtuoos"]["icon"] = "vragenvirtuoos";
                 $udata[$uid]["badges"]["vragenvirtuoos"]["title"] = "Vragen Virtuoos";
             }
