@@ -42,7 +42,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption text-start">
             <h1>We hebben een sponsor!</h1>           
-               <p>Een dikke dankjewel aan Premed! Zij zorgen voor een verdubbeling van de binnengekomen inschrijvingsgelden. Hierdoor kunnen we meerdere deelnemers in de bloemetjes zetten.</p>
+               <p>Dankjewel aan Premed! Zij verdubbelen het binnengekomen inschrijvingsgeld. Zo kunnen we meerdere deelnemers in de bloemetjes zetten.</p>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption">
             <h1>Blijf Voorop met Onze Notificaties!</h1>
-            <p>Op Pr(emed)onostiek is elke seconde belangrijk. Accepteer onze notificatiemeldingen en blijf altijd een stap voor. Ontvang updates, zodat je nooit een kans mist om te pronostikeren of een overwinning te vieren. Jouw succes is onze prioriteit - blijf up-to-date, blijf winnen!</p>
+            <p>Elke seconde belangrijk. Accepteer onze notificatiemeldingen en ontvang updates, zodat je nooit een kans mist om te pronostikeren!</p>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Verdien Je Badges!</h1>
-            <p>Op Pr(emed)onostiek gaat jouw voorspellingstalent niet onopgemerkt voorbij. Elke mijlpaal brengt u een stap dichter bij het verdienen van exclusieve badges. Pronostikeer, presteer en verzamel ze allemaal<br />
+            <p>Elke mijlpaal brengt u een stap dichter bij het verdienen van exclusieve badges. Pronostikeer, presteer en verzamel ze allemaal<br />
                </p>
           </div>
         </div>
@@ -96,7 +96,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption text-start">
             <h1>Beleef de Actie Bijna Live op Pr(emed)onostiek!</h1>
-            <p>Mis geen moment van de spanning! Met onze livescore-updates (elke 5 minuten) blijf je altijd in het hart van de actie. Volg elk doelpunt en elke overwinning terwijl ze gebeuren. Jouw pronostiekervaring is nu levendiger dan ooit. Blijf aan de bal, blijf vooruit met Pr(emed)onostiek!</p>
+            <p>Mis geen moment van de spanning! Met onze livescore-updates (elke 5 minuten) blijf je altijd in het hart van de actie.</p>
           </div>
         </div>
       </div>
