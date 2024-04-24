@@ -48,7 +48,7 @@
                         </li>
 
                         <li>
-                           Lijnen code: <?= $footerdata->linesOfCode; ?>
+                           Aantal Lijnen code: <?= $footerdata->linesOfCode; ?>
                         </li>
                      </ul>
                   </div>
