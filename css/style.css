@@ -362,7 +362,12 @@ button {
 
 .carousel-indicators .active {
     background-color: transparent;
-    border: 3px solid #6cbd15;
+    border: 3px solid #6cbd15 !important;
+}
+
+.carousel-indicators > button {
+    border: 3px solid #fff !important;
+    width: 10px !important;
 }
 
 .carousel-indicators li {
@@ -375,12 +380,13 @@ button {
 
 .carousel-indicators {
     right: inherit;
-    bottom: -110px;
+    /*bottom: -110px;*/
     left: 0;
     justify-content: center;
     padding-left: 0;
     margin-right: 15%;
     margin-left: 0%;
+    
 }
 
 /* banner section end */
@@ -1204,3 +1210,27 @@ hr.solid {
 .sponsor {
     width:70%;
 }
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
+    border:1p solid black;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+    
+  }
+
+  .carousel-caption > h1 {
+    color:#fff;;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 16rem;
+  }
