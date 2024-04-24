@@ -36,7 +36,7 @@ foreach ($matches as $id => $match) {
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="blog_taital">Match overzicht</h1>
+                <h1 class="blog_taital">Voorspellingen</h1>
             </div>
             
             <?php if ($_SESSION["admin"]): ?>
