@@ -398,7 +398,7 @@ button {
     width: 100%;
     float: left;
     height: auto;
-    padding: 90px 0px;
+   /* padding: 90px 0px;*/
     background-size: 100%;
 }
 
@@ -1216,21 +1216,32 @@ hr.solid {
 
 /* Carousel base class */
 .carousel {
-    margin-bottom: 4rem;
+    /*margin-bottom: 4rem;*/
     border:1p solid black;
   }
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
-    bottom: 3rem;
+    bottom: 3.5rem;
     z-index: 10;
-    
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+    border: 1px solid rgba(108, 189, 21, .5)
   }
 
   .carousel-caption > h1 {
-    color:#fff;;
+    color:#fff;
+    font-size:14pt;
   }
+
   
   /* Declare heights because of positioning of img element */
   .carousel-item {
-    height: 16rem;
+    height: 18rem;
+    max-height: 18rem;
+  min-height: 18rem;
+  max-width: 100vw;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   }
+

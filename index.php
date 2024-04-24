@@ -31,24 +31,20 @@ require_once("header.php");
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item active" style="background-image:url(https://ting.blog/wp-content/uploads/Ting-compatible-phones-blog-banner.png);">
         
-        <img src="https://splidejs.com/images/slides/image-slider/01.jpg" class="bd-placeholder-img" width="100%" height="100%"/>
-
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Smartphone compatibel.</h1>
-           
+            <h1>Smartphone compatibel.</h1>           
                <p>De vernieuwde website is smartphonecompatibel, dus nog meer plezier op nog meer toestellen!</p>
-
           </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
+      <div class="carousel-item" style="background-image:url(https://assets-global.website-files.com/638736ae08495c0bba245009/64662bc8484ba336da79c0e4_2%20BG%20color%20new-p-500.webp);">
+        
         <div class="container">
           <div class="carousel-caption">
             <h1>QuickPick&trade;.</h1>
@@ -56,18 +52,30 @@ require_once("header.php");
           </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+      <div class="carousel-item" style="background-image:url(https://vpbe.cdn.pxr.nl/news/2019/11/11/v2_large_8f9f6f23e8b1f52e6b688eb312ccbca919e836ef.jpg);">
+        
 
         <div class="container">
           <div class="carousel-caption text-end">
-            <h1>Badges</h1>
+            <h1>Mijlpalen</h1>
             <p>Probeer ook al onze badges te verzamelen! <br />
-               De tussenstanden worden tijdens de wedstrijd elke 5 minuten, automatisch, geüpdatet. Hierdoor kan je bijna Live de stand volgen en zien waar je op het scorebord zal staan.</p>
+               </p>
           </div>
         </div>
       </div>
       
+      <div class="carousel-item" style="background-image:url(https://img.gadgethacks.com/img/50/92/63632285252732/0/set-persistent-notifications-for-apps-your-iphone.1280x600.jpg);">
+        
+
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Live updates!</h1>
+            <p> De tussenstanden worden tijdens de wedstrijd elke 5 minuten, automatisch, geüpdatet.</p>
+          </div>
+        </div>
+      </div>
+
+     
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
