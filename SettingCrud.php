@@ -11,7 +11,7 @@ class SettingCrud
 
     public function __construct($filePath = 'data.json')
     {
-        $filePath = $_SESSION["datafile"];
+        $filePath = "data.json";//$_SESSION["datafile"];
         $this->adminPath = (isset($_SESSION["install_path"]) ? $_SESSION["install_path"] : "") . "/admin.php";
 
         if (file_exists($filePath)) {
