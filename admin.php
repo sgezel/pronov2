@@ -260,7 +260,9 @@ $allQuestionData = $questionCrud->actionRead();
                         <input type="text" class="form-control" name="apikey" value="<?= $settings["apikey"] ?>" />
                         <br />
                         <br />
-
+                        <label for="sponsor">Sponsor tonen?</label>
+                        <input type="checkbox" name="sponsor" <?= $settings["sponsor"] ? "checked=checked" : "" ?> />
+                        <br />
                         <label for="registrations">Gebruikers mogen registreren:</label>
                         <input type="checkbox" name="registrations" <?= $settings["registrations"] ? "checked=checked" : "" ?> />
                         <br />

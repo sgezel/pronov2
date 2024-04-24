@@ -12,12 +12,17 @@
                   <p class="footer_text">&nbsp;</p>
                </div>
                <div class="col-lg-3 col-sm-6">
-                  <h1 class="useful_text">Trotse sponsor</h1>
-                  <div class="location_text">
+                  <?php if ($sponsor) : ?>
 
-                     <a href="https://www.premed.be"><img class="sponsor" src="images/sponsors/premed.png" /></a>
+                     <h1 class="useful_text">Trotse sponsor</h1>
+                     <div class="location_text">
 
-                  </div>
+                        <a href="https://www.premed.be"><img class="sponsor" src="images/sponsors/premed.png" /></a>
+
+                     </div>
+                  <?php else : ?>
+                     &nbsp;
+                  <?php endif; ?>
                </div>
                <div class="col-lg-3 col-sm-6">
                   <h1 class="useful_text">Contacteer ons!</h1>

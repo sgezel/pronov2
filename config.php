@@ -3,9 +3,12 @@ session_start();
 require_once("SettingCrud.php");
 $title = "Pr(emed)onostiek";
 
-$_SESSION["datafile"] = "data.json";
-$_SESSION["install_path"] = (new SettingCrud())->actionGetSetting("baseurl");
+$settingsCrud = new SettingCrud();
+$sponsor = $settingsCrud->actionGetSetting("sponsor");
 
+
+$_SESSION["datafile"] = "data.json";
+$_SESSION["install_path"] = $settingsCrud->actionGetSetting("baseurl");
 
 $cron_file = "data.json";
 $footer_file = "footer.json";

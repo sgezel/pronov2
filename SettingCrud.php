@@ -19,7 +19,7 @@ class SettingCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "settings";
-            $this->attributesList = ["baseurl","apikey","registrations", "questionvalue","questionslocked", "round1", "round2", "round3", "round4", "round5", "smtp_host", "smtp_port", "smtp_user", "smtp_password"];
+            $this->attributesList = ["baseurl","apikey","registrations", "questionvalue","questionslocked", "round1", "round2", "round3", "round4", "round5", "smtp_host", "smtp_port", "smtp_user", "smtp_password", "sponsor"];
         } else {
             throw new Exception("No file found", 1);
         }
