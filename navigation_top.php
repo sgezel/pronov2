@@ -7,25 +7,23 @@ $registration = $settingsCrud->actionGetSetting("registrations");
 <nav class="navbar navbar-expand-lg  navbar-light bg-light bg-body-tertiary">
    <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-         <img src="images/logo.png" class="float-left logo" />        
+         <img src="images/logo.png" class="float-left logo" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-               <a class="nav-link" href="index.php">Home</a>
-            </li>
-
-            <li class="nav-item">
-               <a class="nav-link" href="reglement.php">Reglement</a>
-            </li>
+            <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false) : ?>
+               <li class="nav-item">
+                  <a class="nav-link" href="index.php">Home</a>
+               </li>
+            <?php endif; ?>
 
             <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
 
                <li class="nav-item">
-                  <a class="nav-link" href="main.php">Invullen</a>
+                  <a class="nav-link" href="main.php">Mijn pronostiek</a>
                </li>
 
                <li class="nav-item">
@@ -33,9 +31,16 @@ $registration = $settingsCrud->actionGetSetting("registrations");
                </li>
 
                <li class="nav-item">
-                  <a class="nav-link" href="overzicht.php">Overzicht</a>
+                  <a class="nav-link" href="overzicht.php">Voorspellingen</a>
                </li>
 
+            <?php endif; ?>
+
+            <li class="nav-item">
+               <a class="nav-link" href="reglement.php">Reglement</a>
+            </li>
+
+            <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
                <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true) : ?>
                   <li class="nav-item">
                      <a class="nav-link" href="admin.php">Admin</a>
@@ -46,7 +51,10 @@ $registration = $settingsCrud->actionGetSetting("registrations");
                   <a class="nav-link" href="logout.php">Uitloggen</a>
                </li>
 
-            <?php else : ?>
+            <?php endif; ?>
+
+
+            <?php if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false) : ?>
                <li class="nav-item">
                   <a class="nav-link" href="login.php">Inloggen</a>
                </li>

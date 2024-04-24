@@ -59,9 +59,9 @@ $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
                             ?>
 
                             <tr>
-                                <td>
+                                <td style="text-align: center;">
                                     <?php if ($place_counter < 4): ?>
-                                        <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:40px;" />
+                                        <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:32px;" />
                                     <?php else: ?>
                                         <?= $place_counter; ?>
                                     <?php endif; ?>

@@ -22,7 +22,7 @@ $currentToken = "";
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="blog_taital">Pronostiek invullen</h1>
+        <h1 class="blog_taital">Mijn pronostiek</h1>
       </div>
 
       <div class="alert alert-dark" role="alert">
