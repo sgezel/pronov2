@@ -45,6 +45,8 @@ $settings = $settingsCrud->actionGetAllSettings();
 $allUserData = $userCrud->actionRead();
 $allMatchData = $matchCrud->actionRead();
 $allQuestionData = $questionCrud->actionRead();
+
+$allUserMailString = "";
 ?>
 
 
@@ -232,7 +234,8 @@ $allQuestionData = $questionCrud->actionRead();
                         </thead>
                         <tbody>
                             <?php foreach ($allUserData as $id => $data) : ?>
-
+                                
+                                <?php $allUserMailString .= ";" . $data["username"]; ?>
                                 <tr>
                                     <td><?= $id ?></td>
                                     <td><?= $data["username"]; ?></td>
@@ -245,6 +248,15 @@ $allQuestionData = $questionCrud->actionRead();
 
                         </tbody>
                     </table>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <p class="wit">
+                                <a href="mailto:?bcc=<?= $allUserMailString;  ?>&subject=Pr(emed)onostiek Update" class="btn btn-warning">Alle deelnemers mailen</a>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="tab-pane" id="settings-tab-pane" role="tabpanel" aria-labelledby="settings-tab" tabindex="3">
@@ -334,13 +346,13 @@ $allQuestionData = $questionCrud->actionRead();
                                         </h2>
                                         <div id="flush-<?= $folder; ?>" class="accordion-collapse collapse" aria-labelledby="flush-head-<?= $folder; ?>" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
-                                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                <?php foreach ($filelist as $file) : ?>
-                                                    
-                                                    <a class="nav-link" href="admin.php?tab=data&folder=<?= $folder; ?>&file=<?= $file; ?>"><?= $file ?></a>
+                                                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                    <?php foreach ($filelist as $file) : ?>
 
-                                                <?php endforeach; ?>
-                                            </div>
+                                                        <a class="nav-link" href="admin.php?tab=data&folder=<?= $folder; ?>&file=<?= $file; ?>"><?= $file ?></a>
+
+                                                    <?php endforeach; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -350,16 +362,14 @@ $allQuestionData = $questionCrud->actionRead();
                         </div>
 
 
-                        <?php 
-                            $json_data = $userCrud->data;
-                            
-                            if(isset($_GET["folder"]) && isset($_GET["file"]))
-                            {
-                                if($_GET["folder"] != "current" && $_GET["file"] != "data.json")
-                                {
-                                    $json_data = json_decode(file_get_contents("backup/" . $_GET["folder"] . "/" . $_GET["file"]));
-                                }
+                        <?php
+                        $json_data = $userCrud->data;
+
+                        if (isset($_GET["folder"]) && isset($_GET["file"])) {
+                            if ($_GET["folder"] != "current" && $_GET["file"] != "data.json") {
+                                $json_data = json_decode(file_get_contents("backup/" . $_GET["folder"] . "/" . $_GET["file"]));
                             }
+                        }
                         ?>
 
                         <div class="col-8">
@@ -425,28 +435,28 @@ $allQuestionData = $questionCrud->actionRead();
                     <h2>QuickPickFix&reg;</h2>
 
                     <form method="post" action="action_admin_forcquickpick.php">
-                    <select class="mail_text" name="match">
-                    <option selected>Kies match...</option>
-                    <?php foreach($allMatchData as $mid => $match): ?>
-                        <option value="<?= $mid; ?>"> <?= $mid; ?>: <?= $match["home"]; ?> - <?= $match["away"]; ?></option>
-                    <?php endforeach; ?>
-                                    
-                    </select>
+                        <select class="mail_text" name="match">
+                            <option selected>Kies match...</option>
+                            <?php foreach ($allMatchData as $mid => $match) : ?>
+                                <option value="<?= $mid; ?>"> <?= $mid; ?>: <?= $match["home"]; ?> - <?= $match["away"]; ?></option>
+                            <?php endforeach; ?>
 
-                    <select class="mail_text" name="user">
-                    <option selected>Kies gebruiker...</option>
-                    <?php foreach($allUserData as $uid => $user): ?>
-                        <option value="<?= $uid; ?>"> <?= $uid; ?>: <?= $user["name"]; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <br /><br />
-                <p>
-                <br /><br />
+                        </select>
 
-                </p>
-                <br /><br />
-                
-                <input type="submit" class="btn btn-primary" value="Forceer quickpick" />
+                        <select class="mail_text" name="user">
+                            <option selected>Kies gebruiker...</option>
+                            <?php foreach ($allUserData as $uid => $user) : ?>
+                                <option value="<?= $uid; ?>"> <?= $uid; ?>: <?= $user["name"]; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <br /><br />
+                        <p>
+                            <br /><br />
+
+                        </p>
+                        <br /><br />
+
+                        <input type="submit" class="btn btn-primary" value="Forceer quickpick" />
                     </form>
                 </div>
             </div>
