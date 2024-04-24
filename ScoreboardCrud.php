@@ -25,6 +25,29 @@ class ScoreboardCrud
         }
     }
 
+    public function IsAnyMatchLive()
+    {
+        
+        $matches = $this->data["matches"];
+
+       
+        $now = new DateTime();
+
+        foreach($matches as $mid => $match)
+        {            
+
+            if($match["date"] !== $now->format("Y-m-d"))
+                continue;
+
+            if($match["time"] < $now && ($match["finished"] === false || $match["finished"] === "false"))
+            {
+                return true;
+            }
+
+        }
+        return false;
+
+    }
 
     
 }

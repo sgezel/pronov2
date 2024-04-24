@@ -11,6 +11,9 @@ $data = $crud->data;
 $place_counter = 0;
 
 $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
+$livematches = $crud->IsAnyMatchLive();
+
+
 ?>
 
 <div class="blog_section layout_padding">
@@ -35,6 +38,12 @@ $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
                 <div class="alert alert-dark clearfix" role="alert">
                     <strong> <a href="badges.php">Lees hier meer over al de badges die je kan verzamelen!</a> </strong>
                 </div>
+
+                <?php if($livematches): ?>
+                    <div class="alert alert-info clearfix" role="alert">
+                        Er is momenteel nog een match bezig. Het scorebord is dus een voorlopige tussenstand.
+                    </div>
+                <?php endif; ?>
                 <table class="table table-hover">
                     <thead>
                         <tr>
