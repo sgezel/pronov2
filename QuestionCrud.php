@@ -106,6 +106,7 @@ class QuestionCrud
             if ($itemData) {
                 unset($data[$listName][$id]);
                 $data[$listName][$id] = $post;
+                ksort($data[$listName]);
                 file_put_contents($this->filePath, json_encode($data));
             }
             header("Location: " . $this->adminPath. "?tab=questions");
