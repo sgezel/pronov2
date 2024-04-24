@@ -180,9 +180,20 @@ function cron_calculateScoreboard()
     $datachanged = false;
 
     $data = $dataSet["users"];
+    $qdata = $dataSet["questions"];
+    $allquestionssolved = true;
     $questionPoints = $dataSet["settings"][0]["questionvalue"];
     $bonuspointmatches = $dataSet["settings"][0]["bonuspointsmatches"];
     $bonuspoints = $dataSet["settings"][0]["bonuspoints"];
+
+    foreach ($qdata as $qid => $question) {
+        if ($question["solved"] === "on") {
+            
+        } else {
+            $allquestionssolved = false;
+            break;
+        }
+    }
 
     foreach ($data as $id => $userdata) {
         $totalscore = 0;
@@ -199,20 +210,21 @@ function cron_calculateScoreboard()
 
                     if ($match["points"] == 4)
                         $correct++;
-                
+
                     //extra punten voor het niet gebruiken van de quickpick berekenen
-                    if(!isset($match["quickpicked"]) || $match["quickpicked"] === false || $match["quickpicked"] === "false")
+                    if (!isset($match["quickpicked"]) || $match["quickpicked"] === false || $match["quickpicked"] === "false")
                         $uquickpicked++;
-                
-                    }
+                }
             }
 
             $totalscore = $totalscore + (intdiv($uquickpicked, $bonuspointmatches) * $bonuspoints);
 
-            foreach ($userdata["questions"] as $question) {
-                if ($question["correct"] == true) {
-                    $totalscore = $totalscore + $questionPoints;
-                    $questionsCorrect++;
+            if ($allquestionssolved) {
+                foreach ($userdata["questions"] as $question) {
+                    if ($question["correct"] == true) {
+                        $totalscore = $totalscore + $questionPoints;
+                        $questionsCorrect++;
+                    }
                 }
             }
         }
@@ -517,7 +529,7 @@ function cron_calculateBadges()
             $udata[$loserid]["badges"]["Losersbadge"]["title"] = "Onderstebovenkampioen";
         }
     }
-    
+
     //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn en alle vragen verbeterd:
     if ($allquestionssolved) {
         foreach ($udata as $uid => $userdata) { // Use reference to modify the original array
@@ -559,65 +571,63 @@ function cron_getFooterStats()
     //https://api.codetabs.com/v1/loc/?github=sgezel/pronov2&ignored=css,js,old,template,PHPMAILER,vlaggen,badges,data,vendor,Crud
 
     $old = json_decode(file_get_contents("footer.json"));
-    
+
     $data = file_get_contents("https://api.codetabs.com/v1/loc/?github=sgezel/pronov2&ignored=css,js,old,template,PHPMAILER,vlaggen,badges,data,vendor,Crud");
-    
+
     $footerdata = [];
 
     $footerdata["commits"] = GetCommits();
-    
 
-    if(isJson($data))
-    {
+
+    if (isJson($data)) {
         $data = json_decode($data, true);
         $footerdata["files"] = $data[0]->files;
         $footerdata["linesOfCode"] = $data[0]->linesOfCode;
-    }
-    else
-    {
+    } else {
         echo "fout ophalen lijnen code";
         $footerdata["files"] = $old->files;
         $footerdata["linesOfCode"] = $old->linesOfCode;
     }
-    
+
     file_put_contents("footer.json", json_encode($footerdata));
 }
 function GetCommits()
 {
 
-$owner = "sgezel"; // vervang door de eigenaar van de repository
-$repo = "pronov2"; // vervang door de naam van de repository
+    $owner = "sgezel"; // vervang door de eigenaar van de repository
+    $repo = "pronov2"; // vervang door de naam van de repository
 
-$ch = curl_init();
-$commits = 0;
-$page = 1;
+    $ch = curl_init();
+    $commits = 0;
+    $page = 1;
 
-do {
-    curl_setopt($ch, CURLOPT_URL, "https://api.github.com/repos/$owner/$repo/commits?page=$page");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+    do {
+        curl_setopt($ch, CURLOPT_URL, "https://api.github.com/repos/$owner/$repo/commits?page=$page");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
-    $headers = array();
-    $headers[] = 'User-Agent: Your-App-Name';
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $headers = array();
+        $headers[] = 'User-Agent: Your-App-Name';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
-        break;
-    }
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+            break;
+        }
 
-    $pageCommits = json_decode($result);
-    $commits += count($pageCommits);
-    $page++;
-} while(count($pageCommits) == 30); // GitHub API returns 30 commits per page
+        $pageCommits = json_decode($result);
+        $commits += count($pageCommits);
+        $page++;
+    } while (count($pageCommits) == 30); // GitHub API returns 30 commits per page
 
-curl_close($ch);
+    curl_close($ch);
 
-return  $commits;
+    return  $commits;
 }
 
-function isJson($string) {
+function isJson($string)
+{
     json_decode($string);
     return json_last_error() === JSON_ERROR_NONE;
- }
+}
