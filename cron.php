@@ -368,8 +368,6 @@ function cron_calculateBadges()
     $sdata = $dataSet["scoreboard"];
     $qdata = $dataSet["questions"];
 
-    $settingdata = $dataSet["settings"];
-
     $matchesplayed = 0;
     $allmatchesfinished = true;
     $questionssolved = 0;
@@ -398,122 +396,144 @@ function cron_calculateBadges()
     foreach ($udata as $userId => $userdata) {
 
         if ((!($userdata["paid"] === true) && !($userdata["paid"] == "on"))) {
-            $udata[$userId]["badges"]["Wanbetaler"] = "wanbetaler";
+            $udata[$userId]["badges"]["Wanbetaler"]["icon"] = "wanbetaler";
+            $udata[$userId]["badges"]["Wanbetaler"]["title"] = "Wanbetaler";
         } else {
             unset($udata[$userId]["badges"]["Wanbetaler"]);
         }
     }
 
 
-    //Uitslag correct
-    foreach ($sdata as $score) {
-        $uid = $score["uid"];
-
-        switch ($score["correct"]) {
-            case 1: // Deze lege lijnen zijn voor de test data, daar hebben we wat berekeningen "gemist"
-            case 2:
-            case 3:
-            case 4:
-                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct1";
-                break;
-            case 5:
-                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct5";
-                break;
-            case 10:
-                $udata[$uid]["badges"]["Correcte pronostiek"] = "correct10";
-                break;
-        }
-    }
-
-    //Pechvogel && Quickpicked
-    foreach ($udata as $uid => $userdata) {
-        $zeroscore = 0;
-        $quickpicked = 0;
-
-        foreach ($userdata["matches"] as $mid => $match) {
-            if ($mdata[$mid]["finished"] == true) {
-                if ($match["points"] == 0)
-                    $zeroscore++;
-
-                if ($match["quickpicked"] == true)
-                    $quickpicked++;
-            }
-        }
-
-        if ($zeroscore > 0 && $zeroscore < 5) {
-            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel1";
-        } else if ($zeroscore >= 5 && $zeroscore < 10) {
-            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel5";
-        } else if ($zeroscore >= 10) {
-            $udata[$uid]["badges"]["Pechvogel"] = "pechvogel10";
-        }
-
-        if ($quickpicked > 0 && $quickpicked < 5) {
-            $udata[$uid]["badges"]["QuickPicker"] = "quickpick1";
-        } else if ($quickpicked >= 5 && $quickpicked < 10) {
-            $udata[$uid]["badges"]["QuickPicker"] = "quickpick5";
-        } else if ($quickpicked >= 10) {
-            $udata[$uid]["badges"]["QuickPicker"] = "quickpick10";
-        }
-    }
-
-    //puntenkoning
-
-    foreach ($udata as $uid => $userdata) {
-
-        if (count($userdata["matches"]) >= 3) {
-
-            $keys = array_keys($userdata["matches"]);
-
-            for ($i = 2; $i < count($keys); $i++) {
-                $points = [];
-                $points[] = $userdata["matches"][$keys[$i]]["points"];
-                $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
-                $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
-
-                if (array_sum($points) > 6)
-                    $udata[$uid]["badges"]["Puntenkoning"] = "puntenkoning";
-            }
-        }
-    }
-
     if (!$web) //deze mogen maar een keer per dag worden berekend.
     {
-        if ($matchesplayed > 2) {
-            //Winnaar
-            $winnaarid = $sdata[0]["uid"];
-            $udata[$winnaarid]["badges"]["Winnaarsbadge"] = "winnaar";
+        //Uitslag correct
+        foreach ($sdata as $score) {
+            $uid = $score["uid"];
 
-            //Loser
-            $loserid = end($sdata)["uid"];
-            $udata[$loserid]["badges"]["Losersbadge"] = "laatste";
+            switch ($score["correct"]) {
+                case 1: // Deze lege lijnen zijn voor de test data, daar hebben we wat berekeningen "gemist"
+                case 2:
+                case 3:
+                case 4:
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "nauwkeurigevoorspeller";
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Nauwkeurige Voorspeller";
+                    break;
+                case 5:
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "viersterrenkoning";
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Viersterrenkoning";
+                    break;
+                case 10:
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "kampioenziener";
+                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Kampioen Ziener";
+                    break;
+            }
+
+            if ($score["score"] >= 30) {
+                $udata[$uid]["badges"]["ekexpert"]["icon"] = "ekexpert";
+                $udata[$uid]["badges"]["ekexpert"]["title"] = "EK Expert";
+            }
         }
-    }
 
-    //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn en alle vragen verbeterd:
-    if ($allquestionssolved) {
-        //QuickPick-ontwijker
+        //Pechvogel && Quickpicked
         foreach ($udata as $uid => $userdata) {
+            $zeroscore = 0;
+            $quickpicked = 0;
 
-            $keys = array_keys($userdata["questions"]);
-            
-            $correctquestions = 0;
-            for ($i = 0; $i < count($keys); $i++) {
-                if (isset($userdata["questions"][$keys[$i]]["correct"]) && $userdata["questions"][$keys[$i]]["correct"] === true)
-                {
-                   $correctquestions++;
+            foreach ($userdata["matches"] as $mid => $match) {
+                if ($mdata[$mid]["finished"] == true) {
+                    if ($match["points"] == 0)
+                        $zeroscore++;
+
+                    if ($match["quickpicked"] == true)
+                        $quickpicked++;
                 }
             }
 
-            if ($correctquestions >= (count($qdata)/2))
-                $udata[$uid]["badges"]["vragenvirtuoos"] = "vragenvirtuoos";
+            if ($zeroscore > 0 && $zeroscore < 5) {
+                $udata[$uid]["badges"]["Pechvogel"]["icon"] = "pechvogel";
+                $udata[$uid]["badges"]["Pechvogel"]["title"] = "Pechvogel";
+            } else if ($zeroscore >= 5 && $zeroscore < 10) {
+                $udata[$uid]["badges"]["Pechvogel"]["icon"] = "nulmeester";
+                $udata[$uid]["badges"]["Pechvogel"]["title"] = "Nulmeester";
+            } else if ($zeroscore >= 10) {
+                $udata[$uid]["badges"]["Pechvogel"]["icon"] = "legendevandelegehand";
+                $udata[$uid]["badges"]["Pechvogel"]["title"] = "Legende van de Lege Hand";
+            }
+
+            if ($quickpicked > 0 && $quickpicked < 5) {
+                $udata[$uid]["badges"]["QuickPicker"]["icon"] = "quickpickenthousiast";
+                $udata[$uid]["badges"]["QuickPicker"]["title"] = "QuickPick Enthousiast";
+            } else if ($quickpicked >= 5 && $quickpicked < 10) {
+                $udata[$uid]["badges"]["QuickPicker"]["icon"] = "quickpickgebruiker";
+                $udata[$uid]["badges"]["QuickPicker"]["title"] = "QuickPick Gebruiker";
+            } else if ($quickpicked >= 10) {
+                $udata[$uid]["badges"]["QuickPicker"]["icon"] = "quickpickfanaat";
+                $udata[$uid]["badges"]["QuickPicker"]["title"] = "QuickPick Fanaat";
+            }
+        }
+
+        //puntenkoning
+
+        foreach ($udata as $uid => $userdata) {
+
+            if (count($userdata["matches"]) >= 3) {
+
+                $keys = array_keys($userdata["matches"]);
+
+                for ($i = 2; $i < count($keys); $i++) {
+                    $points = [];
+                    $points[] = $userdata["matches"][$keys[$i]]["points"];
+                    $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
+                    $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
+
+                    if (array_sum($points) > 6)
+                    {
+                        $udata[$uid]["badges"]["Puntenkoning"]["icon"] = "puntenkoning";
+                        $udata[$uid]["badges"]["Puntenkoning"]["title"] = "Puntenkoning";
+                    }
+                }
+            }
+        }
+
+
+        if ($matchesplayed > 2) {
+            //Winnaar
+            $winnaarid = $sdata[0]["uid"];
+            $udata[$winnaarid]["badges"]["Winnaarsbadge"]["icon"] = "scoreprofeet";
+            $udata[$winnaarid]["badges"]["Winnaarsbadge"]["title"] = "Scoreprofeet";
+
+            //Loser
+            $loserid = end($sdata)["uid"];
+            $udata[$loserid]["badges"]["Losersbadge"]["icon"] = "onderstebovenkampioen";
+            $udata[$loserid]["badges"]["Losersbadge"]["title"] = "Onderstebovenkampioen";
+        }
+    }
+    
+    //deze doen we enkel op het einde van het EK wanneer alle wedstrijden gespeeld zijn en alle vragen verbeterd:
+    if ($allquestionssolved) {
+        foreach ($udata as $uid => $userdata) { // Use reference to modify the original array
+    
+            $keys = array_keys($userdata["questions"]);
+            $correctquestions = 0;
+    
+            foreach ($keys as $key) {
+                if (isset($userdata["questions"][$key]["correct"]) && $userdata["questions"][$key]["correct"] === true) {
+                    $correctquestions++;
+                }
+            }
+            if ($correctquestions >= (count($qdata["questions"]) / 2)) {
+                $udata[$uid]["badges"]["vragenvirtuoos"]["icon"] = "vragenvirtuoos";
+                $udata[$uid]["badges"]["vragenvirtuoos"]["title"] = "Vragen Virtuoos";
+            }
         }
     }
 
+    //QuickPick-ontwijker
     if ($allmatchesfinished) {
         foreach ($udata as $uid => $userdata) {
-            if (!isset($udata[$uid]["badges"]["QuickPicker"])) {
-                $udata[$uid]["badges"]["QuickPickOntwijker"] = "quickpickontwijker";
+            if (!array_key_exists("QuickPicker", $userdata["badges"])) {
+                $udata[$uid]["badges"]["QuickPickOntwijker"]["icon"] = "quickpickweigeraar";
+                $udata[$uid]["badges"]["QuickPickOntwijker"]["title"] = "QuickPick Weigeraar";
             }
         }
     }

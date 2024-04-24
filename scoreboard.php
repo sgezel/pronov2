@@ -74,15 +74,15 @@ $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
                                     <div class="badges">
                                         <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])): ?>
                                             <div class="hover-badge">
-                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]; ?>.png"
+                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]["icon"]; ?>.png"
                                                     width="32" />
                                                 <span class="description">Wanbetaler</span>
                                             </div>
                                         <?php else: ?>
                                             <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
                                                 <div class="hover-badge">
-                                                    <img src="badges/<?= $badge; ?>.png" width="32" />
-                                                    <span class="description"><?= $title; ?></span>
+                                                    <img src="badges/<?= $badge["icon"]; ?>.png" width="32" />
+                                                    <span class="description"><?= $badge["title"]; ?></span>
                                                 </div>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -103,9 +103,9 @@ $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
                                             </div>
                                         <?php else: ?>
                                             <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
-                                                <div class="hover-badge">
-                                                    <img src="badges/<?= $badge; ?>.png" width="32" />
-                                                    <span class="description"><?= $title; ?></span>
+                                                <div class="hover-badge">                                                    
+                                                    <img src="badges/<?= $badge["icon"]; ?>.png" width="32" />
+                                                    <span class="description"><?= $badge["title"]; ?></span>
                                                 </div>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
