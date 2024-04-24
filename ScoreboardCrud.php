@@ -3,6 +3,7 @@
 class ScoreboardCrud
 {
     private $filePath;
+    private $adminPath;
     private $fileContent;
     public $data;
     public $listName;
