@@ -270,6 +270,13 @@ $allQuestionData = $questionCrud->actionRead();
                         <label for="questionvalue">Waarde van 1 vraag:</label>
                         <input type="number" width="20px" class="form-control input-score" name="questionvalue" value="<?= $settings["questionvalue"] ?>" />
                         <br />
+
+                        <label for="bonuspointsmatches">Quickpick bonuspunten na # matchen:</label>
+                        <input type="number" width="20px" class="form-control input-score" name="bonuspointsmatches" value="<?= $settings["bonuspointsmatches"] ?>" />
+                        <br />
+                        <label for="bonuspoints">Quickpick bonuspunten:</label>
+                        <input type="number" width="20px" class="form-control input-score" name="bonuspoints" value="<?= $settings["bonuspoints"] ?>" />
+                        <br />
                         <br />
                         <label for="questionslocked">Vragen afsluiten?</label>
                         <input type="checkbox" name="questionslocked" <?= $settings["questionslocked"] ? "checked=checked" : "" ?> />

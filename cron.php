@@ -9,7 +9,6 @@ date_default_timezone_set('Europe/Brussels');
 
 $cron_file = getcwd() . "/data.json";
 
-
 $dataSet = json_decode(file_get_contents($cron_file), true);
 
 $dataChanged = false;
@@ -182,6 +181,8 @@ function cron_calculateScoreboard()
 
     $data = $dataSet["users"];
     $questionPoints = $dataSet["settings"][0]["questionvalue"];
+    $bonuspointmatches = $dataSet["settings"][0]["bonuspointsmatches"];
+    $bonuspoints = $dataSet["settings"][0]["bonuspoints"];
 
     foreach ($data as $id => $userdata) {
         $totalscore = 0;
@@ -206,7 +207,7 @@ function cron_calculateScoreboard()
                     }
             }
 
-            $totalscore = $totalscore + (intdiv($uquickpicked, 17) * 2);
+            $totalscore = $totalscore + (intdiv($uquickpicked, $bonuspointmatches) * $bonuspoints);
 
             foreach ($userdata["questions"] as $question) {
                 if ($question["correct"] == true) {
