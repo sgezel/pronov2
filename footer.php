@@ -14,9 +14,9 @@
                <div class="col-lg-3 col-sm-6">
                   <h1 class="useful_text">Trotse sponsor</h1>
                   <div class="location_text">
-                    
-                        <a href="https://www.premed.be"><img class="sponsor" src="images/sponsors/premed.png" /></a>
-                  
+
+                     <a href="https://www.premed.be"><img class="sponsor" src="images/sponsors/premed.png" /></a>
+
                   </div>
                </div>
                <div class="col-lg-3 col-sm-6">
@@ -35,7 +35,22 @@
                <div class="col-lg-3 col-sm-6">
                   <h1 class="useful_text">Statistieken</h1>
                   <div class="location_text">
-                     &nbsp;
+                     <?php
+                     $footerdata = GetFooterData();
+                     ?>
+                     <ul>
+                        <li>
+                           Aantal commits: <?= $footerdata->commits; ?>
+                        </li>
+
+                        <li>
+                           Aantal bestanden: <?= $footerdata->files; ?>
+                        </li>
+
+                        <li>
+                           Lijnen code: <?= $footerdata->linesOfCode; ?>
+                        </li>
+                     </ul>
                   </div>
                </div>
 

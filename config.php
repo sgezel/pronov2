@@ -8,7 +8,7 @@ $_SESSION["install_path"] = (new SettingCrud())->actionGetSetting("baseurl");
 
 
 $cron_file = "data.json";
-
+$footer_file = "footer.json";
 
 require_once("functions.php");
 
@@ -76,4 +76,11 @@ function CheckAdminAccess()
         $_SESSION["error_message"] = "U heeft geen toegang tot deze pagina. gelieve eerst in te loggen.";
         header("location: login.php");
     }
+}
+
+function GetFooterData()
+{
+    global $footer_file;
+    
+    return json_decode(file_get_contents($footer_file));
 }
