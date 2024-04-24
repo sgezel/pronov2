@@ -408,9 +408,13 @@ $allUserMailString = "";
                     <h2>Melding versturen?</h2>
 
                     <form method="post" action="action_admin_notification.php">
-                        <label for="devicekey">Devicekey:</label>
-                        <input type="text" class="form-control" name="devicekey" />
-                        <br />
+
+                        <?php foreach ($allUserData as $id => $data) : ?>
+                            <?php if(isset($data["devicekey"]) && !$data["devicekey"] == ""): ?>
+                            <input type="checkbox" name="devicekey[]" value="<?=$data["devicekey"];?>" ?> <?= $data["name"]; ?> <br/>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                         <br />
                         <label for="notificationtitle">Title:</label>
                         <input type="text" class="form-control" name="notificationtitle" />
