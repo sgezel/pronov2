@@ -470,7 +470,7 @@ $action_url = "https://pronostiek.codepage.be/newpassword.php?id=" . $idhashenco
                     <td class="content-cell">
                       <div class="f-fallback">
                         <h1>Hallo <?= $udata["name"]; ?>,</h1>
-                        <p>Je hebt recent een nieuwe wachtwoord aangevraagt voor je <strong><?= $title; ?> </strong> account. Gebruik de knop om deze opnieuw in te stellen.</p>
+                        <p>Je hebt recent een nieuw wachtwoord aangevraagt voor je <strong><?= $title; ?> </strong> account. Gebruik de knop om deze opnieuw in te stellen.</p>
                         <!-- Action -->
                         <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
