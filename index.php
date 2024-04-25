@@ -42,7 +42,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption text-start">
             <h1>We hebben een sponsor!</h1>           
-               <p>Dankjewel aan Premed! Zij verdubbelen het binnengekomen inschrijvingsgeld. Zo kunnen we meerdere deelnemers in de bloemetjes zetten.</p>
+               <p>Premed verdubbelt het binnengekomen inschrijvingsgeld, waardoor we extra deelnemers kunnen belonen. Dankjewel!.</p>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption">
             <h1>Blijf Voorop met Onze Notificaties!</h1>
-            <p>Elke seconde belangrijk. Accepteer onze notificatiemeldingen en ontvang updates, zodat je nooit een kans mist om te pronostikeren!</p>
+            <p>Accepteer onze notificatiemeldingen en ontvang updates, zodat je nooit een kans mist om te pronostikeren!</p>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ require_once("header.php");
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Verdien Je Badges!</h1>
-            <p>Elke mijlpaal brengt u een stap dichter bij het verdienen van exclusieve badges. Pronostikeer, presteer en verzamel ze allemaal<br />
+            <p>Elke mijlpaal brengt u een stap dichter bij het verdienen van exclusieve badges. Pronostikeer, presteer en verzamel ze allemaal!<br />
                </p>
           </div>
         </div>
