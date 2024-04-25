@@ -33,6 +33,10 @@ if (isset($argv)) {
 if ($web)
     echo "<pre>";
 
+    function isActive($variable)
+{
+    return ($variable === true || $variable === "true" || $variable === "on");
+}
 
 foreach ($functions_to_execute as $function) {
     echo (new DateTime("now"))->format('Y-m-d H:i:s') . ": calling $function \n";

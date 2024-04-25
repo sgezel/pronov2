@@ -4,6 +4,7 @@ require_once("SettingCrud.php");
 require_once("PHPMailer/PHPMailer.php");
 require_once("PHPMailer/SMTP.php");
 require_once("PHPMailer/Exception.php");
+include_once("MatchCrud.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -275,9 +276,18 @@ class UserCrud
         $data = $this->data;
         $itemData = $data[$listName][$id];
       
+        $matchCrud = new MatchCrud();
+        $allMatchData = $matchCrud->actionRead();
+
         foreach($_POST["matches"] as $match => $udata)
         {
             $itemData["matches"][$match] = $udata;
+
+            if(isActive($allMatchData[$match]["locked"]))
+            {
+                $itemData["matches"][$match]["cheated"] = true;
+            }
+
         }
         
         if(isset($_POST["questions"]))
