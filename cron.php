@@ -81,6 +81,11 @@ function cron_lockMatches()
 
     $matchData = $dataSet["matches"];
 
+    if (!isActive($dataSet["settings"][0]["questionslocked"])) {
+        usort($matchData, function ($a, $b) {
+            return strcmp($a["date"], $b["date"]); });
+    }
+    
     foreach ($matchData as $matchId => $match) {
         if (isMatchLocked($match["date"], $match["time"])) {
             $matchData[$matchId]["locked"] = true;
@@ -91,6 +96,15 @@ function cron_lockMatches()
             $matchData[$matchId]["locked"] = false;
         }
     }
+
+    if (!isActive($dataSet["settings"][0]["questionslocked"])) {
+        echo "questions not locked\n";
+        echo reset($matchData)["date"] . "\n";
+        if (reset($matchData)["locked"] == true) {
+            $dataSet["settings"][0]["questionslocked"] = true;
+        }
+    }
+
 
     $dataSet["matches"] = $matchData;
 
