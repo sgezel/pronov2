@@ -33,9 +33,12 @@ if (isset($argv)) {
 if ($web)
     echo "<pre>";
 
+if (!function_exists('isActive')) {
+
     function isActive($variable)
-{
-    return ($variable === true || $variable === "true" || $variable === "on");
+    {
+        return ($variable === true || $variable === "true" || $variable === "on");
+    }
 }
 
 foreach ($functions_to_execute as $function) {
@@ -45,7 +48,7 @@ foreach ($functions_to_execute as $function) {
 }
 
 if ($dataChanged) {
-    print("data aangepast, opslaan\n");
+    print ("data aangepast, opslaan\n");
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
@@ -186,7 +189,7 @@ function cron_calculateScoreboard()
 
     foreach ($qdata as $qid => $question) {
         if ($question["solved"] === "on") {
-            
+
         } else {
             $allquestionssolved = false;
             break;
@@ -286,7 +289,7 @@ function cron_getLiveScore()
                 $context = stream_context_create($options);
                 $result = file_get_contents($apiUrl, false, $context);
                 if ($result === false) {
-                    print("fout bij ophalen data\n");
+                    print ("fout bij ophalen data\n");
                 } else {
                     $data = json_decode($result, true);
 
@@ -496,7 +499,7 @@ function cron_calculateBadges()
 
         foreach ($udata as $uid => $userdata) {
 
-            if (is_array($userdata["matches"] ) && count($userdata["matches"]) >= 3) {
+            if (is_array($userdata["matches"]) && count($userdata["matches"]) >= 3) {
 
                 $keys = array_keys($userdata["matches"]);
 
@@ -621,7 +624,7 @@ function GetCommits()
 
     curl_close($ch);
 
-    return  $commits;
+    return $commits;
 }
 
 function isJson($string)
