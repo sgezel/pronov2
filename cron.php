@@ -496,7 +496,7 @@ function cron_calculateBadges()
 
         foreach ($udata as $uid => $userdata) {
 
-            if (count($userdata["matches"]) >= 3) {
+            if (is_array($userdata["matches"] ) && count($userdata["matches"]) >= 3) {
 
                 $keys = array_keys($userdata["matches"]);
 
