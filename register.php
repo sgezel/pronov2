@@ -20,6 +20,7 @@ $crud = new UserCrud();
                         <input type="text" class="mail_text" placeholder="Email" name="username"  autofill="false" />
                         <input type="text" class="mail_text" placeholder="Naam" name="name" />
                         <input type="password" class="mail_text" placeholder="Wachtwoord" name="password" />                       
+                        <input type="password" class="mail_text" placeholder="Wachtwoord" name="password2" />                       
                      </div>
                      <input type="submit" class="btn btn-primary" value="Maak account" />
                   </div>

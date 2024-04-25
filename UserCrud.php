@@ -43,6 +43,13 @@ class UserCrud
 
     public function actionAdd()
     {
+        if($_POST["password"] !== $_POST["password2"])
+        {
+            $_SESSION["error_message"] = "Wachtwoorden komen niet overeen.";
+            header("Location: " . $this->regPath);
+            die();
+        }
+
         $listName = $this->listName;
         $data = $this->data;
 
