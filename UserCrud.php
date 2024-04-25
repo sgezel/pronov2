@@ -166,6 +166,7 @@ class UserCrud
                     if(password_verify($password, $userdata["password"])){
                         $_SESSION["loggedin"] = true;
                         $_SESSION["admin"] = $userdata["admin"];
+                        $_SESSION["superadmin"] = $userdata["superadmin"];
                         $_SESSION["userid"] = $id;
                         $_SESSION["visible"] = (($userdata["visible"] === true) || ($userdata["visible"] == "on"));
                         

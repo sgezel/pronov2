@@ -67,6 +67,7 @@ $allUserMailString = "";
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings-tab-pane" type="button" role="tab" aria-controls="settings-tab-pane" aria-selected="false">Instellingen</button>
                 </li>
+                <?php if(isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) :?>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
                 </li>
@@ -80,6 +81,7 @@ $allUserMailString = "";
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="quickpickfix-tab" data-bs-toggle="tab" data-bs-target="#quickpickfix-tab-pane" type="button" role="tab" aria-controls="quickpickfix-tab-pane" aria-selected="false">QuickPickFix&reg;</button>
                 </li>
+                <?php endif; ?>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane show active" id="matches-tab-pane" role="tabpanel" aria-labelledby="matches-tab" tabindex="0">

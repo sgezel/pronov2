@@ -38,6 +38,13 @@ if ($userData == null) {
                             <label class="form-check-label" for="flexSwitchAdmin">Admin</label>
                         </div>
 
+                        <?php if(isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) :?>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="superadmin" type="checkbox" id="flexSwitchSuperAdmin" <?= $userData["superadmin"] ? "checked=checked" : "" ?>>
+                            <label class="form-check-label" for="flexSwitchSuperAdmin">Superadmin</label>
+                        </div>
+                        <?php endif; ?>
+
                         <div class="form-check form-switch">
                             <input class="form-check-input" name="visible" type="checkbox" id="flexSwitchVisible" <?= $userData["visible"] ? "checked=checked" : "" ?>>
                             <label class="form-check-label" for="flexSwitchVisible">Visible</label>
