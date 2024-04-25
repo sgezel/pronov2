@@ -326,7 +326,7 @@ function cron_calculateScores()
     foreach ($data as $userId => $userdata) {
         foreach ($matchData as $matchId => $match) {
             if (isset($match["home_score"]) && isset($match["away_score"])) {
-                if (!array_key_exists($matchId, $userdata["matches"])) {
+                if (!is_array($userdata["matches"]) || !array_key_exists($matchId, $userdata["matches"])) {
                     continue;
                 }
 
