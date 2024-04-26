@@ -48,7 +48,7 @@ foreach ($functions_to_execute as $function) {
 }
 
 if ($dataChanged) {
-    print ("data aangepast, opslaan\n");
+    print("data aangepast, opslaan\n");
     file_put_contents($cron_file, json_encode($dataSet, JSON_PRETTY_PRINT));
 }
 
@@ -83,9 +83,10 @@ function cron_lockMatches()
 
     if (!isActive($dataSet["settings"][0]["questionslocked"])) {
         uasort($matchData, function ($a, $b) {
-            return strcmp($a["date"], $b["date"]); });
+            return strcmp($a["date"], $b["date"]);
+        });
     }
-    
+
     foreach ($matchData as $matchId => $match) {
         if (isMatchLocked($match["date"], $match["time"])) {
             $matchData[$matchId]["locked"] = true;
@@ -201,9 +202,20 @@ function cron_calculateScoreboard()
     $bonuspointmatches = $dataSet["settings"][0]["bonuspointsmatches"];
     $bonuspoints = $dataSet["settings"][0]["bonuspoints"];
 
+    $mdata = $dataSet["matches"];
+    $matchesplayed = 0;
+
+    foreach ($mdata as $mid => $match) {
+        if ($match["finished"]) {
+            $matchesplayed++;
+
+            if ($matchesplayed > 2)
+                break; //vanaf 3 gaan we winnaar en loser badges berekenen
+        }
+    }
+
     foreach ($qdata as $qid => $question) {
         if ($question["solved"] === "on") {
-
         } else {
             $allquestionssolved = false;
             break;
@@ -244,7 +256,7 @@ function cron_calculateScoreboard()
             }
         }
 
-        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible" => (($userdata["visible"] === true) || ($userdata["visible"] == "on")), "level" => "noqp"];
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible" => (($userdata["visible"] === true) || ($userdata["visible"] == "on")), "position" => "level"];
 
         usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
@@ -255,49 +267,46 @@ function cron_calculateScoreboard()
 
         $datachanged = true;
     }
-   
 
 
-    //Plaats sinds gisteren berekenen
+    if ($matchesplayed >= 2) {
+        //Plaats sinds gisteren berekenen
 
-    $previousBackup = "backup/" . date("d_m", strtotime("today")) . "/data_01_00.json";
-    
-    $scoreboardYesterday = [];
-    if(file_exists($previousBackup))
-    {
-        $backupData = file_get_contents($previousBackup);
-        $backupData = json_decode($backupData, true);
-        $scoreboardYesterday = $backupData["scoreboard"];
-    }
+        $previousBackup = "backup/" . date("d_m", strtotime("today")) . "/data_01_00.json";
 
-    for($i = 0; $i<count($scoreboard); $i++)
-    {
-        $index = -1;
-
-        foreach($scoreboardYesterday as $backupscore)
-        {
-            $index++;
-            if($backupscore["uid"] === $scoreboard[$i]["uid"])
-                break;
+        $scoreboardYesterday = [];
+        if (file_exists($previousBackup)) {
+            $backupData = file_get_contents($previousBackup);
+            $backupData = json_decode($backupData, true);
+            $scoreboardYesterday = $backupData["scoreboard"];
         }
 
-        if($i < $index)
-        {
-            //beter
-            $scoreboard[$i]["position"] = "up";
-        }else if($i > $index)
-        {
-            //slechter
-            $scoreboard[$i]["position"] = "down";
+        for ($i = 0; $i < count($scoreboard); $i++) {
+            $index = -1;
 
-        }
-        else
-        {
-            //gelijk
-            $scoreboard[$i]["position"] = "noqp";
+            foreach ($scoreboardYesterday as $backupscore) {
+                $index++;
+                if ($backupscore["uid"] === $scoreboard[$i]["uid"])
+                    break;
+            }
 
+            if($index != -1)
+            {
+                if ($i < $index) {
+                    //beter
+                    $scoreboard[$i]["position"] = "up";
+                } else if ($i > $index) {
+                    //slechter
+                    $scoreboard[$i]["position"] = "down";
+                } else {
+                    //gelijk
+                    $scoreboard[$i]["position"] = "level";
+                }
+            }
+           
         }
     }
+
 
 
     $dataSet["scoreboard"] = $scoreboard;
@@ -346,7 +355,7 @@ function cron_getLiveScore()
                 $context = stream_context_create($options);
                 $result = file_get_contents($apiUrl, false, $context);
                 if ($result === false) {
-                    print ("fout bij ophalen data\n");
+                    print("fout bij ophalen data\n");
                 } else {
                     $data = json_decode($result, true);
 
