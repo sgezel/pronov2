@@ -112,6 +112,7 @@ foreach ($matches as $id => $match) {
                                             <th>Thuis</th>
                                             <th>Uit</th>
                                             <th>Punten</th>
+                                            <th></th>
                                     </thead>
 
                                     <tbody>
@@ -128,6 +129,7 @@ foreach ($matches as $id => $match) {
                                                 <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?></td>
                                                 <td><?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?></td>
                                                 <td><?= isset($usermatch["points"]) ? $usermatch["points"] : ""; ?></td>
+                                                <td><img src="images/<?php echo isset($usermatch['quickpicked']) && $usermatch['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px"></td>
                                             </tr>
 
                                         <?php endforeach; ?>
