@@ -73,7 +73,7 @@ $livematches = $crud->IsAnyMatchLive();
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
                                 </td>
-                                <td><?= $score["name"]; ?></td>
+                                <td> <img src="images/<?= $score["position"] ?>.png" width="13"/> <?= $score["name"]; ?></td>
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td class="text-center"><?= $score["questions"]; ?></td>

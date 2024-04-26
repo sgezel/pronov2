@@ -244,7 +244,7 @@ function cron_calculateScoreboard()
             }
         }
 
-        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible" => (($userdata["visible"] === true) || ($userdata["visible"] == "on"))];
+        $scoreboard[] = ["uid" => $id, "name" => $userdata["name"], "score" => $totalscore, "correct" => $correct, "questions" => $questionsCorrect, "visible" => (($userdata["visible"] === true) || ($userdata["visible"] == "on")), "level" => "noqp"];
 
         usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
@@ -255,10 +255,53 @@ function cron_calculateScoreboard()
 
         $datachanged = true;
     }
+   
 
+
+    //Plaats sinds gisteren berekenen
+
+    $previousBackup = "backup/" . date("d_m", strtotime("today")) . "/data_01_00.json";
+    
+    $scoreboardYesterday = [];
+    if(file_exists($previousBackup))
+    {
+        $backupData = file_get_contents($previousBackup);
+        $backupData = json_decode($backupData, true);
+        $scoreboardYesterday = $backupData["scoreboard"];
+    }
+
+    for($i = 0; $i<count($scoreboard); $i++)
+    {
+        $index = -1;
+
+        foreach($scoreboardYesterday as $backupscore)
+        {
+            $index++;
+            if($backupscore["uid"] === $scoreboard[$i]["uid"])
+                break;
+        }
+
+        if($i < $index)
+        {
+            //beter
+            $scoreboard[$i]["position"] = "up";
+        }else if($i > $index)
+        {
+            //slechter
+            $scoreboard[$i]["position"] = "down";
+
+        }
+        else
+        {
+            //gelijk
+            $scoreboard[$i]["position"] = "noqp";
+
+        }
+    }
 
 
     $dataSet["scoreboard"] = $scoreboard;
+
     return $datachanged;
 }
 
