@@ -75,7 +75,7 @@ foreach ($matches as $id => $match) {
                 <?php $first = true; ?>
 
                     <?php if(!$display): ?>
-                        <p>De voorspellingen zullen zichtbaar zijn op het moment dat de eerste match wordt afgesloten.</p>
+                        <p>De voorspellingen zullen zichtbaar zijn op het moment dat de pronostiek van de eerste match wordt afgesloten.</p>
                         <?php else: ?>
             
 
