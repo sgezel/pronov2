@@ -39,7 +39,7 @@ class ScoreboardCrud
             if($match["date"] !== $now->format("Y-m-d"))
                 continue;
 
-            if($match["time"] < $now && ($match["finished"] === false || $match["finished"] === "false"))
+            if($match["time"] < date("H:i") && ($match["finished"] === false || $match["finished"] === "false"))
             {
                 return true;
             }
