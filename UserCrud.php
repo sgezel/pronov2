@@ -292,7 +292,7 @@ class UserCrud
 
             if(isActive($allMatchData[$match]["locked"]))
             {
-                $itemData["matches"][$match]["cheated"] = true;
+                $itemData["matches"][$match]["cheated"] = (new DateTime("now"))->format("d-m-Y H:i:s");
             }
 
         }
