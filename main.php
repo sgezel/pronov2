@@ -43,7 +43,7 @@ $currentToken = "";
             </thead>
             <?php foreach ($allQuestionData as $id => $data) : ?>
               <tr>
-                <td><?= $id ?></td>
+                <td><?= $id+1 ?></td>
                 <td><?= $data["question"]; ?></td>
                 <td></td>
               </tr>

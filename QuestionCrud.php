@@ -42,8 +42,8 @@ class QuestionCrud
 
         if($this->actionQuestionData($questiondata["question"]) == null)
         {
-            array_push($data[$listName], $questiondata);
-            file_put_contents($this->filePath, json_encode($data));
+            $data[$listName][] = $questiondata;
+            file_put_contents($this->filePath, json_encode($data, JSON_FORCE_OBJECT));
             $_SESSION["success_message"] = "Vraag werd succesvol aangemaakt.";
         }
         else
