@@ -102,10 +102,9 @@ foreach ($matches as $id => $match) {
 
                                                 
                                                 <?php 
-                                                 
-                                                    $now = new DateTime();
+                                                                                                     
                                                     
-                                                    if($currentmatch["time"] < $now &&
+                                                    if($currentmatch["time"] < date("H:i") &&
                                                     ($currentmatch["finished"] === false || $currentmatch["finished"] === "false"))
                                                      {?>
                                                         <span class="badge bg-warning text-dark">Live</span>
@@ -119,8 +118,7 @@ foreach ($matches as $id => $match) {
 
                                         <tr>
                                             <th>Naam</th>
-                                            <th>Thuis</th>
-                                            <th>Uit</th>
+                                            <th>Prono</th>
                                             <th>Punten</th>
                                             <th></th>
                                     </thead>
@@ -136,8 +134,7 @@ foreach ($matches as $id => $match) {
                                             <?php $usermatch = $user["matches"][$matchid]; ?>
                                             <tr class="<?= (isset($usermatch["points"]) && $usermatch["points"] == 4) ? "table-success" : ""; ?>">
                                                 <td><?= $user["name"]; ?></td>
-                                                <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?></td>
-                                                <td><?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?></td>
+                                                <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?> - <?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?></td>
                                                 <td><?= isset($usermatch["points"]) ? $usermatch["points"] : ""; ?></td>
                                                 <td><img src="images/<?php echo isset($usermatch['quickpicked']) && $usermatch['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px"></td>
                                             </tr>
