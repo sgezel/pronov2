@@ -54,8 +54,13 @@ foreach ($matches as $id => $match) {
             <div class="d-flex align-items-start">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                    <?php $first = true; ?>
+                    <?php 
+                        $first = true; 
+                        $display = false;
+                    ?>
+
                     <?php foreach ($matchdata as $date => $matchesdata): ?>
+                        <?php $display = true; ?>
                         <button class="nav-link <?= $first ? "active":  "" ?>" id="v-pills-home-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-<?= $date; ?>" type="button" role="tab"
                             aria-controls="v-pills-<?= $date; ?>"
@@ -68,6 +73,11 @@ foreach ($matches as $id => $match) {
                 <div class="tab-content w-100" id="v-pills-tabContent">
 
                 <?php $first = true; ?>
+
+                    <?php if(!$display): ?>
+                        <p>De voorspellingen zullen zichtbaar zijn op het moment dat de eerste match wordt afgesloten.</p>
+                        <?php else: ?>
+            
 
                     <?php foreach ($matchdata as $date => $matchesdata): ?>
 
@@ -144,6 +154,7 @@ foreach ($matches as $id => $match) {
                         </div>
 
                     <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
