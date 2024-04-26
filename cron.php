@@ -82,7 +82,7 @@ function cron_lockMatches()
     $matchData = $dataSet["matches"];
 
     if (!isActive($dataSet["settings"][0]["questionslocked"])) {
-        usort($matchData, function ($a, $b) {
+        uasort($matchData, function ($a, $b) {
             return strcmp($a["date"], $b["date"]); });
     }
     
