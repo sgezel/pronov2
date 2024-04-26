@@ -1,6 +1,6 @@
 <?php
-require_once ("header.php");
-require_once ("ScoreboardCrud.php");
+require_once("header.php");
+require_once("ScoreboardCrud.php");
 
 CheckAccess();
 
@@ -23,14 +23,12 @@ $livematches = $crud->IsAnyMatchLive();
                 <h1 class="blog_taital">Scorebord</h1>
                 <br /><br /><br />
 
-                <?php if ($_SESSION["admin"]): ?>
+                <?php if ($_SESSION["admin"]) : ?>
                     <div class="clearfix">
-                        <?php if (!$_SESSION["visible"]): ?>
-                            <small><a href="action_toggle_visible.php" class="btn btn-sm btn-outline-danger pull-right"
-                                    role="button">Onzichtbare spelers zichtbaar</a></small>
-                        <?php else: ?>
-                            <small><a href="action_toggle_visible.php" class="btn btn-sm btn-outline-warning pull-right"
-                                    role="button">Onzichtbare spelers verborgen</a></small>
+                        <?php if (!$_SESSION["visible"]) : ?>
+                            <small><a href="action_toggle_visible.php" class="btn btn-sm btn-outline-danger pull-right" role="button">Onzichtbare spelers zichtbaar</a></small>
+                        <?php else : ?>
+                            <small><a href="action_toggle_visible.php" class="btn btn-sm btn-outline-warning pull-right" role="button">Onzichtbare spelers verborgen</a></small>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
@@ -39,7 +37,7 @@ $livematches = $crud->IsAnyMatchLive();
                     <strong> <a href="badges.php">Lees hier meer over al de badges die je kan verzamelen!</a> </strong>
                 </div>
 
-                <?php if($livematches): ?>
+                <?php if ($livematches) : ?>
                     <div class="alert alert-info clearfix" role="alert">
                         Er is momenteel nog een match bezig. Het scorebord is dus een voorlopige tussenstand.
                     </div>
@@ -58,7 +56,7 @@ $livematches = $crud->IsAnyMatchLive();
                     </thead>
 
                     <tbody>
-                        <?php foreach ($data["scoreboard"] as $score): ?>
+                        <?php foreach ($data["scoreboard"] as $score) : ?>
                             <?php
                             if ($onlyvisible && !$score["visible"]) {
                                 continue;
@@ -69,9 +67,9 @@ $livematches = $crud->IsAnyMatchLive();
 
                             <tr>
                                 <td style="text-align: center;">
-                                    <?php if ($place_counter < 4): ?>
+                                    <?php if ($place_counter < 4) : ?>
                                         <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:32px;" />
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
                                 </td>
@@ -81,19 +79,20 @@ $livematches = $crud->IsAnyMatchLive();
                                 <td class="text-center"><?= $score["questions"]; ?></td>
                                 <td class="scoreboardbadges">
                                     <div class="badges">
-                                        <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])): ?>
+                                        <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])) : ?>
                                             <div class="hover-badge">
-                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]["icon"]; ?>.png"
-                                                    width="32" />
+                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]["icon"]; ?>.png" width="32" />
                                                 <span class="description">Wanbetaler</span>
                                             </div>
-                                        <?php else: ?>
-                                            <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
-                                                <div class="hover-badge">
-                                                    <img src="badges/<?= $badge["icon"]; ?>.png" width="32" />
-                                                    <span class="description"><?= $badge["title"]; ?></span>
-                                                </div>
-                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <?php if (isset($data["users"][$score["uid"]]["badges"]) && is_array($data["users"][$score["uid"]]["badges"])) : ?>
+                                                <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge) : ?>
+                                                    <div class="hover-badge">
+                                                        <img src="badges/<?= $badge["icon"]; ?>.png" width="32" />
+                                                        <span class="description"><?= $badge["title"]; ?></span>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
                                 </td>
@@ -104,15 +103,14 @@ $livematches = $crud->IsAnyMatchLive();
                                 </td>
                                 <td colspan="4">
                                     <div class="badges">
-                                    <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])): ?>
+                                        <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])) : ?>
                                             <div class="hover-badge">
-                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]; ?>.png"
-                                                    width="32" />
+                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]; ?>.png" width="32" />
                                                 <span class="description">Wanbetaler</span>
                                             </div>
-                                        <?php else: ?>
-                                            <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge): ?>
-                                                <div class="hover-badge">                                                    
+                                        <?php else : ?>
+                                            <?php foreach ($data["users"][$score["uid"]]["badges"] as $title => $badge) : ?>
+                                                <div class="hover-badge">
                                                     <img src="badges/<?= $badge["icon"]; ?>.png" width="32" />
                                                     <span class="description"><?= $badge["title"]; ?></span>
                                                 </div>
@@ -130,5 +128,5 @@ $livematches = $crud->IsAnyMatchLive();
 </div>
 
 <?php
-require_once ("footer.php");
+require_once("footer.php");
 ?>
