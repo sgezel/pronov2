@@ -67,7 +67,7 @@ include("header.php");
                                             <span class="description">Pechvogel</span>
                                         </div>
                                         <div class="hover-badge">
-                                            <img src="badges/Nulmeester.png" width="32" />
+                                            <img src="badges/nulmeester.png" width="32" />
                                             <span class="description">Nulmeester</span>
                                         </div>
                                         <div class="hover-badge">
