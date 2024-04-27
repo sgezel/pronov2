@@ -52,7 +52,7 @@ foreach ($matches as $id => $match) {
                 <?php endif; ?>
 
             <div class="d-flex align-items-start">
-                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav flex-column nav-pills sm-2 me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                     <?php 
                         $first = true; 
@@ -119,8 +119,8 @@ foreach ($matches as $id => $match) {
                                         <tr>
                                             <th>Naam</th>
                                             <th>Prono</th>
-                                            <th>Punten</th>
-                                            <th></th>
+                                            <th>ptn</th>
+                                            <th>QP</th>
                                     </thead>
 
                                     <tbody>
@@ -134,7 +134,8 @@ foreach ($matches as $id => $match) {
                                             <?php $usermatch = $user["matches"][$matchid]; ?>
                                             <tr class="<?= (isset($usermatch["points"]) && $usermatch["points"] == 4) ? "table-success" : ""; ?>">
                                                 <td><?= $user["name"]; ?></td>
-                                                <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?> - <?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?></td>
+                                                <td><?= isset($usermatch["home"]) ? $usermatch["home"] : ""; ?> - <?= isset($usermatch["away"]) ? $usermatch["away"] : ""; ?> 
+                                            </td>
                                                 <td><?= isset($usermatch["points"]) ? $usermatch["points"] : ""; ?></td>
                                                 <td><img src="images/<?php echo isset($usermatch['quickpicked']) && $usermatch['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px"></td>
                                             </tr>
