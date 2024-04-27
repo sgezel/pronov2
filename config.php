@@ -1,5 +1,7 @@
 <?php
 session_start();
+date_default_timezone_set('Europe/Brussels');
+
 require_once("SettingCrud.php");
 $title = "Pr(emed)onostiek";
 
