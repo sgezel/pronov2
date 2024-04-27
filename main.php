@@ -117,6 +117,7 @@ $currentToken = "";
                   </td>
                   <td class="points text-left" colspan="3">
                     <?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?>
+                    <img src="images/<?php echo isset($userData['matches'][$id]['quickpicked']) && $userData['matches'][$id]['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px">
                   </td>
                 </tr>
                 <tr>
