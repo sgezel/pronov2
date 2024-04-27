@@ -1245,3 +1245,7 @@ hr.solid {
   background-repeat: no-repeat;
   }
 
+  input[type=submit] {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
