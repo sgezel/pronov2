@@ -131,7 +131,7 @@ foreach ($matches as $id => $match) {
                                                             Niet ingevuld
                                                         <?php endif; ?>
                                                     </td>
-                                                    
+
                                                     <td class="text-center"><?= isset($usermatch["points"]) ? $usermatch["points"] : "0"; ?></td>
                                                     <td class="text-center"><img src="images/<?php echo isset($usermatch['quickpicked']) && $usermatch['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px"></td>
                                                 </tr>

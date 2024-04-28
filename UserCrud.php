@@ -180,6 +180,7 @@ class UserCrud
                         $_SESSION["superadmin"] = $userdata["superadmin"];
                         $_SESSION["userid"] = $id;
                         $_SESSION["visible"] = (($userdata["visible"] === true) || ($userdata["visible"] == "on"));
+                        $_SESSION["group"] = $userdata["group"];
                         
                         $data[$listName][$id]["lastloggedin"] = date("Y-m-d H:i:s");
                         $data[$listName][$id]["totallogins"] = isset($userdata["totallogins"]) ? $userdata["totallogins"] + 1 : 1;

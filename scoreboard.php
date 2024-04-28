@@ -1,16 +1,18 @@
 <?php
 require_once("header.php");
 require_once("ScoreboardCrud.php");
-
+require_once("UserCrud.php");
 CheckAccess();
 
 $crud = new ScoreboardCrud();
+$usercrud = new UserCrud();
 
 $data = $crud->data;
 
 $place_counter = 0;
 
 $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
+$visiblegroup = !isset($_SESSION["visiblegroup"]) && isset($_SESSION["group"]) ? $_SESSION["group"] : null;
 $livematches = $crud->IsAnyMatchLive();
 
 
@@ -31,8 +33,17 @@ $livematches = $crud->IsAnyMatchLive();
                             <small><a href="action_toggle_visible.php" class="btn btn-sm btn-outline-warning pull-right" role="button">Onzichtbare spelers verborgen</a></small>
                         <?php endif; ?>
                     </div>
+                    <div class="clearfix">
+                    <?php if (isset($_SESSION["group"])) : ?>
+                        <?php if (!isset($_SESSION["visiblegroup"])) : ?>
+                            <small><a href="action_toggle_group.php" class="btn btn-sm btn-outline-danger pull-right" role="button"><?= $_SESSION["group"] ?></a></small>
+                        <?php else : ?>
+                            <small><a href="action_toggle_group.php" class="btn btn-sm btn-outline-warning pull-right" role="button">All</a></small>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
                 <?php endif; ?>
-
+                
                 <div class="alert alert-dark clearfix" role="alert">
                     <strong> <a href="badges.php">Lees hier meer over al de badges die je kan verzamelen!</a> </strong>
                 </div>
@@ -58,6 +69,12 @@ $livematches = $crud->IsAnyMatchLive();
                     <tbody>
                         <?php foreach ($data["scoreboard"] as $score) : ?>
                             <?php
+
+                            $userdata = $usercrud->actionUserDataById($score["uid"]);
+                            if (isset($visiblegroup) && (!isset($userdata["group"]) || $userdata["group"] != $visiblegroup)) {
+                                continue;
+                            }
+
                             if ($onlyvisible && !$score["visible"]) {
                                 continue;
                             }
@@ -73,7 +90,7 @@ $livematches = $crud->IsAnyMatchLive();
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
                                 </td>
-                                <td> <img src="images/<?= $score["position"] ?>.png" width="13"/> <?= $score["name"]; ?></td>
+                                <td> <img src="images/<?= $score["position"] ?>.png" width="13" /> <?= $score["name"]; ?></td>
                                 <td class="text-center"><?= $score["score"]; ?></td>
                                 <td class="text-center"><?= $score["correct"]; ?></td>
                                 <td class="text-center"><?= $score["questions"]; ?></td>
