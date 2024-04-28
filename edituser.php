@@ -24,6 +24,7 @@ if ($userData == null) {
                 <div class="col-md-12">
                     <div class="mail_section_1">
                         <h1 class="contact_taital">Gebruiker "<?= $userData["name"]; ?>" aanpassen. </h1>
+                        User has logged in <?= $userData["totallogins"]; ?> time(s), last <?= $userData["lastloggedin"]; ?>.<br/><br/>
                         <div class="form">
                             <input type="hidden" name="id" value="<?= $id; ?>" />
                             <input type="text" class="mail_text" placeholder="Email" name="username" value="<?= $userData["username"]; ?>" autofill="false" />
@@ -59,6 +60,7 @@ if ($userData == null) {
                             <input class="form-check-input" name="quickpicker" type="checkbox" id="flexSwitchQuickPick" <?= $userData["quickpicker"] ? "checked=checked" : "" ?>>
                             <label class="form-check-label" for="flexSwitchQuickPick">QuickPick&trade;</label>
                         </div>
+
 
                         <input type="submit" class="btn btn-primary" value="Opslaan" />
                     </div>
