@@ -290,8 +290,7 @@ function cron_calculateScoreboard()
                     break;
             }
 
-            if($index != -1)
-            {
+            if ($index != -1) {
                 if ($i < $index) {
                     //beter
                     $scoreboard[$i]["position"] = "up";
@@ -303,7 +302,6 @@ function cron_calculateScoreboard()
                     $scoreboard[$i]["position"] = "level";
                 }
             }
-           
         }
     }
 
@@ -458,7 +456,7 @@ function cron_calculateBadges()
     $qdata = $dataSet["questions"];
 
     $matchesplayed = 0;
-    $allmatchesfinished = true;
+    $allmatchesfinished = false;
     $questionssolved = 0;
     $allquestionssolved = true;
 
@@ -466,12 +464,14 @@ function cron_calculateBadges()
         if ($match["finished"]) {
             $matchesplayed++;
 
-            if ($matchesplayed > 2)
+            /* if ($matchesplayed > 2)
                 break; //vanaf 3 gaan we winnaar en loser badges berekenen
-        } else {
-            $allmatchesfinished = false;
+                */
         }
     }
+
+    if ($matchesplayed === count($mdata))
+        $allmatchesfinished = true;
 
     foreach ($qdata as $qid => $question) {
         if ($question["solved"] === "on") {
@@ -620,6 +620,11 @@ function cron_calculateBadges()
     //QuickPick-ontwijker
     if ($allmatchesfinished) {
         foreach ($udata as $uid => $userdata) {
+
+            if (!isset($userdata["badges"])) {
+                $userdata["badges"] = [];
+            }
+
             if (!array_key_exists("QuickPicker", $userdata["badges"])) {
                 $udata[$uid]["badges"]["QuickPickOntwijker"]["icon"] = "quickpickweigeraar";
                 $udata[$uid]["badges"]["QuickPickOntwijker"]["title"] = "QuickPick Weigeraar";
