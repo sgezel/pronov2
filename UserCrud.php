@@ -35,7 +35,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","quickpicker","devicekey", "questions", "matches", "badges"];
+            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","lastloggedin","totallogins","quickpicker","devicekey", "questions", "matches", "badges"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -61,10 +61,13 @@ class UserCrud
         $userdata["admin"] = false;
         $userdata["visible"] = true;
         $userdata["paid"] = false;
+        $userdata["lastloggedin"] = "";
+        $userdata["totallogins"] = 0;
         $userdata["quickpicker"] = false;
         $userdata["devicekey"] = "";
         $userdata["questions"] = [];
         $userdata["matches"] = [];
+
 
         if($this->actionUserData($userdata["username"]) == null)
         {
@@ -177,7 +180,16 @@ class UserCrud
                         $_SESSION["superadmin"] = $userdata["superadmin"];
                         $_SESSION["userid"] = $id;
                         $_SESSION["visible"] = (($userdata["visible"] === true) || ($userdata["visible"] == "on"));
+                        $_SESSION["group"] = $userdata["group"];
                         
+                        $data[$listName][$id]["lastloggedin"] = date("Y-m-d H:i:s");
+                        $data[$listName][$id]["totallogins"] = isset($userdata["totallogins"]) ? $userdata["totallogins"] + 1 : 1;
+
+                        $itemData = $data[$listName][$id];
+                        unset($data[$listName][$id]);
+                        $data[$listName][$id] = $itemData;
+                        file_put_contents($this->filePath, json_encode($data));
+
                         header("Location: " . $this->homePath);
                         die("test");
                     }                   
