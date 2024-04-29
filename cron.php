@@ -583,17 +583,53 @@ function cron_calculateBadges()
             }
         }
 
-
         if ($matchesplayed > 2) {
-            //Winnaar
-            $winnaarid = $sdata[0]["uid"];
-            $udata[$winnaarid]["badges"]["Winnaarsbadge"]["icon"] = "scoreprofeet";
-            $udata[$winnaarid]["badges"]["Winnaarsbadge"]["title"] = "Scoreprofeet";
+            $scoresPerGroup = [];
 
-            //Loser
-            $loserid = end($sdata)["uid"];
-            $udata[$loserid]["badges"]["Losersbadge"]["icon"] = "onderstebovenkampioen";
-            $udata[$loserid]["badges"]["Losersbadge"]["title"] = "Onderstebovenkampioen";
+            // Iterate over the scoreboard to find the highest and lowest scores per group
+            foreach ($sdata as $score) {
+                $userId = $score['uid'];
+                $points = $score['score'];
+
+                // Find the group of the current user
+                foreach ($udata as $uid => $userdata) {
+                    if ($uid === $userId) {
+                        $group = $userdata['group'];
+
+                        // Initialize the group in the scores array if not already set
+                        if (!isset($scoresPerGroup[$group])) {
+                            $scoresPerGroup[$group] = [
+                                'highest' => ['userid' => $userId, 'points' => $points],
+                                'lowest' => ['userid' => $userId, 'points' => $points]
+                            ];
+                        } else {
+                            // Check for highest score in the group
+                            if ($points > $scoresPerGroup[$group]['highest']['points']) {
+                                $scoresPerGroup[$group]['highest'] = ['userid' => $userId, 'points' => $points];
+                            }
+                            // Check for lowest score in the group
+                            if ($points < $scoresPerGroup[$group]['lowest']['points']) {
+                                $scoresPerGroup[$group]['lowest'] = ['userid' => $userId, 'points' => $points];
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            foreach ($scoresPerGroup as $group => $scores) {
+                echo "Highest: User ID " . $scores['highest']['userid'] . " from group " . $group . " gets a badge for " . $scores['highest']['points'] . " points.\n";
+                //winnaar
+                $winnaarid = $scores['highest']['userid'];
+                $udata[$winnaarid]["badges"]["Winnaarsbadge"]["icon"] = "scoreprofeet";
+                $udata[$winnaarid]["badges"]["Winnaarsbadge"]["title"] = "Scoreprofeet";
+                echo "Lowest: User ID " . $scores['lowest']['userid'] . " from group " . $group . " gets a badge for " . $scores['lowest']['points'] . " points.\n";
+                //laatste
+                $loserid =  $scores['lowest']['userid'];
+                $udata[$loserid]["badges"]["Losersbadge"]["icon"] = "onderstebovenkampioen";
+                $udata[$loserid]["badges"]["Losersbadge"]["title"] = "Onderstebovenkampioen";
+                // Here you would update your database or data structure to assign the badges
+            }
         }
     }
 
