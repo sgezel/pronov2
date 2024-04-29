@@ -24,12 +24,13 @@ if ($userData == null) {
                 <div class="col-md-12">
                     <div class="mail_section_1">
                         <h1 class="contact_taital">Gebruiker "<?= $userData["name"]; ?>" aanpassen. </h1>
-                        User has logged in <?= $userData["totallogins"]; ?> time(s), last <?= $userData["lastloggedin"]; ?>.<br/><br/>
+                        User has logged in <?= isset($userData["totallogins"]) ? $userData["totallogins"] : 0; ?> time(s), last <?= isset($userData["lastloggedin"]) ? $userData["lastloggedin"] : ""; ?>.<br/><br/>
                         <div class="form">
                             <input type="hidden" name="id" value="<?= $id; ?>" />
                             <input type="text" class="mail_text" placeholder="Email" name="username" value="<?= $userData["username"]; ?>" autofill="false" />
                             <input type="text" class="mail_text" placeholder="Naam" name="name" value="<?= $userData["name"]; ?>" />
                             <input type="password" class="mail_text" placeholder="Wachtwoord" name="password" />
+                            <input type="text" class="mail_text" placeholder="Groep" name="group" value="<?= $userData["group"]; ?>"/>
                         </div>
 
                     </div>
@@ -41,7 +42,7 @@ if ($userData == null) {
 
                         <?php if(isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) :?>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" name="superadmin" type="checkbox" id="flexSwitchSuperAdmin" <?= $userData["superadmin"] ? "checked=checked" : "" ?>>
+                            <input class="form-check-input" name="superadmin" type="checkbox" id="flexSwitchSuperAdmin" <?= isset($userData["superadmin"]) ? ($userData["superadmin"] ? "checked=checked" : "") : "" ?>>
                             <label class="form-check-label" for="flexSwitchSuperAdmin">Superadmin</label>
                         </div>
                         <?php endif; ?>

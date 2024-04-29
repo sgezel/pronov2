@@ -35,7 +35,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","lastloggedin","totallogins","quickpicker","devicekey", "questions", "matches", "badges"];
+            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","lastloggedin","totallogins","group","quickpicker","devicekey", "questions", "matches", "badges"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -63,6 +63,7 @@ class UserCrud
         $userdata["paid"] = false;
         $userdata["lastloggedin"] = "";
         $userdata["totallogins"] = 0;
+        $userdata["group"] = "";
         $userdata["quickpicker"] = false;
         $userdata["devicekey"] = "";
         $userdata["questions"] = [];
@@ -183,7 +184,7 @@ class UserCrud
                         $_SESSION["group"] = $userdata["group"];
                         
                         $data[$listName][$id]["lastloggedin"] = date("Y-m-d H:i:s");
-                        $data[$listName][$id]["totallogins"] = isset($userdata["totallogins"]) ? $userdata["totallogins"] + 1 : 1;
+                        $data[$listName][$id]["totallogins"] = isset($userdata["totallogins"]) && $userdata["totallogins"] != "" ? $userdata["totallogins"] + 1 : 1;
 
                         $itemData = $data[$listName][$id];
                         unset($data[$listName][$id]);
