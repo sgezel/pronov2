@@ -12,6 +12,7 @@ $userCrud = new UserCrud();
 $users = $userCrud->actionRead();
 
 $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
+$visiblegroup = !isset($_SESSION["visiblegroup"]) && isset($_SESSION["group"]) ? $_SESSION["group"] : null;
 
 uasort($users, function ($a, $b) {
     // First compare by round
@@ -39,12 +40,22 @@ foreach ($matches as $id => $match) {
                 <h1 class="blog_taital">Voorspellingen</h1>
             </div>
 
+
             <?php if ($_SESSION["admin"]) : ?>
                 <div class="clearfix">
                     <?php if (!$_SESSION["visible"]) : ?>
                         <small><a href="action_toggle_visible.php?p=overzicht" class="btn btn-sm btn-outline-danger pull-right" role="button">Onzichtbare spelers zichtbaar</a></small>
                     <?php else : ?>
                         <small><a href="action_toggle_visible.php?p=overzicht" class="btn btn-sm btn-outline-warning pull-right" role="button">Onzichtbare spelers verborgen</a></small>
+                    <?php endif; ?>
+                </div>
+                <div class="clearfix">
+                    <?php if (isset($_SESSION["group"])) : ?>
+                        <?php if (!isset($_SESSION["visiblegroup"])) : ?>
+                            <small><a href="action_toggle_group.php?p=overzicht" class="btn btn-sm btn-outline-danger pull-right" role="button"><?= $_SESSION["group"] ?></a></small>
+                        <?php else : ?>
+                            <small><a href="action_toggle_group.php?p=overzicht" class="btn btn-sm btn-outline-warning pull-right" role="button">All</a></small>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -117,6 +128,11 @@ foreach ($matches as $id => $match) {
 
                                             <?php foreach ($users as $userid => $user) : ?>
                                                 <?php
+                                                $userdata = $userCrud->actionUserDataById($userid);
+                                                if (isset($visiblegroup) && (!isset($userdata["group"]) || $userdata["group"] != $visiblegroup)) {
+                                                    continue;
+                                                }
+
                                                 if ($onlyvisible && !(($user["visible"] === true) || ($user["visible"] == "on"))) {
                                                     continue;
                                                 }
