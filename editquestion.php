@@ -43,7 +43,7 @@ if ($questionData == null) {
                     </div>
                     <div class="mail_section_1">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" name="solved" type="checkbox" id="flexSwitchSolved" <?= isset($questionData["solved"]) ? "checked=checked" : "" ?>>
+                            <input class="form-check-input" name="solved" type="checkbox" id="flexSwitchSolved" <?= isset($questionData["solved"]) && $questionData["solved"]!= "" ? "checked=checked" : "" ?>>
                             <label class="form-check-label" for="flexSwitchSolved">Opgelost?</label>
                         </div>
                     </div>
