@@ -55,32 +55,36 @@ $allUserMailString = "";
         <div class="row">
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="matches-tab" data-bs-toggle="tab" data-bs-target="#matches-tab-pane" type="button" role="tab" aria-controls="matches-tab-pane" aria-selected="true">Matches</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions-tab-pane" type="button" role="tab" aria-controls="questions-tab-pane" aria-selected="false">Questions</button>
-                </li>
+                <?php if (isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) : ?>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions-tab-pane" type="button" role="tab" aria-controls="questions-tab-pane" aria-selected="false">Questions</button>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane" type="button" role="tab" aria-controls="users-tab-pane" aria-selected="false">Users</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings-tab-pane" type="button" role="tab" aria-controls="settings-tab-pane" aria-selected="false">Instellingen</button>
-                </li>
-                <?php if(isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) :?>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="cron-tab" data-bs-toggle="tab" data-bs-target="#cron-tab-pane" type="button" role="tab" aria-controls="cron-tab-pane" aria-selected="false">Cron</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification-tab-pane" type="button" role="tab" aria-controls="notification-tab-pane" aria-selected="false">Notifications</button>
-                </li>
 
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="quickpickfix-tab" data-bs-toggle="tab" data-bs-target="#quickpickfix-tab-pane" type="button" role="tab" aria-controls="quickpickfix-tab-pane" aria-selected="false">QuickPickFix&reg;</button>
-                </li>
+                <?php if (isset($_SESSION["superadmin"]) && $_SESSION["superadmin"] == true) : ?>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings-tab-pane" type="button" role="tab" aria-controls="settings-tab-pane" aria-selected="false">Instellingen</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Data</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="cron-tab" data-bs-toggle="tab" data-bs-target="#cron-tab-pane" type="button" role="tab" aria-controls="cron-tab-pane" aria-selected="false">Cron</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification-tab-pane" type="button" role="tab" aria-controls="notification-tab-pane" aria-selected="false">Notifications</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="quickpickfix-tab" data-bs-toggle="tab" data-bs-target="#quickpickfix-tab-pane" type="button" role="tab" aria-controls="quickpickfix-tab-pane" aria-selected="false">QuickPickFix&reg;</button>
+                    </li>
                 <?php endif; ?>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -236,7 +240,15 @@ $allUserMailString = "";
                         </thead>
                         <tbody>
                             <?php foreach ($allUserData as $id => $data) : ?>
-                                
+
+                                <?php
+                                if (!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] != true) {
+                                    if ($_SESSION["group"] != $data["group"])
+                                        continue;
+                                }
+
+                                ?>
+
                                 <?php $allUserMailString .= ";" . $data["username"]; ?>
                                 <tr>
                                     <td><?= $id ?></td>
@@ -412,8 +424,8 @@ $allUserMailString = "";
                     <form method="post" action="action_admin_notification.php">
 
                         <?php foreach ($allUserData as $id => $data) : ?>
-                            <?php if(isset($data["devicekey"]) && !$data["devicekey"] == ""): ?>
-                            <input type="checkbox" name="devicekey[]" value="<?=$data["devicekey"];?>" ?> <?= $data["name"]; ?> <br/>
+                            <?php if (isset($data["devicekey"]) && !$data["devicekey"] == "") : ?>
+                                <input type="checkbox" name="devicekey[]" value="<?= $data["devicekey"]; ?>" ?> <?= $data["name"]; ?> <br />
                             <?php endif; ?>
                         <?php endforeach; ?>
 

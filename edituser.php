@@ -30,7 +30,7 @@ if ($userData == null) {
                             <input type="text" class="mail_text" placeholder="Email" name="username" value="<?= $userData["username"]; ?>" autofill="false" />
                             <input type="text" class="mail_text" placeholder="Naam" name="name" value="<?= $userData["name"]; ?>" />
                             <input type="password" class="mail_text" placeholder="Wachtwoord" name="password" />
-                            <input type="text" class="mail_text" placeholder="Groep" name="group" value="<?= $userData["group"]; ?>"/>
+                            <input type="text" class="mail_text" placeholder="Groep" name="group" value="<?= isset($userData["group"]) ? $userData["group"] : "" ; ?>"/>
                         </div>
 
                     </div>
