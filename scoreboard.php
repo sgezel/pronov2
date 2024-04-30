@@ -82,7 +82,7 @@ $livematches = $crud->IsAnyMatchLive();
                             ++$place_counter;
                             ?>
 
-                            <tr>
+                            <tr class="<?= ($score["uid"] === $_SESSION["userid"]) ? "table-primary" : ""; ?>">
                                 <td style="text-align: center;">
                                     <?php if ($place_counter < 4) : ?>
                                         <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:32px;" />
