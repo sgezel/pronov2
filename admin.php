@@ -304,6 +304,10 @@ $allUserMailString = "";
                         <input type="number" width="20px" class="form-control input-score" name="bonuspoints" value="<?= $settings["bonuspoints"] ?>" />
                         <br />
                         <br />
+                        <label for="scoreboardequalplace">Gelijke plaatsen op scorebord:</label>
+                        <input type="checkbox" name="scoreboardequalplace" <?= $settings["scoreboardequalplace"] ? "checked=checked" : "" ?> />
+                        <br />
+                        <br />
                         <label for="questionslocked">Vragen afsluiten?</label>
                         <input type="checkbox" name="questionslocked" <?= $settings["questionslocked"] ? "checked=checked" : "" ?> />
                         <br />

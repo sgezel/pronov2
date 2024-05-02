@@ -15,7 +15,7 @@ $onlyvisible = isset($_SESSION["visible"]) ? $_SESSION["visible"] : true;
 $visiblegroup = !isset($_SESSION["visiblegroup"]) && isset($_SESSION["group"]) ? $_SESSION["group"] : null;
 $livematches = $crud->IsAnyMatchLive();
 
-
+$scoreboardsameplace = isset($data["settings"][0]["scoreboardequalplace"]) && ($data["settings"][0]["scoreboardequalplace"] == true || $data["settings"][0]["scoreboardequalplace"] == "on");
 ?>
 
 <div class="blog_section layout_padding">
@@ -67,6 +67,9 @@ $livematches = $crud->IsAnyMatchLive();
                     </thead>
 
                     <tbody>
+                        <?php 
+                            $previous = null;
+                        ?>
                         <?php foreach ($data["scoreboard"] as $score) : ?>
                             <?php
 
@@ -79,7 +82,29 @@ $livematches = $crud->IsAnyMatchLive();
                                 continue;
                             }
 
-                            ++$place_counter;
+                            if($scoreboardsameplace)
+                            {
+                                if($previous)
+                                {
+                                    if($previous["score"] > $score["score"])
+                                    {
+                                        ++$place_counter;
+                                    }
+                                    else if($previous["correct"] > $score["correct"])
+                                    {
+                                        ++$place_counter;
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    ++$place_counter;
+                                }
+                            }
+                            else
+                            {
+                                ++$place_counter;
+                            }
                             ?>
 
                             <tr class="<?= ($score["uid"] === $_SESSION["userid"]) ? "table-primary" : ""; ?>">
@@ -136,6 +161,15 @@ $livematches = $crud->IsAnyMatchLive();
                                     </div>
                                 </td>
                             </tr>
+
+                            <?php 
+                            if($scoreboardsameplace)
+                            {
+                                $previous = $score;
+                            }
+
+                            ?>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
