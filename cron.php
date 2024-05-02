@@ -260,6 +260,10 @@ function cron_calculateScoreboard()
 
         usort($scoreboard, function ($a, $b) {
             if ($a['score'] == $b['score']) {
+
+                if ($a['correct'] == $b['correct']) {
+                    return strcmp(strtolower($a['name']), strtolower($b['name']));
+                }
                 return $b['correct'] - $a['correct'];
             }
             return $b['score'] - $a['score'];
