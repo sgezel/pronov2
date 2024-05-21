@@ -503,25 +503,18 @@ function cron_calculateBadges()
         foreach ($sdata as $score) {
             $uid = $score["uid"];
 
-            switch ($score["correct"]) {
-                case 1: // Deze lege lijnen zijn voor de test data, daar hebben we wat berekeningen "gemist"
-                case 2:
-                case 3:
-                case 4:
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "nauwkeurigevoorspeller";
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Nauwkeurige Voorspeller";
-                    break;
-                case 5:
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "viersterrenkoning";
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Viersterrenkoning";
-                    break;
-                case 10:
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "kampioenziener";
-                    $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Kampioen Ziener";
-                    break;
+            if ($score["correct"] > 1 && $score["correct"] < 4) {
+                $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "nauwkeurigevoorspeller";
+                $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Nauwkeurige Voorspeller";
+            } else if ($score["correct"] >= 4 && $score["correct"] < 8) {
+                $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "viersterrenkoning";
+                $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Viersterrenkoning";
+            } else if ($score["correct"] >= 8) {
+                $udata[$uid]["badges"]["Correcte pronostiek"]["icon"] = "kampioenziener";
+                $udata[$uid]["badges"]["Correcte pronostiek"]["title"] = "Kampioen Ziener";
             }
 
-            if ($score["score"] >= 75) {
+            if ($score["score"] >= 80) {
                 $udata[$uid]["badges"]["ekexpert"]["icon"] = "ekexpert";
                 $udata[$uid]["badges"]["ekexpert"]["title"] = "EK Expert";
             }
@@ -542,10 +535,10 @@ function cron_calculateBadges()
                 }
             }
 
-            if ($zeroscore > 0 && $zeroscore < 5) {
+            if ($zeroscore > 2 && $zeroscore < 6) {
                 $udata[$uid]["badges"]["Pechvogel"]["icon"] = "pechvogel";
                 $udata[$uid]["badges"]["Pechvogel"]["title"] = "Pechvogel";
-            } else if ($zeroscore >= 5 && $zeroscore < 10) {
+            } else if ($zeroscore >= 6 && $zeroscore < 10) {
                 $udata[$uid]["badges"]["Pechvogel"]["icon"] = "nulmeester";
                 $udata[$uid]["badges"]["Pechvogel"]["title"] = "Nulmeester";
             } else if ($zeroscore >= 10) {
@@ -579,7 +572,7 @@ function cron_calculateBadges()
                     $points[] = $userdata["matches"][$keys[$i - 1]]["points"];
                     $points[] = $userdata["matches"][$keys[$i - 2]]["points"];
 
-                    if (array_sum($points) > 6) {
+                    if (array_sum($points) > 7) {
                         $udata[$uid]["badges"]["Puntenkoning"]["icon"] = "puntenkoning";
                         $udata[$uid]["badges"]["Puntenkoning"]["title"] = "Puntenkoning";
                     }
