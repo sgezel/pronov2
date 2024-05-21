@@ -1,8 +1,15 @@
 <?php
 require_once("header.php");
 include_once("UserCrud.php");
+require_once("SettingCrud.php");
 
 $crud = new UserCrud();
+$settingsCrud = new SettingCrud();
+$registrations = $settingsCrud->actionGetSetting("registrations");
+
+if($registrations !== true && $registrations !== "on")
+   header("location: index.php");
+
 ?>
 
 <form method="post" action="action_register.php" autocomplete="off">
