@@ -15,7 +15,7 @@ $crud = new UserCrud();
             <div class="row">
                <div class="col-md-6">
                   <div class="mail_section_1">
-                     <h1 class="contact_taital">Registreren <?= $_SESSION["registergroup"] ?> <?= session_id() ?></h1>
+                     <h1 class="contact_taital">Registreren</h1>
                      <div class="form">
                         <input type="text" class="mail_text" placeholder="Email" name="username"  autofill="false" />
                         <input type="text" class="mail_text" placeholder="Naam" name="name" />

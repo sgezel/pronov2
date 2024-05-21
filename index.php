@@ -1,9 +1,5 @@
 <?php
 require_once("header.php");
-
-if(!isset($_GET["group"]) || (isset($_SESSION["registergroup"]) && $_SESSION["registergroup"] == "Premed"))
-  $_SESSION["registergroup"] = isset($_GET["group"]) ? $_GET["group"] : "Premed";
-
 ?>
 
 <!-- banner section start -->
