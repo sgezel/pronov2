@@ -11,7 +11,7 @@ $_SESSION["registergroup"] = isset($_GET["group"]) ? $_GET["group"] : "Premed";
       
                <div class="row">
                   <div class="col-sm-12">
-                     <h1 class="banner_taital">Hij is er eindelijk weer!</h1>
+                     <h1 class="banner_taital">Hij is er eindelijk weer! <?=$_SESSION["registergroup"] ?>   <?= $_GET["group"] ?> .</h1>
                      <p class="banner_text">De <?= $title ?> is er weer vanaf juni 2024!</p>
                      <div class="btn_main">
                         <div class="started_bt"><a href="register.php">Schrijf je nu in!</a></div>
