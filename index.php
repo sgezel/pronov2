@@ -1,7 +1,8 @@
 <?php
 require_once("header.php");
 
-$_SESSION["registergroup"] = isset($_GET["group"]) ? $_GET["group"] : "Premed";
+if(!isset($_GET["group"]) || (isset($_SESSION["registergroup"]) && $_SESSION["registergroup"] == "Premed"))
+  $_SESSION["registergroup"] = isset($_GET["group"]) ? $_GET["group"] : "Premed";
 
 ?>
 
