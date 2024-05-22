@@ -147,7 +147,7 @@ $scoreboardsameplace = isset($data["settings"][0]["scoreboardequalplace"]) && ($
                                     <div class="badges">
                                         <?php if (isset($data["users"][$score["uid"]]["badges"]["Wanbetaler"])) : ?>
                                             <div class="hover-badge">
-                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]; ?>.png" width="32" />
+                                                <img src="badges/<?= $data["users"][$score["uid"]]["badges"]["Wanbetaler"]["icon"]; ?>.png" width="32" />
                                                 <span class="description">Wanbetaler</span>
                                             </div>
                                         <?php else : ?>
