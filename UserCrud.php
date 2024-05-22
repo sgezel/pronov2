@@ -63,7 +63,7 @@ class UserCrud
         $userdata["paid"] = false;
         $userdata["lastloggedin"] = "";
         $userdata["totallogins"] = 0;
-        $userdata["group"] = isset($_SESSION["registergroup"]) ? $_SESSION["registergroup"] : "PremedRegister";
+        $userdata["group"] = isset($_SESSION["registergroup"]) ? $_SESSION["registergroup"] : "Premed";
         $userdata["quickpicker"] = false;
         $userdata["devicekey"] = "";
         $userdata["questions"] = [];
