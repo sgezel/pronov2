@@ -35,7 +35,7 @@ class UserCrud
             $this->fileContent = file_get_contents($filePath);
             $this->data = json_decode($this->fileContent, true);
             $this->listName = "users";
-            $this->attributesList = ["username", "name", "password", "admin", "visible", "paid","lastloggedin","totallogins","group","quickpicker","devicekey", "questions", "matches", "badges"];
+            $this->attributesList = ["username", "name", "password", "admin", "superadmin", "visible", "paid","lastloggedin","totallogins","group","quickpicker","devicekey", "questions", "matches", "badges"];
         } else {
             throw new Exception("No file found", 1);
         }
@@ -59,6 +59,7 @@ class UserCrud
         $userdata["name"] = $_POST["name"];
         $userdata["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $userdata["admin"] = false;
+        $userdata["superadmin"] = false;
         $userdata["visible"] = true;
         $userdata["paid"] = false;
         $userdata["lastloggedin"] = "";
