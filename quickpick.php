@@ -59,7 +59,7 @@
                         </ul>
                         <br/><br/>
                         <h2>Krijg ik strafpunten voor het gebruik van de QuickPick&trade;?</h2>
-                        Neen, je krijg geen strafpunten voor het gebruik van het QuickPick&trade; systeem. Je kan net zoals iedereen 4 punten verdienen op elke match.<br/><br/>
+                        Neen, je krijgt geen strafpunten voor het gebruik van het QuickPick&trade; systeem. Je kan net zoals iedereen 4 punten verdienen op elke match.<br/><br/>
                         Wel krijgen de deelnemers die zelden of nooit gebruik maken van het systeem een bonus. Zij krijgen namelijk per 17 wedstrijden dat ze het systeem niet gebruiken 2 punten. In totaal kan de bonus dus oplopen tot 6 punten.
 
 
