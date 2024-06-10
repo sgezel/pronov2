@@ -580,7 +580,7 @@ function cron_calculateBadges()
             }
         }
 
-        if ($matchesplayed > 2) {
+        if ($matchesplayed > 4) {
             $scoresPerGroup = [];
 
             // Iterate over the scoreboard to find the highest and lowest scores per group
@@ -615,12 +615,12 @@ function cron_calculateBadges()
             }
 
             foreach ($scoresPerGroup as $group => $scores) {
-                echo "Highest: User ID " . $scores['highest']['userid'] . " from group " . $group . " gets a badge for " . $scores['highest']['points'] . " points.\n";
+                //echo "Highest: User ID " . $scores['highest']['userid'] . " from group " . $group . " gets a badge for " . $scores['highest']['points'] . " points.\n";
                 //winnaar
                 $winnaarid = $scores['highest']['userid'];
                 $udata[$winnaarid]["badges"]["Winnaarsbadge"]["icon"] = "scoreprofeet";
                 $udata[$winnaarid]["badges"]["Winnaarsbadge"]["title"] = "Scoreprofeet";
-                echo "Lowest: User ID " . $scores['lowest']['userid'] . " from group " . $group . " gets a badge for " . $scores['lowest']['points'] . " points.\n";
+                //echo "Lowest: User ID " . $scores['lowest']['userid'] . " from group " . $group . " gets a badge for " . $scores['lowest']['points'] . " points.\n";
                 //laatste
                 $loserid =  $scores['lowest']['userid'];
                 $udata[$loserid]["badges"]["Losersbadge"]["icon"] = "onderstebovenkampioen";
