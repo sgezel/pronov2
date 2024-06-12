@@ -54,7 +54,7 @@ $scoreboardsameplace = isset($data["settings"][0]["scoreboardequalplace"]) && ($
                     </div>
                 <?php endif; ?>
                 <table class="table table-hover">
-                    <thead>
+                    <thead style="position: sticky;top: 0">
                         <tr>
 
                             <th>&nbsp;</th>
