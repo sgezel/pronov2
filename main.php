@@ -133,7 +133,7 @@ $currentToken = "";
                   <td> - </td>
                   <td><input type="number" width="20px" class="form-control input-score" <?= $data["locked"] ? "readonly disabled" : "" ?> name="matches[<?= $id; ?>][away]" value="<?= isset($userData["matches"][$id]["away"]) ?  $userData["matches"][$id]["away"] : "" ?>" ? min="0" max="20"></td>
                   <td><?= $data["away_score"]; ?></td>
-                  <td><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
+                  <td style="text-align: right;"><?= $data["away"] ?><img src=".\\vlaggen\\<?= $data["away"]; ?>.png" class="flag"></td>
                   <td class="datefield"><?= isset($userData['matches'][$id]['points']) ? $userData["matches"][$id]["points"] . "p" : "" ?>  <img src="images/<?php echo isset($userData['matches'][$id]['quickpicked']) && $userData['matches'][$id]['quickpicked'] ? 'qp' : 'noqp'; ?>.png" width="32px"></td>
                 </tr>
 
