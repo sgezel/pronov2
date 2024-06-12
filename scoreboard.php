@@ -111,6 +111,8 @@ $scoreboardsameplace = isset($data["settings"][0]["scoreboardequalplace"]) && ($
                                 <td style="text-align: center;">
                                     <?php if ($place_counter < 4) : ?>
                                         <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:32px;" />
+                                    <?php elseif ($place_counter % 10 == 0 && $_SESSION["group"] == "Premed") : ?>
+                                        <img src="images/scoreboard/<?= $place_counter; ?>.png" style="width:32px;" />
                                     <?php else : ?>
                                         <?= $place_counter; ?>
                                     <?php endif; ?>
