@@ -292,6 +292,13 @@ class UserCrud
 
     public function actionSaveData(){
        
+        if(!isset($_SESSION) || $_SESSION["userid"] == "" )
+        {
+            $_SESSION["error_message"] = "Uw sessie is vervallen. Gelieve opnieuw in te loggen.";
+            header("Location: " . $this->loginPath);
+            die();
+        }
+
         $id = $_SESSION["userid"];
         $listName = $this->listName;
         $data = $this->data;
