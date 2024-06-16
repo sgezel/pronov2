@@ -302,11 +302,13 @@ class UserCrud
 
         foreach($_POST["matches"] as $match => $udata)
         {
-            $itemData["matches"][$match] = $udata;
-
             if(isActive($allMatchData[$match]["locked"]))
             {
-                $itemData["matches"][$match]["cheated"] = (new DateTime("now"))->format("d-m-Y H:i:s");
+                $itemData["matches"][$match]["cheated"] = (new DateTime("now"))->format("d-m-Y H:i:s") . " (" . $udata["home"] . "-" . $udata["away"] . ")";
+            }
+            else
+            {
+                $itemData["matches"][$match] = $udata;
             }
 
         }
