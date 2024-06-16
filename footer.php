@@ -74,6 +74,7 @@
             </div>
             <!-- copyright section end -->
             <!-- Javascript files-->
+             
             <script src="js/jquery.min.js"></script>
             <script src="js/popper.min.js"></script>
             <script src="js/bootstrap.bundle.min.js"></script>
@@ -82,6 +83,13 @@
             <!-- sidebar -->
             <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
             <script src="js/custom.js"></script>
+            <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+            
+            <script>
+                        $("document").ready(function(){
+                            let table = new DataTable('#usertable');
+                        });
+                    </script>
             </body>
 
             </html>

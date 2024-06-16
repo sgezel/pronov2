@@ -1,12 +1,13 @@
 <br />
                     <h2>Gebruikers aanpassen</h2>
 
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="usertable" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">email</th>
                                 <th scope="col">name</th>
+                                <th scope="col">group</th>
                                 <th scope="col">paid</th>
                                 <th scope="col">Edit</th>
                             </tr>
@@ -27,6 +28,7 @@
                                     <td><?= $id ?></td>
                                     <td><?= $data["username"]; ?></td>
                                     <td><?= $data["name"]; ?></td>
+                                    <td><?= $data["group"]; ?></td>
                                     <td><?= $data["paid"] ?></td>
                                     <td><a href="edituser.php?id=<?= $id; ?>" class="btn btn-primary">Edit</a></td>
                                 </tr>
@@ -43,3 +45,5 @@
                             </p>
                         </div>
                     </div>
+
+                    

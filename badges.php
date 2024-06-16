@@ -15,7 +15,7 @@ include("header.php");
                     <div class="col-md-12">
                         <p>
                         <h2>Wat zijn de badges?</h2>
-                        De badges zijn een 'beloning' voor het behalen van bepaalde opdrachten. Het proberen te verzamelen van alle badges kan zorgen voor een extra uitdaging. Om ze allemaal te kunnen verzamelen ga je wel het nodige geluk en/of pech moeten hebben.
+                        De badges zijn een 'beloning' voor het behalen van bepaalde opdrachten. Het proberen te verzamelen van alle badges kan zorgen voor een extra uitdaging. Om ze allemaal te kunnen verzamelen ga je wel het nodige geluk en/of pech moeten hebben. Deze worden drie maal per dag herberekend op volgende tijdstippen: 17:50, 20:50 en 23:50.
                         <br /><br />
                         <h2>Welke badges zijn er te behalen?</h2>
                         <table class="table table-hover">
@@ -113,14 +113,14 @@ include("header.php");
                                             <img src="badges/scoreprofeet.png" width="32" />
                                             <span class="description">Scoreprofeet</span>
                                         </div></td>
-                                    <td><strong>Scoreprofeet-badge</strong>: Verdien de prestigieuze Scoreprofeet-badge door jouw voorspellingsvaardigheden te tonen! Deze badge is beschikbaar zodra er <strong>drie wedstrijden</strong> gespeeld zijn. Elke deelnemer die daarna <strong>ooit de eerste plaats in de rangschikking</strong> bereikt, zal deze eretitel ontvangen en kan zich een ware Scoreprofeet noemen.</td>
+                                    <td><strong>Scoreprofeet-badge</strong>: Verdien de prestigieuze Scoreprofeet-badge door jouw voorspellingsvaardigheden te tonen! Deze badge is beschikbaar zodra er <strong>vijf wedstrijden</strong> gespeeld zijn. Elke deelnemer die daarna <strong>ooit de eerste plaats in de rangschikking</strong> bereikt, zal deze eretitel ontvangen en kan zich een ware Scoreprofeet noemen.</td>
                                 </tr>
                                 <tr>
                                     <td><div class="hover-badge">
                                             <img src="badges/onderstebovenkampioen.png" width="32" />
                                             <span class="description">Onderstebovenkampioen</span>
                                         </div></td>
-                                    <td><strong>Onderstebovenkampioen-badge</strong>: Word gekroond tot Onderstebovenkampioen! Deze unieke badge is beschikbaar na het spelen van <strong>drie wedstrijden</strong>. Elke deelnemer die daarna <strong> de laatste plaats in de rangschikking</strong> inneemt, zal de Onderstebovenkampioen-badge ontvangen. Het is een speelse erkenning voor het ervaren van een onverwachte wending in het spel!</td>
+                                    <td><strong>Onderstebovenkampioen-badge</strong>: Word gekroond tot Onderstebovenkampioen! Deze unieke badge is beschikbaar na het spelen van <strong>vijf wedstrijden</strong>. Elke deelnemer die daarna <strong> de laatste plaats in de rangschikking</strong> inneemt, zal de Onderstebovenkampioen-badge ontvangen. Het is een speelse erkenning voor het ervaren van een onverwachte wending in het spel!</td>
                                 </tr>
                                 <tr>
                                     <td><div class="hover-badge">

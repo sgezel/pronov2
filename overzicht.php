@@ -78,7 +78,7 @@ foreach ($matches as $id => $match) {
                 </div>
                 <div class="tab-content w-100" id="v-pills-tabContent">
 
-                    <?php $first = true; ?>
+                    <?php $first = true;?>
 
                     <?php if (!$display) : ?>
                         <p>De voorspellingen zullen zichtbaar zijn op het moment dat de pronostiek van de eerste match wordt afgesloten.</p>
@@ -96,7 +96,7 @@ foreach ($matches as $id => $match) {
                                     ?>
 
                                     <table class="table table-hover">
-                                        <thead>
+                                        <thead style="position: sticky;top: 0">
                                             <tr>
                                                 <th colspan="4" class="text-center">
                                                     <img src="vlaggen/<?= $currentmatch["home"]; ?>.png" />

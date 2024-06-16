@@ -63,7 +63,7 @@ session_set_cookie_params(604800);
 					<p>
 					<h2>Waarom zou ik meedoen?</h2>
 
-					De winnaar van deze wedstrijd mag natuurlijk een leuke prijs verwachten. Afhankelijk van het aantal deelnemers en dus het bedrag dat gespendeerd kan worden, zal er een overwinningscadeau voorzien worden. Maar nog belangrijker dan de prijs, is natuurlijk de eer. Wie zou zich niet een paar jaar lang de onbetwistbare nummer één van de <nobr>Pr(emed)onostiek</nobr> willen noemen. Word jij het dit jaar?
+					De winnaar van deze wedstrijd mag natuurlijk een leuke prijs verwachten. Afhankelijk van het aantal deelnemers en dus het bedrag dat gespendeerd kan worden, zullen er prijzen voorzien worden. Maar nog belangrijker dan de prijzen, is natuurlijk de eer. Wie zou zich niet een paar jaar lang de onbetwistbare nummer één van de <nobr>Pr(emed)onostiek</nobr> willen noemen. Word jij het dit jaar?
 					<br /><br />
 					Je moet zeker geen schrik hebben om deel te nemen. Kennis is van geen belang. De score in de pronostiek is zo opgebouwd dat iemand zonder enige kennis van voetbal zou kunnen winnen.
 					<br /><br />
@@ -71,7 +71,7 @@ session_set_cookie_params(604800);
 					<p>
 					<h2>Hoe betaal ik mijn bijdrage? </h2>
 
-					We vragen ook dit jaar om de bijdrage over te schrijven op het rekeningnummer van Dieter. Velen onder jullie komen nog maar weinig op kantoor (Leuven) en daarom vragen we om de 2 euro over te schrijven op rekeningnummer BE69 9731 1595 8278 met vermelding van je naam, of de barcode te gebruiken. Indien je wel op Premed komt, mag je dit ook altijd cash betalen. (Maar overschrijven heeft de voorkeur). Het geld gaat integraal naar een cadeau voor de winnaar. <br /><br />
+					We vragen ook dit jaar om de bijdrage over te schrijven op het rekeningnummer van Dieter. Velen onder jullie komen nog maar weinig op kantoor (Leuven) en daarom vragen we om de 2 euro over te schrijven op rekeningnummer BE69 9731 1595 8278 met vermelding van je naam, of de barcode te gebruiken. Indien je wel op Premed komt, mag je dit ook altijd cash betalen. (Maar overschrijven heeft de voorkeur). <br /><br />
 					Indien je niet betaald hebt bij de start van het EK, zal er geen score op het scorebord berekend worden voor jou. <br />
 
 					<img src="images/qr.png" width=150 />
